@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Auth from "./auth/Auth";
+import moduleName from 'formik'
 // import UserEdit from "./auth/UserEdit";
 // import Sitebar from "./site/Navbar";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
@@ -7,6 +8,8 @@ import logo from './logo.svg';
 import './App.css';
 import Home from './site/Header';
 import Footer from './site/Footer';
+import {Signup} from './auth/Signup';
+import {Login} from './auth/Login';
 
 type AcceptedProps={};
 type SessionState = {
@@ -38,6 +41,8 @@ render(){
   return (
     <div className="App">
       <div id="main" className="sideBar">
+        <Signup onSubmit={() => {}} />
+        <Login onSubmit={() => {}} />
       {/* <Header /> */}
       <Router>
         <Home
