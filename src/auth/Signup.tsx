@@ -1,6 +1,6 @@
+import { TextField, Button } from "@material-ui/core";
+import { Form, Formik } from "formik";
 import * as React from "react";
-import { TextField } from "@material-ui/core";
-import { Formik, Form } from "formik";
 
 interface Values {
   firstName: string;
@@ -66,7 +66,8 @@ export const Signup: React.FC<Props> = ({ onSubmit }) => {
                 onBlur={handleChange}
               />
             </div>
-            <pre>{JSON.stringify(values, null, 2)}</pre>
+            <Button type="submit">submit </Button>
+            <pre>{JSON.stringify(values, null, 5)}</pre>
           </Form>
         )}
       </Formik>
