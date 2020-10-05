@@ -1,33 +1,36 @@
 import React, { useState } from "react";
 import { Route, Switch, Link } from "react-router-dom";
+import AppBar from "@material-ui/core/AppBar";
 
-// import Home from "./Home";
-// import MediaTable from "../media/MediaTable";
-// import MediaIndex from "../media/MediaIndex";
-// import MediaCreate from "../media/MediaCreate";
-// import MediaActions from "../media/MediaActions";
-// import MediaAll from "../media/MediaAll";
-// import UserEdit from "../auth/UserEdit";
-// import Media from "../assets/Media.png";
-import "./Navbar.css";
-// import {
-//   Navbar,
-//   NavbarBrand,
-//   NavbarToggler,
-//   Collapse,
-//   Nav,
-//   NavItem,
-//   Button,
-// } from "reactstrap";
+type acceptedProps = {
+  clearToken: any,
+  protectedViews: any,
+  protectedViewsTwo: any,
+  protectedViewsThree: any
+}
 
-const Sitebar = (props:any) => {
-//   const [isOpen, setIsOpen] = useState(false);
-  // const [deleteId, setDeleteId] = useState('');
+type valueTypes = {
+  token: any,
+  setToken: string | any,
+  userName: string | any,
+  setUserName: string | any,
+  userRole: string | any,
+}
 
-  const toggle = () => {
-    // let newIsOpen = !isOpen;
-    // setIsOpen(newIsOpen);
-  };
+export default class SiteBar extends React.Component<acceptedProps, valueTypes> {
+  constructor(props: acceptedProps){
+      super(props);
+      this.state = {
+          token: "",
+          setToken: "",
+          userName: "",
+          setUserName: "",
+          userRole: "",
+      };
+  }
+
+render() {
+
 
   return (
     <div className="sidebar">
@@ -73,9 +76,8 @@ const Sitebar = (props:any) => {
                 {/* </NavItem> */}
                 {/* <NavItem> */}
                   <button
-                    className="nav_buttons"
-                    color="secondary"
-                    onClick={props.clearToken}
+            
+                    onClick={this.props.clearToken}
                   >
                     {/* <link
                      className="nav_links" to="">
@@ -91,4 +93,5 @@ const Sitebar = (props:any) => {
     </div>
   );
 };
-export default Sitebar;
+}
+

@@ -1,54 +1,93 @@
 import * as React from "react";
-import { TextField, Button } from "@material-ui/core";
-import { Formik, Form } from "formik";
+// import {Form, FormGroup, Input, Label} from 'reactstrap';
+import { FormControl, TextField, Button } from "@material-ui/core";
+// import "./login.css";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+// import './login.css';
+// import './auth.css';
+import APIURL from "../helpers/environment";
 
-interface Values {
-  userName: string;
-  password: string;
-}
+type acceptedProps = {
+  updateSessionToken: (newToken: string) => void;
 
-interface Props {
-  onSubmit: (values: Values) => void;
-}
-
-export const Login: React.FC<Props> = ({ onSubmit }) => {
-  return (
-    <div>
-          <h2>Login</h2>
-      <Formik
-        initialValues={{
-          userName: "",
-          password: "",
-        }}
-        onSubmit={(values) => {
-          onSubmit(values);
-        }}
-      >
-        {({ values, handleChange, handleBlur }) => (
-          <Form>
-            <div>
-              <TextField
-                placeholder="User Name"
-                name="userName"
-                value={values.userName}
-                onChange={handleChange}
-                onBlur={handleChange}
-              />
-            </div>
-            <div>
-              <TextField
-                placeholder="Password"
-                name="password"
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleChange}
-              />
-            </div>
-           <Button type="submit">submit </Button>
-            <pre>{JSON.stringify(values, null, 2)}</pre>
-          </Form>
-        )}
-      </Formik>
-    </div>
-  );
+  updateUserRole: (newUserRole: string) => void;
+  setUsername: (newUsername: string) => void;
 };
+type userState = {
+  username: string;
+  setUsername: string;
+  password: string;
+  setPassword: string;
+};
+
+export class Login extends React.Component<acceptedProps, userState> {
+  constructor(props: acceptedProps) {
+    super(props);
+    this.state = {
+      username: "",
+      setUsername: "",
+      password: "",
+      setPassword: "",
+    };
+  }
+
+  handleSubmit = (e: React.FormEvent<HTMLElement>) => {
+    e.preventDefault();
+    fetch(`${APIURL}/user/login`, {
+      method: "POST",
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password,
+      }),
+      headers: new Headers({
+        "Content-Type": "application/json",
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        this.props.updateSessionToken(data.sessionToken);
+        this.props.setUsername(data.user.username);
+        this.props.updateUserRole(data.user.userRole);
+      });
+  };
+  render() {
+    return (
+      <div id="loginDiv">
+        <h1 id="loginHeading">Login</h1>
+        <FormControl>
+          <TextField
+            label="Username"
+            variant="outlined"
+            type="text"
+            onChange={(e) => {
+              this.setState({ username: e.target.value });
+            }}
+            // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}"
+            //   title="Username must include one number, one capital letter, and be 4-15 characters in length."
+          />
+          <TextField
+            label="Password"
+            variant="outlined"
+            type="password"
+            onChange={(e) => {
+              this.setState({ password: e.target.value });
+            }}
+            /* pattern="[a-zA-Z0-9]+"
+              title="Password must contain one number, one capital letter, and be 5-15 characters in length." */
+          />
+          <Button
+            variant="contained"
+            onClick={(e) => {
+              this.handleSubmit(e);
+            }}
+          >
+            Signup
+          </Button>
+        </FormControl>
+      </div>
+    );
+  }
+}
+
+export default Login;
