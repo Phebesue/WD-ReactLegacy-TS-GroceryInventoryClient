@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 
-type acceptedProps = {
+type AcceptedProps = {
   clearToken: any,
   protectedViews: any,
   protectedViewsTwo: any,
   protectedViewsThree: any
 }
 
-type valueTypes = {
+type ValueTypes = {
   token: any,
   setToken: string | any,
   userName: string | any,
@@ -17,8 +17,8 @@ type valueTypes = {
   userRole: string | any,
 }
 
-export default class SiteBar extends React.Component<acceptedProps, valueTypes> {
-  constructor(props: acceptedProps){
+class Navbar extends Component<AcceptedProps, ValueTypes> {
+  constructor(props: AcceptedProps){
       super(props);
       this.state = {
           token: "",
@@ -35,13 +35,13 @@ render() {
   return (
     <div className="sidebar">
       <div className="mainNav">
-        <div id="navContainer">
-          <h2 style={{ color: "white" }}>
-            <div className="d-flex">
+        {/* <div id="navContainer"> */}
+          {/* <h2 style={{ color: "white" }}> */}
+            {/* <div className="d-flex"> */}
               {/* <img className="media_image" src={Media} alt="" /> */}
               <h3>What's for dinner?</h3>
             </div>
-          </h2>
+          {/* </h2> */}
           {/* <navbar color="black" light expand="md">
             <navbarToggler onClick={toggle} />
             <Collapse isOpen={isOpen} navbar> */}
@@ -88,10 +88,10 @@ render() {
               </nav>
             {/* </Collapse> */}
           {/* </navbar> */}
-        </div>
-      </div>
+        {/* </div> */}
+      {/* // </div> */}
     </div>
   );
 };
 }
-
+export default Navbar;

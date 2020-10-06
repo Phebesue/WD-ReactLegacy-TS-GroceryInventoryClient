@@ -1,12 +1,11 @@
 import React from "react";
-// import Navbar from '../Navbar/NavBar';
+import AdminNavbar from '../admin/AdminNavbar';
 import Footer from "../../site/Footer";
 // import { Container, Button } from 'reactstrap';
 // import { Card } from 'antd';
 // import "./Admin.css";
 import APIURL from "../../helpers/environment";
-//import IconButton from '@material-ui/core/IconButton';
-//import DeleteTwoToneIcon from '@material-ui/icons/';
+
 
 type AcceptedProps = {
   setUsername: string | any;
@@ -84,6 +83,7 @@ export class Admin extends React.Component<AcceptedProps, ValueTypes> {
     return (
       <div id="feedDiv">
         <div id="userContainer">
+          <AdminNavbar />
           <header id="titleUserList">User List:</header>
           {this.userMapper()}
         </div>

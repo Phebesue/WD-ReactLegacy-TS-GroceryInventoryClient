@@ -9,16 +9,16 @@ type ValueTypes = {
   firstName: string;
   lastName: string;
   username: string;
-  setUsername: string;
+  // setUsername: string;
   password: string;
-  setPassword: string;
+  // setPassword: string;
 };
 
 type AcceptedProps = {
-  sessionToken?: any;
-  setUsername: any;
-  updateSessionToken?: (newToken: string) => void;
-  updateUserRole?: (newUserRole: string) => void;
+  // sessionToken: any;
+  updateUsername: (newUsername: string) => void;
+  updateSessionToken: (newToken: string) => void;
+  updateUserRole: (newUserRole: string) => void;
 };
 
 export class Signup extends React.Component<AcceptedProps, ValueTypes> {
@@ -28,9 +28,9 @@ export class Signup extends React.Component<AcceptedProps, ValueTypes> {
       firstName: "",
       lastName: "",
       username: "",
-      setUsername: "",
+      // setUsername: "",
       password: "",
-      setPassword: "",
+      // setPassword: "",
     };
   }
 
@@ -50,8 +50,8 @@ export class Signup extends React.Component<AcceptedProps, ValueTypes> {
     })
       .then((response) => response.json())
       .then((data) => {
-        this.updateSessionToken(data.sessionToken);
-        this.props.setUsername(data.user.userName);
+        this.props.updateSessionToken(data.sessionToken);
+        this.props.updateUsername(data.user.username);
         this.props.updateUserRole(data.user.userRole);
       });
   };

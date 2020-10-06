@@ -2,33 +2,32 @@ import * as React from "react";
 // import {Form, FormGroup, Input, Label} from 'reactstrap';
 import { FormControl, TextField, Button } from "@material-ui/core";
 // import "./login.css";
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
+// import { makeStyles } from "@material-ui/core/styles";
+// import Paper from "@material-ui/core/Paper";
 // import './login.css';
 // import './auth.css';
 import APIURL from "../helpers/environment";
 
-type acceptedProps = {
+type AcceptedProps = {
   updateSessionToken: (newToken: string) => void;
-
   updateUserRole: (newUserRole: string) => void;
-  setUsername: (newUsername: string) => void;
+  updateUsername: (newUsername: string) => void;
 };
-type userState = {
+type UserState = {
   username: string;
-  setUsername: string;
+  // setUsername: string;
   password: string;
-  setPassword: string;
+  // setPassword: string;
 };
 
-export class Login extends React.Component<acceptedProps, userState> {
-  constructor(props: acceptedProps) {
+export class Login extends React.Component<AcceptedProps, UserState> {
+  constructor(props: AcceptedProps) {
     super(props);
     this.state = {
       username: "",
-      setUsername: "",
+      // setUsername: "",
       password: "",
-      setPassword: "",
+      // setPassword: "",
     };
   }
 
@@ -46,8 +45,11 @@ export class Login extends React.Component<acceptedProps, userState> {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(this.props);
+        console.log(data);
+        console.log(data.sessionToken);
         this.props.updateSessionToken(data.sessionToken);
-        this.props.setUsername(data.user.username);
+        this.props.updateUsername(data.user.username);
         this.props.updateUserRole(data.user.userRole);
       });
   };
@@ -82,7 +84,7 @@ export class Login extends React.Component<acceptedProps, userState> {
               this.handleSubmit(e);
             }}
           >
-            Signup
+            Login
           </Button>
         </FormControl>
       </div>
@@ -90,4 +92,4 @@ export class Login extends React.Component<acceptedProps, userState> {
   }
 }
 
-export default Login;
+// export default Login;
