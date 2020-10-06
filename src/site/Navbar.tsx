@@ -3,10 +3,9 @@ import { Route, Switch, Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 
 type AcceptedProps = {
-  clearToken: any,
-  protectedViews: any,
-  protectedViewsTwo: any,
-  protectedViewsThree: any
+  clearUser: () => void,
+  // protectedViews: any,
+  
 }
 
 type ValueTypes = {
@@ -27,6 +26,7 @@ class Navbar extends Component<AcceptedProps, ValueTypes> {
           setUserName: "",
           userRole: "",
       };
+      console.log(props)
   }
 
 render() {
@@ -77,8 +77,8 @@ render() {
                 {/* <NavItem> */}
                   <button
             
-                    onClick={this.props.clearToken}
-                  >
+                    onClick={this.props.clearUser}
+                  >LogOut
                     {/* <link
                      className="nav_links" to="">
                       Logout
