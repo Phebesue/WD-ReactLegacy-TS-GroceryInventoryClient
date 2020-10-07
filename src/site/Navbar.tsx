@@ -1,19 +1,20 @@
 import React, { Component } from "react";
-import { Route, Switch, Link } from "react-router-dom";
-import AppBar from "@material-ui/core/AppBar";
+import { Route, Link, Switch, BrowserRouter as Router } from "react-router-dom";
+import { AppBar, Button, IconButton, Toolbar, Typography } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import PersonIcon from '@material-ui/icons/Person';
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 
 type AcceptedProps = {
   clearUser: () => void,
-  // protectedViews: any,
   
 }
 
 type ValueTypes = {
   token: any,
-  setToken: string | any,
   userName: string | any,
-  setUserName: string | any,
   userRole: string | any,
+
 }
 
 class Navbar extends Component<AcceptedProps, ValueTypes> {
@@ -21,77 +22,57 @@ class Navbar extends Component<AcceptedProps, ValueTypes> {
       super(props);
       this.state = {
           token: "",
-          setToken: "",
           userName: "",
-          setUserName: "",
           userRole: "",
-      };
+         };
       console.log(props)
   }
 
 render() {
-
+  const session = localStorage.getItem("sessionToken");
 
   return (
     <div className="sidebar">
-      <div className="mainNav">
-        {/* <div id="navContainer"> */}
-          {/* <h2 style={{ color: "white" }}> */}
-            {/* <div className="d-flex"> */}
-              {/* <img className="media_image" src={Media} alt="" /> */}
-              <h3>What's for dinner?</h3>
-            </div>
-          {/* </h2> */}
-          {/* <navbar color="black" light expand="md">
-            <navbarToggler onClick={toggle} />
-            <Collapse isOpen={isOpen} navbar> */}
-              <nav className="nav-fill w-100">
-                {/* <navItem> */}
-                  <button className="nav_buttons">
-                    {/* <link className="nav_links" to="/mediaCreate">
-                      Add Media
-                    </link> */}
-                  </button>
-                {/* </navItem> */}
-                {/* <NavItem> */}
-                  <button className="nav_buttons" color="secondary">
-                    {/* <link className="nav_links" to="/mediaAll">
-                      View All Media
-                    </link> */}
-                  </button>
-                {/* </NavItem> */}
-                {/* <NavItem> */}
-                  <button className="nav_buttons" color="secondary">
-                    {/* <link className="nav_links" to="/mediaMine">
-                      View My Media
-                    </link> */}
-                  </button>
-                {/* </NavItem> */}
-                {/* <NavItem> */}
-                  <button className="nav_buttons" color="secondary">
-                    {/* <link className="nav_links" to="/userEdit">
-                      User Edit
-                    </link> */}
-                  </button>
-                {/* </NavItem> */}
-                {/* <NavItem> */}
-                  <button
-            
+      <div className="mainNav"> 
+      <h3>What's for dinner? Navbar</h3>
+    {/* let container
+    if (session !== null) {
+     <div>
+    <Router>
+      <nav id="navbar">
+        <ul>
+          <li id="name"><a href="#" className="nav-link">What's for dinner?</a></li>
+          <li><Link to="/" className="nav-link" onClick={this.clearUser}> Logout </Link></li>
+          <li><a href="#" className="nav-link">My Account</a></li>
+          <li>
+            <Link to="/cart" className="nav-link"> Cart </Link>
+          </li>
+          <li>
+            <Link to="/" className="nav-link"> Home </Link>
+          </li>
+        </ul>
+      </nav>
+      <div className="navbarRoute">
+        <Switch>
+          <Route exact path="/"> 
+            <User clearUser={this.clearUser} sessionToken={session} userRole={this.state.userRole} /> 
+          </Route>
+          <Route exact path="/cart">
+            {/* <Admin sessionToken={this.state.sessionToken} /> 
+          </Route>
+        </Switch>
+      </div>
+    </Router> */}
+                  <Button            
                     onClick={this.props.clearUser}
-                  >LogOut
-                    {/* <link
-                     className="nav_links" to="">
-                      Logout
-                    </link> */}
-                  </button>
-                {/* </NavItem> */}
-              </nav>
-            {/* </Collapse> */}
-          {/* </navbar> */}
-        {/* </div> */}
-      {/* // </div> */}
+                  >LogOut         
+                  </Button>
+  </div>        
+   
     </div>
-  );
+    
+
+)
 };
 }
 export default Navbar;

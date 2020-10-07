@@ -10,13 +10,13 @@ import APIURL from "../helpers/environment";
 
 type AcceptedProps = {
   updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: string) => void;
+  updateUserRole: (newUserRole: boolean) => void;
   updateUsername: (newUsername: string) => void;
 };
 type UserState = {
   username: string;
-  // setUsername: string;
   password: string;
+  // setUsername: string;
   // setPassword: string;
 };
 
@@ -25,8 +25,8 @@ export class Login extends React.Component<AcceptedProps, UserState> {
     super(props);
     this.state = {
       username: "",
-      // setUsername: "",
       password: "",
+      // setUsername: "",
       // setPassword: "",
     };
   }
@@ -35,22 +35,22 @@ export class Login extends React.Component<AcceptedProps, UserState> {
     e.preventDefault();
     fetch(`${APIURL}/user/login`, {
       method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json",
+      }),
       body: JSON.stringify({
         username: this.state.username,
         password: this.state.password,
       }),
-      headers: new Headers({
-        "Content-Type": "application/json",
-      }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(this.props);
         console.log(data);
-        console.log(data.sessionToken);
+        // console.log(this.props);
+        // console.log(data.sessionToken);
         this.props.updateSessionToken(data.sessionToken);
-        this.props.updateUsername(data.user.username);
-        this.props.updateUserRole(data.user.userRole);
+        // this.props.updateUsername(data.user.username);
+        // this.props.updateUserRole(data.user.admin);
       });
   };
   render() {
