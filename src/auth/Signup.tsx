@@ -13,7 +13,7 @@ type ValueTypes = {
 type AcceptedProps = {
   updateUsername: (newUsername: string) => void;
   updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: boolean) => void;
+  updateUserRole: (newUserRole: string) => void;
 };
 
 export class Signup extends React.Component<AcceptedProps, ValueTypes> {

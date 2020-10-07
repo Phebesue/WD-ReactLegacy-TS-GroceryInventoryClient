@@ -12,32 +12,16 @@ import {
   Container,
 } from "@material-ui/core";
 import "./App.css";
-import Home from "./site/Header";
 import Footer from "./site/Footer";
-import { Signup } from "./auth/Signup";
-import { Login } from "./auth/Login";
 import { Admin } from "../src/components/admin/Admin";
 import User from "../src/components/user/User";
 import AdminNavbar from "../src/components/admin/AdminNavbar";
-import Navbar from "../src/site/Navbar";
-
-// type acceptedProps = {
-//   updateToken: any;
-//   updateUserName: any;
-//   clearToken: any;
-//   username: any;
-//   sessionToken: any;
-// };
+import Navbar2 from "../src/site/Navbar2";
 
 type sessionState = {
   sessionToken: string | null | undefined;
   username: string | null | undefined;
-  userRole: boolean | null;
-  // setSessionToken: string | any;
-  // clearSessionToken: string | null;
-  // updateSessionToken: string | null;
-  // updateUsername: string | null;
-  // updateUserRole: string | null;
+  userRole: string | null;
 };
 export default class GroceryApp extends Component<{}, sessionState> {
   constructor(props: sessionState) {
@@ -45,43 +29,35 @@ export default class GroceryApp extends Component<{}, sessionState> {
     this.state = {
       sessionToken: "",
       username: "",
-      userRole: false,
+      userRole: "false",
     };
+    this.protectedViews=this.protectedViews.bind(this)
   }
-  componentDidMount() {
-    console.log("Mounted");
-    if (localStorage.getItem("username")) {
-      this.setState({ username: localStorage.getItem("username") });
-    }
-    if (localStorage.getItem("sessionToken")) {
-      this.setState({ sessionToken: localStorage.getItem("sessionToken") });
-    }
-    if (localStorage.getItem("sessionToken")) {
-      this.setState({ sessionToken: localStorage.getItem("sessionToken") });
-    }
-  }
+
+
 
   componentDidUpdate() {
     console.log("Updated");
     console.log(`User is admin: ${this.state.userRole}`);
+    
   }
 
-  updateUserRole = (newUserRole: boolean) => {
+  updateUserRole = (newUserRole: string) => {
     if (newUserRole !== null) {
       this.setState({ userRole: newUserRole });
-      localStorage.setItem("userRole", newUserRole.toString());
+      localStorage.setItem("userRole", newUserRole);
     } else {
-      this.setState({ userRole: false });
+      this.setState({ userRole: "false" });
       localStorage.setItem("userRole", "false");
     }
     // console.log(localStorage);
-    console.log(`Admin?: ${this.state.userRole}`);
+    // console.log(`Admin?: ${this.state.userRole}`);
   };
 
   updateSessionToken = (newToken: string) => {
-    localStorage.setItem("token", newToken);
+    localStorage.setItem("sessionToken", newToken);
     this.setState({ sessionToken: newToken });
-    console.log(`Token: ${newToken}`);
+    // console.log(`Token: ${newToken}`);
   };
 
   updateUsername = (newUsername: string) => {
@@ -92,59 +68,81 @@ export default class GroceryApp extends Component<{}, sessionState> {
 
   clearUser = () => {
     localStorage.clear();
-    this.setState({ sessionToken: "", userRole: false });
+    this.setState({ sessionToken: "", userRole: "false" });
     sessionStorage.clear();
   };
 
   protectedViews = () => {
-      if (
-      this.state.sessionToken === localStorage.getItem("token") &&
-      this.state.userRole
-    ) {return(
-      <div>        
-             <AdminNavbar
-              clearUser={this.clearUser}
-                        />        
-        <Admin updateSessionToken={this.updateSessionToken}
-        sessionToken={this.updateSessionToken}
-        updateUsername={this.updateUsername}
-        updateUserRole={this.updateUserRole}/> 
-      </div>
-      )
-    } else {return(
-   <Navbar clearUser={this.clearUser} />)};
-      {
-        /* <User /> */
-      }
-    }
+    console.log("Summer was here")
+    console.log("userRole: ",this.state.userRole)
   
+    if (
+      this.state.sessionToken === localStorage.getItem("sessionToken") &&
+      localStorage.getItem("userRole") == "true"
+    ) {
+      return (
+        <div>                    
+          <AdminNavbar clearUser={this.clearUser} />
+          <Admin
+            updateSessionToken={this.updateSessionToken}
+            sessionToken={this.state.sessionToken}
+            updateUsername={this.updateUsername}
+            updateUserRole={this.updateUserRole}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Navbar2 clearUser={this.clearUser} />
+          <User
+            updateSessionToken={this.updateSessionToken}
+            sessionToken={this.state.sessionToken}
+            updateUsername={this.updateUsername}
+            updateUserRole={this.updateUserRole}
+          />
+        </div>
+      );
+    }
+  };
+  componentDidMount() {
+    console.log("Mounted");
+    if (localStorage.getItem("username")) {
+      this.setState({ username: localStorage.getItem("username") });
+    }
+    if (localStorage.getItem("sessionToken")) {
+      this.setState({ sessionToken: localStorage.getItem("sessionToken") });
+    }
+    if (localStorage.getItem("userRole")) {
+      this.setState({ userRole: localStorage.getItem("admin") });
+      console.log(this.state.userRole)
+    }
+  }
 
   render() {
     const session = localStorage.getItem("sessionToken");
-
+console.log("session was here", session)
     return (
       <div className="App">
-        <div id="main" className="sideBar">
+        <div id="main">
+          <h2> What's for Dinner?</h2>
           {/* <div className={session === null ? "mainDiv" : ""}> */}
           {/* <Typography component="nav"></Typography> */}
-          {
-            session == null ? (
-              <Auth
-                updateSessionToken={this.updateSessionToken}
-                updateUsername={this.updateUsername}
-                updateUserRole={this.updateUserRole}
-              />
-            ) : (
-              (console.log("Call Protected Views"), this.protectedViews)
-            )
-            // <Navbar clearUser={this.clearUser} updateSessionToken= {session}  role={this.state.userRole}/>
-          }
-          {this.protectedViews()}
+          {/* {session == null ? ( */}
+          {!session ? (
+            <Auth
+              updateSessionToken={this.updateSessionToken}
+              updateUsername={this.updateUsername}
+              updateUserRole={this.updateUserRole}
+            />
+          ) : (
+            this.protectedViews()
+            )}
+             {console.log("After Protected Views")}
 
           <Footer />
         </div>
       </div>
-      // </div>
-    );
+      );
   }
 }

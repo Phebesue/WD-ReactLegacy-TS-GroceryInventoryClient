@@ -8,10 +8,10 @@ import APIURL from "../../helpers/environment";
 
 type AcceptedProps = {
   updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: boolean) => void;
+  updateUserRole: (newUserRole: string) => void;
   updateUsername: (newUsername: string) => void;
   // clearUser: () => void;
-  sessionToken: any;
+  sessionToken: string |null;
 };
 
 type ValueTypes = {
@@ -37,7 +37,7 @@ export class Admin extends React.Component<AcceptedProps, ValueTypes> {
         method: "GET",
         headers: new Headers({
           "Content-Type": "application/json",
-          Authorization: this.props.sessionToken,
+          "Authorization": this.props.sessionToken,
         }),
       })
         .then((res) => {
@@ -93,7 +93,7 @@ export class Admin extends React.Component<AcceptedProps, ValueTypes> {
           <header id="titleUserList">User List:</header>
           {this.userMapper()}
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

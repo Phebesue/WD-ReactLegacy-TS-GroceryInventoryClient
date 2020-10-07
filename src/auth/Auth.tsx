@@ -8,7 +8,7 @@ import { Login } from "./Login";
 type AcceptedProps = {
   updateSessionToken: (newToken: string) => void;
   updateUsername: (newUsername: string) => void;
-  updateUserRole: (newUserRole: boolean) => void;
+  updateUserRole: (newUserRole: string) => void;
 };
 
 type UserState = {
@@ -25,14 +25,14 @@ export default class Auth extends Component<AcceptedProps, UserState> {
 
   loginToggle = (event: any) => {
     event.preventDefault();
-    if (this.state.showLogin === true) {
-      return this.setState({
-        showLogin: false,
-      });
-    }
     if (this.state.showLogin === false) {
       return this.setState({
         showLogin: true,
+      });
+    }
+    if (this.state.showLogin === true) {
+      return this.setState({
+        showLogin: false,
       });
     }
   };
@@ -42,23 +42,24 @@ export default class Auth extends Component<AcceptedProps, UserState> {
       <div className="auth">
         <div id="signuplogin">
           {this.state.showLogin ? (
-            <Login
-              updateSessionToken={this.props.updateSessionToken}
-              updateUsername={this.props.updateUsername}
-              updateUserRole={this.props.updateUserRole}
-			  />
-		  ) : (
-            <Signup
+              <Signup
               updateSessionToken={this.props.updateSessionToken}
               updateUsername={this.props.updateUsername}
               updateUserRole={this.props.updateUserRole}
             />
+          
+		  ) : (
+        <Login
+        updateSessionToken={this.props.updateSessionToken}
+        updateUsername={this.props.updateUsername}
+        updateUserRole={this.props.updateUserRole}
+  />
           )}
           <br />
           <Button
             variant="contained"
             onClick={e => {this.loginToggle(e) }}>
-            {this.state.showLogin ? "Signup Here" : "Login Here"}
+            {this.state.showLogin ? "Login Here": "Signup Here" }
           </Button>
         </div>
       </div>
