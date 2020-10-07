@@ -1,24 +1,19 @@
 import * as React from "react";
 import { FormControl, TextField, Button } from "@material-ui/core";
-// import {Form, FormGroup, FormLabel, Input} from 'reactstrap';
 // import './signup.css';
-// import './auth.css';
 import APIURL from "../../src/helpers/environment";
 
 type ValueTypes = {
   firstName: string;
   lastName: string;
   username: string;
-  // setUsername: string;
   password: string;
-  // setPassword: string;
 };
 
 type AcceptedProps = {
-  // sessionToken: any;
   updateUsername: (newUsername: string) => void;
   updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: string) => void;
+  updateUserRole: (newUserRole: boolean) => void;
 };
 
 export class Signup extends React.Component<AcceptedProps, ValueTypes> {
@@ -28,9 +23,7 @@ export class Signup extends React.Component<AcceptedProps, ValueTypes> {
       firstName: "",
       lastName: "",
       username: "",
-      // setUsername: "",
       password: "",
-      // setPassword: "",
     };
   }
 
@@ -50,9 +43,9 @@ export class Signup extends React.Component<AcceptedProps, ValueTypes> {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         this.props.updateSessionToken(data.sessionToken);
-        this.props.updateUsername(data.user.username);
-        this.props.updateUserRole(data.user.userRole);
+        this.props.updateUserRole(data.user.admin);
       });
   };
   render() {
@@ -97,6 +90,7 @@ export class Signup extends React.Component<AcceptedProps, ValueTypes> {
             /* pattern="[a-zA-Z0-9]+"
               title="Password must contain one number, one capital letter, and be 5-15 characters in length." */
           />
+          {/* <pre>{JSON.stringify(values, null, 5)}</pre> */}
           <Button
             variant="contained"
             onClick={(e) => {
@@ -111,4 +105,3 @@ export class Signup extends React.Component<AcceptedProps, ValueTypes> {
   }
 }
 
-// export default Signup;

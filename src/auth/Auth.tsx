@@ -6,16 +6,15 @@ import { Signup } from "./Signup";
 import { Login } from "./Login";
 
 type AcceptedProps = {
-//   sessionToken: any;
-//   username: (newUsername: string) => void;
   updateSessionToken: (newToken: string) => void;
   updateUsername: (newUsername: string) => void;
-  updateUserRole: (newUserRole: string) => void;
-//   userRole:(newUserRole: string) => void;
+  updateUserRole: (newUserRole: boolean) => void;
 };
+
 type UserState = {
   showLogin: boolean;
 };
+
 export default class Auth extends Component<AcceptedProps, UserState> {
   constructor(props: AcceptedProps) {
     super(props);

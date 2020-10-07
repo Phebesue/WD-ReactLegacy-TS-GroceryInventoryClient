@@ -1,49 +1,60 @@
 import React from "react";
-import AdminNavbar from '../admin/AdminNavbar';
+// import AdminNavbar from '../admin/AdminNavbar';
 import Footer from "../../site/Footer";
 // import { Container, Button } from 'reactstrap';
 // import { Card } from 'antd';
 // import "./Admin.css";
 import APIURL from "../../helpers/environment";
 
-
 type AcceptedProps = {
-  setUsername: string | any;
+  updateSessionToken: (newToken: string) => void;
+  updateUserRole: (newUserRole: boolean) => void;
+  updateUsername: (newUsername: string) => void;
+  // clearUser: () => void;
   sessionToken: any;
-  updateUserRole: any;
- 
 };
 
 type ValueTypes = {
-  username: string | any;
-  dataTable: []
+  dataTable: [];
 };
 
 export class Admin extends React.Component<AcceptedProps, ValueTypes> {
   constructor(props: AcceptedProps) {
     super(props);
     this.state = {
-      username: "",
-      dataTable: []
+      dataTable: [],
     };
   }
+
+  componentDidMount() {
+    this.fetchUsers();
+  }
+
   fetchUsers = () => {
-    console.log("User" + this.state.username);
-    fetch(`${APIURL}/user`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        // Authorization: this.props.token
-      },
-    })
-      .then((response) => response.json())
-      .then((userData) => {
-        console.log("user data ", userData);
-        this.setState({
-          dataTable: userData.user,
+    if (this.props.sessionToken) {
+      console.log("Before Fetch");
+      fetch(`${APIURL}/users/`, {
+        method: "GET",
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Authorization: this.props.sessionToken,
+        }),
+      })
+        .then((res) => {
+          if (res.status !== 200) {
+            throw new Error("Error");
+          } else return res.json();
+        })
+        .then((data) => {
+          // let objUser: UserDetails = {
+          //   id: 0,
+          //     firstName: "",
+          //     lastName: "",
+          //     userName: "",
+          //     role: "",
+          // }
         });
-        console.log("USERS", this.state.dataTable);
-      });
+    }
   };
 
   deleteUser = (user: any) => {
@@ -56,7 +67,7 @@ export class Admin extends React.Component<AcceptedProps, ValueTypes> {
   userMapper = () => {
     return this.state.dataTable.map((users: any, index) => {
       return (
-        //call mapper and use jsx to display
+        //call mapper and display
 
         <div key={index} id="userlist">
           <p id="listUserName">Username: {users.userName}</p>
@@ -75,15 +86,10 @@ export class Admin extends React.Component<AcceptedProps, ValueTypes> {
     });
   };
 
-  componentDidMount() {
-    this.fetchUsers();
-  }
-
   render() {
     return (
-      <div id="feedDiv">
-        <div id="userContainer">
-          <AdminNavbar />
+      <div id="adminDiv">
+        <div id="adminContainer">
           <header id="titleUserList">User List:</header>
           {this.userMapper()}
         </div>
