@@ -3,11 +3,13 @@ import React from "react";
 
 const Footer = () => {
     return(
-        <footer>
-            {/* <row> */}
-                <p>&copy; Summer J. Kerekes 2020</p>
-            {/* </row> */}
-        </footer>
+        <div className="footer">
+            <footer>
+             
+            <p>&copy; Summer J. Kerekes 2020</p>
+            
+            </footer>
+        </div>
     )
 }
 export default Footer;

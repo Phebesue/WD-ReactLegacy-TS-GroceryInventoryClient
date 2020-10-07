@@ -32,15 +32,15 @@ export class AdminNavbar extends Component<AcceptedProps, ValueTypes> {
     return (
       <div>
         <h3>AdminNavbar</h3>
+        <Button className="logout" onClick={this.props.clearUser}>Logout</Button>
         <Toolbar>
-          {/* <IconButton edge="start" color="inherit" aria-label="menu"> */}
+     
             <MenuIcon />
             <PersonIcon />
             <PersonOutlineIcon />
-          {/* </IconButton> */}
+        
         </Toolbar>
 
-        <Button onClick={this.props.clearUser}>Logout</Button>
    
       </div>
     );

@@ -14,8 +14,8 @@ const User: FunctionComponent<AcceptedProps> = (props) => {
 
     return (
         <div>
-          {/* <h3>Welcome User!</h3>
-          <Footer /> */}
+          <h3>Welcome User!</h3>
+          <Footer />
         </div>
     )
 }
