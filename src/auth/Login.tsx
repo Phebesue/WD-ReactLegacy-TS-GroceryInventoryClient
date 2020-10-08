@@ -39,10 +39,11 @@ export class Login extends React.Component<AcceptedProps, UserState> {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        // console.log(this.props);
+        console.log(this.props);
         // console.log(data.sessionToken);
         this.props.updateSessionToken(data.sessionToken);
         this.props.updateUserRole(data.user.admin);
+        this.props.updateUsername(data.user.username);
       })
       // .then(() => {
       //   window.location.reload()

@@ -21,7 +21,7 @@ import Navbar2 from "../src/site/Navbar2";
 type sessionState = {
   sessionToken: string | null | undefined;
   username: string | null | undefined;
-  userRole: string | null;
+  userRole: string;
 };
 export default class GroceryApp extends Component<{}, sessionState> {
   constructor(props: sessionState) {
@@ -29,17 +29,14 @@ export default class GroceryApp extends Component<{}, sessionState> {
     this.state = {
       sessionToken: "",
       username: "",
-      userRole: "false",
+      userRole: "",
     };
     this.protectedViews=this.protectedViews.bind(this)
   }
 
-
-
   componentDidUpdate() {
     console.log("Updated");
-    console.log(`User is admin: ${this.state.userRole}`);
-    
+    console.log(`User is admin: ${localStorage.getItem("userRole")}`);    
   }
 
   updateUserRole = (newUserRole: string) => {
@@ -50,7 +47,7 @@ export default class GroceryApp extends Component<{}, sessionState> {
       this.setState({ userRole: "false" });
       localStorage.setItem("userRole", "false");
     }
-    // console.log(localStorage);
+    console.log("Local Storage: ",localStorage);
     // console.log(`Admin?: ${this.state.userRole}`);
   };
 
@@ -73,7 +70,6 @@ export default class GroceryApp extends Component<{}, sessionState> {
   };
 
   protectedViews = () => {
-    console.log("Summer was here")
     console.log("userRole: ",this.state.userRole)
   
     if (
@@ -85,21 +81,24 @@ export default class GroceryApp extends Component<{}, sessionState> {
           <AdminNavbar clearUser={this.clearUser} />
           <Admin
             updateSessionToken={this.updateSessionToken}
-            sessionToken={this.state.sessionToken}
             updateUsername={this.updateUsername}
             updateUserRole={this.updateUserRole}
+            sessionToken={this.state.sessionToken}
+            username={this.state.username}
           />
         </div>
       );
     } else {
       return (
         <div>
-          <Navbar2 clearUser={this.clearUser} />
+          <Navbar2 clearUser={this.clearUser} 
+          updateUsername={this.updateUsername}/>
           <User
             updateSessionToken={this.updateSessionToken}
             sessionToken={this.state.sessionToken}
             updateUsername={this.updateUsername}
             updateUserRole={this.updateUserRole}
+            username={this.state.username}
           />
         </div>
       );
@@ -113,22 +112,19 @@ export default class GroceryApp extends Component<{}, sessionState> {
     if (localStorage.getItem("sessionToken")) {
       this.setState({ sessionToken: localStorage.getItem("sessionToken") });
     }
-    if (localStorage.getItem("userRole")) {
-      this.setState({ userRole: localStorage.getItem("admin") });
-      console.log(this.state.userRole)
-    }
+    // if (localStorage.getItem("userRole")) {
+    //   this.setState({ userRole: localStorage.getItem("admin") });
+    //   console.log(this.state.userRole)
+    // }
   }
 
   render() {
     const session = localStorage.getItem("sessionToken");
-console.log("session was here", session)
     return (
       <div className="App">
         <div id="main">
           <h2> What's for Dinner?</h2>
-          {/* <div className={session === null ? "mainDiv" : ""}> */}
-          {/* <Typography component="nav"></Typography> */}
-          {/* {session == null ? ( */}
+          
           {!session ? (
             <Auth
               updateSessionToken={this.updateSessionToken}

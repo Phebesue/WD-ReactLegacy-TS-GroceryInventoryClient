@@ -15,10 +15,6 @@ import { render } from "@testing-library/react";
 
 type ValueTypes = {};
 type AcceptedProps = {
-//   updateSessionToken: (newToken: string) => void;
-//   sessionToken: (newToken: string) => void;
-//   updateUserRole: (newUserRole: boolean) => void;
-//   updateUsername: (newUsername: string) => void;
   clearUser: () => void;
 };
 
@@ -32,16 +28,20 @@ export class AdminNavbar extends Component<AcceptedProps, ValueTypes> {
     return (
       <div>
         <h3>AdminNavbar</h3>
-        <Button className="logout" onClick={this.props.clearUser}>Logout</Button>
-        <Toolbar>
-     
-            <MenuIcon />
-            <PersonIcon />
-            <PersonOutlineIcon />
-        
+        <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
+          <Button style={{ marginRight: "5em" }} onClick={this.props.clearUser}>
+            Home
+          </Button>
+          <Button style={{ marginLeft: "5em" }} onClick={this.props.clearUser}>
+            Logout
+          </Button>
+          {console.log("Nav2 Footer")}
         </Toolbar>
-
-   
+        <Toolbar>
+          <MenuIcon />
+          <PersonIcon />
+          <PersonOutlineIcon />
+        </Toolbar>
       </div>
     );
   }
