@@ -1,100 +1,57 @@
-import React from "react";
-// import AdminNavbar from '../admin/AdminNavbar';
-import Footer from "../../site/Footer";
-// import { Container, Button } from 'reactstrap';
-// import { Card } from 'antd';
+import React, { Component } from "react";
+import AdminUserTable from "../admin/AdminUserTable";
+import { Button } from "@material-ui/core";
 // import "./Admin.css";
 import APIURL from "../../helpers/environment";
+// import Radium from 'radium';
 
-type AcceptedProps = {
+type AdminProps = {
   updateSessionToken: (newToken: string) => void;
   updateUserRole: (newUserRole: string) => void;
   updateUsername: (newUsername: string) => void;
-  // clearUser: () => void;
-  sessionToken: string |null;
+  sessionToken: string | null;
+  username: string | null | undefined;
 };
 
-type ValueTypes = {
-  dataTable: [];
-};
+const styles = {
+  table: {
+      minWidth: 650
+  }}
 
-export class Admin extends React.Component<AcceptedProps, ValueTypes> {
-  constructor(props: AcceptedProps) {
+export class Admin extends Component<AdminProps, {}> {
+  constructor(props: AdminProps) {
     super(props);
-    this.state = {
-      dataTable: [],
-    };
+    this.state = {}
   }
-
-  componentDidMount() {
-    this.fetchUsers();
-  }
-
-  fetchUsers = () => {
-    if (this.props.sessionToken) {
-      console.log("Before Fetch");
-      fetch(`${APIURL}/users/`, {
-        method: "GET",
-        headers: new Headers({
-          "Content-Type": "application/json",
-          "Authorization": this.props.sessionToken,
-        }),
-      })
-        .then((res) => {
-          if (res.status !== 200) {
-            throw new Error("Error");
-          } else return res.json();
-        })
-        .then((data) => {
-          // let objUser: UserDetails = {
-          //   id: 0,
-          //     firstName: "",
-          //     lastName: "",
-          //     userName: "",
-          //     role: "",
-          // }
-        });
-    }
-  };
-
-  deleteUser = (user: any) => {
-    fetch(`${APIURL}/user/${user.id}`, {
-      method: "DELETE",
-      headers: new Headers({ "Content-Type": "application/json" }),
-    }).then(() => this.fetchUsers());
-  };
-
-  userMapper = () => {
-    return this.state.dataTable.map((users: any, index) => {
-      return (
-        //call mapper and display
-
-        <div key={index} id="userlist">
-          <p id="listUserName">Username: {users.userName}</p>
-          <button
-            id="deleteMe"
-            // variant="contained"
-            color="primary"
-            onClick={() => {
-              this.deleteUser(users);
-            }}
-          >
-            Delete User
-          </button>
-        </div>
-      );
-    });
-  };
+  
 
   render() {
     return (
       <div id="adminDiv">
         <div id="adminContainer">
-          <header id="titleUserList">User List:</header>
-          {this.userMapper()}
+        <div  style={{display:"flex", justifyContent:"flex-start"}}>
+          <h3>Welcome {this.props.username}</h3>
+          <h5> What would you like to manage?</h5>
         </div>
-        {/* <Footer /> */}
+        <div style={{display:"flex", justifyContent:"spaceBetween"}}className="options">
+        <Button style={{ backgroundColor: "lightgrey",margin:"3em", color: "#5F9EA0", fontFamily: "cursive", borderColor:"#5F9EA0"}}/*onClick={this.props.clearUser}*/>Vendors</Button>
+        <Button style={{ backgroundColor: "lightgrey",margin:"3em", color: "#5F9EA0", fontFamily: "cursive", borderColor:"#5F9EA0"}}/*onClick={this.props.clearUser}*/>Locations</Button>
+        <Button style={{ backgroundColor: "lightgrey",margin:"3em", color: "#5F9EA0", fontFamily: "cursive", borderColor:"#5F9EA0"}}/*onClick={this.props.clearUser}*/>Users</Button>
+        <Button style={{ backgroundColor: "lightgrey",margin:"3em", color: "#5F9EA0", fontFamily: "cursive", borderColor:"#5F9EA0"}}/*onClick={this.props.clearUser}*/>Grocery Items</Button>
+        </div>
+          </div>
+     
+        {console.log("Admin Footer")}
+         
+       
+        <AdminUserTable       
+      updateSessionToken={this.props.updateSessionToken}
+      sessionToken={this.props.sessionToken}
+      updateUsername={this.props.updateUsername}
+      updateUserRole={this.props.updateUserRole}/>
       </div>
     );
   }
 }
+
+export default Admin;
