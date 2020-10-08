@@ -1,9 +1,9 @@
-import * as React from "react";
+import React, { Component } from "react";
 import { FormControl, TextField, Button } from "@material-ui/core";
 // import './signup.css';
 import APIURL from "../../src/helpers/environment";
 
-type ValueTypes = {
+type UserState = {
   firstName: string;
   lastName: string;
   username: string;
@@ -16,7 +16,7 @@ type AcceptedProps = {
   updateUserRole: (newUserRole: string) => void;
 };
 
-export class Signup extends React.Component<AcceptedProps, ValueTypes> {
+export class Signup extends Component<AcceptedProps, UserState> {
   constructor(props: AcceptedProps) {
     super(props);
     this.state = {
@@ -104,4 +104,3 @@ export class Signup extends React.Component<AcceptedProps, ValueTypes> {
     );
   }
 }
-
