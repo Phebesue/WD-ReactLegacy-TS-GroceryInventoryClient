@@ -1,4 +1,5 @@
-.footer {
+footer {
+    margin-top: 5rem;
     position: fixed;
     left: 0;
     bottom: 0;
@@ -6,3 +7,6 @@
     background-color: red;
     color: white;
     text-align: center;}
+    .spacer{
+        height:10rem;
+    }
