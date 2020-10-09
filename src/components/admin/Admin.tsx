@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import LocationCreate from "../locations/LocationCreate";
+import LocationTable from "../locations/LocationTable";
 import VendorCreate from "../vendors/VendorCreate";
+import VendorTable from "../vendors/VendorTable";
 import AdminUserTable from "../admin/AdminUserTable";
 import { Button } from "@material-ui/core";
 // import "./Admin.css";
@@ -101,12 +103,24 @@ export class Admin extends Component<AdminProps, {}> {
           updateUsername={this.props.updateUsername}
           updateUserRole={this.props.updateUserRole}
         />
+          <LocationTable
+          updateSessionToken={this.props.updateSessionToken}
+          sessionToken={this.props.sessionToken}
+          updateUsername={this.props.updateUsername}
+          updateUserRole={this.props.updateUserRole}          
+        />
 
         <VendorCreate
           updateSessionToken={this.props.updateSessionToken}
           sessionToken={this.props.sessionToken}
           updateUsername={this.props.updateUsername}
           updateUserRole={this.props.updateUserRole}
+        />
+              <VendorTable
+          updateSessionToken={this.props.updateSessionToken}
+          sessionToken={this.props.sessionToken}
+          updateUsername={this.props.updateUsername}
+          updateUserRole={this.props.updateUserRole}          
         />
       </div>
     );

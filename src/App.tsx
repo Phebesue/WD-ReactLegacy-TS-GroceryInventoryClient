@@ -78,7 +78,13 @@ export default class GroceryApp extends Component<{}, sessionState> {
     ) {
       return (
         <div>                    
-          <AdminNavbar clearUser={this.clearUser} />
+          <AdminNavbar clearUser={this.clearUser}
+             updateSessionToken={this.updateSessionToken}
+             updateUsername={this.updateUsername}
+             updateUserRole={this.updateUserRole}
+             sessionToken={this.state.sessionToken}
+             username={this.state.username}
+          />
           <Admin
             updateSessionToken={this.updateSessionToken}
             updateUsername={this.updateUsername}

@@ -60,9 +60,7 @@ const types = [
 ];
 
 export default class LocationCreate extends Component<
-  AcceptedProps,
-  LocationState
-> {
+  AcceptedProps,  LocationState> {
   constructor(props: AcceptedProps) {
     super(props);
     this.state = {
@@ -98,15 +96,12 @@ export default class LocationCreate extends Component<
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
-          // this.props.updateSessionToken(data.sessionToken);
-          // this.props.updateUserRole(data.user.admin);
+          console.log(data);   
         })
         .catch((err) => console.log(err));
     }
   };
-  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ type: event.target.value });
+  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {    this.setState({ type: event.target.value });
   };
 
   render() {

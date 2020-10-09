@@ -8,7 +8,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 // import Radium from 'radium';
-import Paper from '@material-ui/core/Paper';
+import Paper from "@material-ui/core/Paper";
 
 type AcceptedProps = {
   updateSessionToken: (newToken: string) => void;
@@ -25,7 +25,7 @@ interface Results {
 }
 type UserDataState = {
   userData: Results[];
-  results:Results;
+  results: Results;
   columns: ColDef[];
 };
 const styles = {
@@ -37,24 +37,24 @@ const styles = {
 export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
   constructor(props: AcceptedProps) {
     super(props);
-    this.state = {
-      userData: [],
-      results:{
-        id:0,
-        firstName: "",
-        lastName: "",
-        username: "",
-        admin: "false"
-      },
-      // console.log(props),
-      columns: [
-        { field: "id", headerName: "Id", type: "number", width: 70 },
-        { field: "firstName", headerName: "First Name", width: 130 },
-        { field: "lastName", headerName: "Last Name", width: 130 },
-        { field: "username", headerName: "Username", width: 130 },
-        { field: "admin", headerName: "Is Admin?",  width: 130 },
-      ],
-    }
+    // console.log(props),
+      (this.state = {
+        userData: [],
+        results: {
+          id: 0,
+          firstName: "",
+          lastName: "",
+          username: "",
+          admin: "false",
+        },
+        columns: [
+          { field: "id", headerName: "Id", type: "number", width: 70 },
+          { field: "firstName", headerName: "First Name", width: 130 },
+          { field: "lastName", headerName: "Last Name", width: 130 },
+          { field: "username", headerName: "Username", width: 130 },
+          { field: "admin", headerName: "Is Admin?", width: 130 },
+        ],
+      });
   }
   componentDidMount() {
     this.fetchUsers();
@@ -87,8 +87,6 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
   userMapper = () => {
     return this.state.userData.map((users: Results, index) => {
       return (
-        //call mapper and display
-
         <TableRow key={index}>
           <TableCell component="th" scope="row">
             {users.id}
@@ -107,25 +105,19 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
       <div>
         <h3>User Table</h3>
         <TableContainer component={Paper}>
-            <Table style={styles.table} aria-label='simple table'>
-                <TableHead>
-                            <TableRow>
-                                <TableCell align='right'>id</TableCell>
-                                <TableCell align='right'>First Name</TableCell>
-                                <TableCell align='right'>Last Name</TableCell>
-                                <TableCell align='right'>Username</TableCell>
-                                <TableCell align='right'>Admin?</TableCell>
-                              
-                            </TableRow>
-                </TableHead>
+          <Table style={styles.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="right">id</TableCell>
+                <TableCell align="right">First Name</TableCell>
+                <TableCell align="right">Last Name</TableCell>
+                <TableCell align="right">Username</TableCell>
+                <TableCell align="right">Admin?</TableCell>
+              </TableRow>
+            </TableHead>
 
-                        <TableBody>
-                            {/* if using basic table, map here */}
-                            {/* {this.fetchUsers()} */}
-        {this.userMapper()}
-                        </TableBody>
-
-            </Table>
+            <TableBody>{this.userMapper()}</TableBody>
+          </Table>
         </TableContainer>
       </div>
     );
