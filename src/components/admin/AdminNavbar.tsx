@@ -16,6 +16,11 @@ import { render } from "@testing-library/react";
 type ValueTypes = {};
 type AcceptedProps = {
   clearUser: () => void;
+  updateUsername: (newUsername: string) => void;
+  updateSessionToken: (newToken: string) => void;
+  updateUserRole: (newUserRole: string) => void;
+  sessionToken: string | null;
+  username: string | null | undefined;
 };
 
 export class AdminNavbar extends Component<AcceptedProps, ValueTypes> {
