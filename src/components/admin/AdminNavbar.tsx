@@ -32,20 +32,43 @@ export class AdminNavbar extends Component<AcceptedProps, ValueTypes> {
   render() {
     return (
       <div>
-        <h3>AdminNavbar</h3>
+        <div id="adminContainer">
+          <div style={{ display: "block", justifyContent: "flex-start" }}>
+            <h3>AdminNavbar</h3> <br />
+            <h3>Welcome {this.props.username}</h3>
+            <h5> What would you like to manage?</h5>
+          </div>
+        </div>
         <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
-          <Button style={{ marginRight: "5em" }} onClick={this.props.clearUser}>
-            Home
+          <Button style={{ margin: "5em" }}>
+            <Link to="/admin/home">Admin Home</Link>
           </Button>
-          <Button style={{ marginLeft: "5em" }} onClick={this.props.clearUser}>
-            Logout
+
+          <Button style={{ margin: "5em" }}>
+          
+            <Link to="/admin/vendors">Vendor</Link>
           </Button>
-          {console.log("Nav2 Footer")}
-        </Toolbar>
-        <Toolbar>
-          <MenuIcon />
-          <PersonIcon />
-          <PersonOutlineIcon />
+
+          <Button style={{ margin: "5em" }}>
+            
+            <Link to="/admin/locations">Locations</Link>
+          </Button>
+
+          <Button style={{ margin: "5em" }}>
+            
+            <Link to="/admin/userTable">User Management</Link>
+          </Button>
+
+          <Button style={{ margin: "5em" }}>
+            
+            <Link to="/admin/grocery">Grocery</Link>
+          </Button>
+
+          <Button style={{ margin: "5em" }} onClick={this.props.clearUser}>
+          <Link to="/home">Logout</Link>
+            {/* Logout */}
+          </Button>
+          {console.log("Admin Nav Footer")}
         </Toolbar>
       </div>
     );
