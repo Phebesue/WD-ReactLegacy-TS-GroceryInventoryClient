@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Footer from "../site/Footer";
+import { Link } from "react-router-dom";
 import {
   AppBar,
   Button,
@@ -10,7 +10,8 @@ import {
 
 type AcceptedProps = {
   clearUser: () => void;
-  updateUsername: (newUsername: string) => void;
+  sessionToken: string | null;
+  username: string | null | undefined;
 };
 
 export class Navbar2 extends Component<AcceptedProps, {}> {
@@ -24,22 +25,39 @@ export class Navbar2 extends Component<AcceptedProps, {}> {
       <div className="mainNav">
         <div id="navContainer"></div>
         <h3>User Navbar</h3>
+        <h3>Welcome {this.props.username}</h3>
 
-        {/* <ul>
-  <li><a class="active" href="#home">Home</a></li>
-  <li><a href="#news">News</a></li>
-  <li><a href="#contact">Contact</a></li>
-  <li><a href="#about">About</a></li>
-</ul> */}
-        <br />
         <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
-          <Button style={{ marginRight: "5em" }} onClick={this.props.clearUser}>
-            Home
+          <Button style={{ margin: "5em" }}>
+            <Link to="/user/home"> User Home</Link>
           </Button>
-          <Button style={{ marginLeft: "5em" }} onClick={this.props.clearUser}>
-            Logout
+
+          <Button style={{ margin: "5em" }}>
+            <Link to="/user/vendorList">Vendor List</Link>
           </Button>
-          {console.log("Nav2 Footer")}
+
+          <Button style={{ margin: "5em" }}>
+            <Link to="/user/locationList">Location List</Link>
+          </Button>
+
+          <Button style={{ margin: "5em" }}>
+            <Link to="/user/edit">Edit my Acct</Link>
+          </Button>
+
+          <Button style={{ margin: "5em" }}>
+            <Link to="/user/grocery">Grocery</Link>
+          </Button>
+
+          <Button style={{ margin: "5em" }}>
+            <Link to="/user/groceryCreate">Grocery Create</Link>
+          </Button>
+
+          <Button style={{ margin: "5em" }} onClick={this.props.clearUser}>
+            {/* <Link to="/user/home"> Logout</Link> */}
+            <Link to="/home">Logout</Link>
+            {/* Logout */}
+          </Button>
+          {console.log("Nav Footer")}
         </Toolbar>
       </div>
     );

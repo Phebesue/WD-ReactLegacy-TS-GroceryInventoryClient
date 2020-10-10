@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
-import { DataGrid, ColDef, ValueGetterParams } from "@material-ui/data-grid";
+// import { DataGrid, ColDef, ValueGetterParams } from "@material-ui/data-grid";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -26,7 +26,7 @@ interface Results {
 type UserDataState = {
   userData: Results[];
   results: Results;
-  columns: ColDef[];
+  // columns: ColDef[];
 };
 const styles = {
   table: {
@@ -47,13 +47,13 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
           username: "",
           admin: "false",
         },
-        columns: [
-          { field: "id", headerName: "Id", type: "number", width: 70 },
-          { field: "firstName", headerName: "First Name", width: 130 },
-          { field: "lastName", headerName: "Last Name", width: 130 },
-          { field: "username", headerName: "Username", width: 130 },
-          { field: "admin", headerName: "Is Admin?", width: 130 },
-        ],
+        // columns: [
+        //   { field: "id", headerName: "Id", type: "number", width: 70 },
+        //   { field: "firstName", headerName: "First Name", width: 130 },
+        //   { field: "lastName", headerName: "Last Name", width: 130 },
+        //   { field: "username", headerName: "Username", width: 130 },
+        //   { field: "admin", headerName: "Is Admin?", width: 130 },
+        // ],
       });
   }
   componentDidMount() {
@@ -88,9 +88,7 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
     return this.state.userData.map((users: Results, index) => {
       return (
         <TableRow key={index}>
-          <TableCell component="th" scope="row">
-            {users.id}
-          </TableCell>
+          <TableCell component="th" scope="row">{users.id}</TableCell>
           <TableCell align="right">{users.firstName}</TableCell>
           <TableCell align="right">{users.lastName}</TableCell>
           <TableCell align="right">{users.username}</TableCell>
