@@ -1,10 +1,21 @@
 import React, { Component } from "react";
 import { FormControl, TextField, Button } from "@material-ui/core";
+import {UserDetails} from '../../Interfaces'
 import APIURL from "../../helpers/environment";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import {Link } from "react-router-dom";
-import {UserDetails} from '../../Interfaces'
+import { Link } from "react-router-dom";
+
+type UserDataState = {
+  editId: number;
+  editFirstName: string;
+  editLastName: string;
+  editUsername: string;
+  editPassword: string;
+  editAdmin: string;
+  userData: UserDetails[];
+  results: UserDetails;
+};
 
 type AcceptedProps = {
   updateUsername: (newUsername: string) => void;
@@ -13,15 +24,6 @@ type AcceptedProps = {
   clearUser: () => void;
   sessionToken: any;
   // sessionToken: string | null;
-};
-type UserDataState = {
-  editId: number;
-  editFirstName: string;
-  editLastName: string;
-  editUsername: string;
-  editPassword: string;
-  userData: UserDetails[];
-  results: UserDetails;
 };
 
 export class UserEdit extends Component<AcceptedProps, UserDataState> {
@@ -33,6 +35,7 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
       editLastName: "",
       editUsername: "",
       editPassword: "",
+      editAdmin: "",
       userData: [],
       results: {
         id: 0,
@@ -40,7 +43,7 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
         lastName: "",
         username: "",
         password: "",
-        role:"",
+        role: "",
       },
     };
     console.log("st: ", this.props.sessionToken);
@@ -65,8 +68,13 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
           this.setState({ editUsername: results.username });
           this.setState({ editPassword: results.password });
           console.log("hi", results.id);
-               })
-      
+          // this.setState({ userData: results });
+        })
+        // .then(() => {
+        //   if (this.state.userData !== null) {
+        //     console.log("userData:", this.state.userData);
+        //   }
+        // })
         .catch((err) => console.log(err));
     }
   };
@@ -81,6 +89,7 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
         lastName: this.state.editLastName,
         username: this.state.editUsername,
         password: this.state.editPassword,
+        admin: this.state.editAdmin,
       }),
       headers: new Headers({
         "Content-Type": "application/json",
@@ -95,17 +104,17 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
 
   handleDelete = (id: number | undefined) => {
     if (this.props.sessionToken) {
-      // fetch(`${APIURL}/user/${this.state.editId}`, {
-      fetch(`${APIURL}/user/${id}`, {
+      fetch(`${APIURL}/user/${this.state.editId}`, {
+        // fetch(`${APIURL}/user/${this.state.editId}`, {
         method: "DELETE",
         headers: new Headers({
           "Content-Type": "application/json",
-          "Authorization": this.props.sessionToken,
+          Authorization: this.props.sessionToken,
         }),
       })
         .then((res) => {
           this.fetchUser();
-         this.props.clearUser()
+          this.props.clearUser();
         })
         .catch((err) => alert(err));
     }
@@ -117,7 +126,7 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
   render() {
     return (
       <div id="editUserDiv">
-        <h3 id="editUserHeading">Edit your account</h3>
+        <h3 id="editUserHeading">Edit an Account</h3>
         <FormControl>
           <TextField
             label="First Name"
@@ -159,6 +168,15 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
               this.setState({ editPassword: e.target.value });
             }}
           />
+          <TextField
+            label="Is Admin?"
+            variant="outlined"
+            type="text"
+            value={this.state.editAdmin}
+            onChange={(e) => {
+              this.setState({ editAdmin: e.target.value });
+            }}
+          />
 
           <div>
             <Button
@@ -171,7 +189,7 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
                 firstName: ${this.state.editFirstName},
                   lastName: ${this.state.editLastName},
                   username: ${this.state.editUsername},
-            
+                  admin: ${this.state.editAdmin},     
                   `);
               }}
             >
@@ -184,12 +202,11 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
               value={this.state.editId}
               onClick={(e) => {
                 // console.log(this.state.editId);
-                this.handleDelete(this.state.editId);   
-            
+                this.handleDelete(this.state.editId);
               }}
             >
               <DeleteIcon />
-                     <Link to="/home">Delete</Link>
+              <Link to="/admin/userTable">Delete</Link>
             </Button>
           </div>
         </FormControl>

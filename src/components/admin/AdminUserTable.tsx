@@ -1,14 +1,8 @@
 import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
-import { DataGrid, ColDef, ValueGetterParams } from "@material-ui/data-grid";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
+import {Button, Table, TableBody, TableCell,TableContainer, TableHead, TableRow, Paper } from "@material-ui/core";
+
 // import Radium from 'radium';
-import Paper from "@material-ui/core/Paper";
 
 type AcceptedProps = {
   updateSessionToken: (newToken: string) => void;
@@ -26,7 +20,6 @@ interface Results {
 type UserDataState = {
   userData: Results[];
   results: Results;
-  columns: ColDef[];
 };
 const styles = {
   table: {
@@ -47,13 +40,7 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
           username: "",
           admin: "false",
         },
-        columns: [
-          { field: "id", headerName: "Id", type: "number", width: 70 },
-          { field: "firstName", headerName: "First Name", width: 130 },
-          { field: "lastName", headerName: "Last Name", width: 130 },
-          { field: "username", headerName: "Username", width: 130 },
-          { field: "admin", headerName: "Is Admin?", width: 130 },
-        ],
+     
       });
   }
   componentDidMount() {
@@ -83,18 +70,26 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
         .catch((err) => console.log(err));
     }
   };
+  deleteUser = ( user: any) => {
+    fetch(`${APIURL}/user/${user.id}`, {
+        method: 'DELETE',
+        headers: new Headers({'Content-Type': 'application/json'}),
+
+    }).then(() => this.fetchUsers())
+}
 
   userMapper = () => {
     return this.state.userData.map((users: Results, index) => {
       return (
         <TableRow key={index}>
-          <TableCell component="th" scope="row">
-            {users.id}
-          </TableCell>
+          <TableCell component="th" scope="row">{users.id}</TableCell>
           <TableCell align="right">{users.firstName}</TableCell>
           <TableCell align="right">{users.lastName}</TableCell>
           <TableCell align="right">{users.username}</TableCell>
-          <TableCell align="right">{users.admin}</TableCell>
+          <TableCell align="right">{users.admin}</TableCell>    
+          <Button  /*onClick={()=> {this.props.AdminEditUser(user); this.props.updateOn()}}*/>Update</Button>
+          <Button id="deleteMe" variant='contained' color='primary' onClick={() => {this.deleteUser(users)}}>Delete User</Button>
+
         </TableRow>
       );
     });
@@ -124,3 +119,5 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
   }
 }
 export default AdminUserTable;
+
+{/* <Link to="/admin/edit">Edit an Acct</Link> */}

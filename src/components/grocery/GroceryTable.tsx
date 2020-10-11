@@ -1,14 +1,8 @@
 import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
-import { DataGrid, ColDef, ValueGetterParams } from "@material-ui/data-grid";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
+import {Button, Table, TableBody, TableCell,TableContainer, TableHead, TableRow, Paper } from "@material-ui/core";
+import {GroceryDetails, Groc} from '../../Interfaces'
 // import Radium from 'radium';
-import Paper from "@material-ui/core/Paper";
 
 type AcceptedProps = {
   updateUsername: (newUsername: string) => void;
@@ -17,17 +11,28 @@ type AcceptedProps = {
   sessionToken: string | null;
   username: string | null | undefined;
 };
-interface Results {
-  id: number;
-  firstName: string;
-  lastName: string;
-  groceryname: string;
-  admin: string;
-}
+// interface Groc {
+// grocery:GroceryDetails[]
+// }
+
+// interface GroceryDetails {
+//   id: number;
+//   upc: string;
+//   groceryName: string;
+//   storageType: string;
+//   storageContainer: string;
+//   quantity: string;
+//   unitOfMeasure: string;
+//   onHand: number;
+//   groceryNotes: string;
+//   locationId: number;
+//   vendorId: number;
+// }
 type GroceryDataState = {
-  GroceryData: Results[];
-  results: Results;
-  columns: ColDef[];
+  groceryData: [GroceryDetails];
+  results: GroceryDetails;
+  
+
 };
 const styles = {
   table: {
@@ -35,76 +40,101 @@ const styles = {
   },
 };
 
-export class GroceryTable extends Component<AcceptedProps, GroceryDataState> {
+export default class GroceryTable extends Component<AcceptedProps, GroceryDataState> {
   constructor(props: AcceptedProps) {
     super(props);
     this.state = {
-      GroceryData: [],
+      groceryData: [{
+        id: 0,
+        upc: "",
+        groceryName: "",
+        storageType: "",
+        storageContainer: "",
+        quantity: "",
+        unitOfMeasure: "",
+        onHand: 0,
+        groceryNotes: "",
+        locationId: 0,
+        vendorId: 0,}],
       results: {
         id: 0,
-        firstName: "",
-        lastName: "",
-        groceryname: "",
-        admin: "false",
-      },
-      // console.log(props),
-      columns: [
-        { field: "id", headerName: "Id", type: "number", width: 70 },
-        { field: "firstName", headerName: "First Name", width: 130 },
-        { field: "lastName", headerName: "Last Name", width: 130 },
-        { field: "groceryname", headerName: "Groceryname", width: 130 },
-        { field: "admin", headerName: "Is Admin?", width: 130 },
-      ],
+        upc: "",
+        groceryName: "",
+        storageType: "",
+        storageContainer: "",
+        quantity: "",
+        unitOfMeasure: "",
+        onHand: 0,
+        groceryNotes: "",
+        locationId: 0,
+        vendorId: 0,
+      }
+      }
     };
-  }
-  //   componentDidMount() {
-  //     this.fetchGroceries();
-  //   }
+  
+    componentDidMount() {
+      // this.fetchGroceries();
+    }
 
-  //   fetchGroceries = () => {
-  //     if (this.props.sessionToken) {
-  //       console.log("Before Groceries Fetch");
-  //       fetch(`${APIURL}/grocery/all`, {
-  //         method: "GET",
-  //         headers: new Headers({
-  //           "Content-Type": "application/json",
-  //           Authorization: this.props.sessionToken,
-  //         }),
-  //       })
-  //         .then((res) => res.json())
-  //         .then((data: Results[]) => {
-  //           // console.log(groceryData);
-  //           this.setState({ groceryData: data });
-  //         })
-  //         .then(() => {
-  //           if (this.state.groceryData !== null) {
-  //             console.log(this.state.groceryData);
-  //           }
-  //         })
-  //         .catch((err) => console.log(err));
-  //     }
-  //   };
+    fetchGroceries = () => {
+      if (this.props.sessionToken) {
+        console.log("Before Groceries Fetch");
+        fetch(`${APIURL}/grocery/all`, {
+          method: "GET",
+          headers: new Headers({
+            "Content-Type": "application/json",
+            "Authorization": this.props.sessionToken,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            this.setState({ groceryData: data });
+         
+          })
+          .then(() => {
+            if (this.state.groceryData !== null) {
+              console.log(this.state.groceryData);
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+    };
 
-  //   groceryMapper = () => {
-  //     return this.state.groceryData.map((groceries: Results, index) => {
-  //       return (
-  //         //call mapper and display
-
-  //         <TableRow key={index}>
-  //           <TableCell component="th" scope="row">
-  //             {groceries.id}
-  //           </TableCell>
-  //           <TableCell align="right">{groceries.firstName}</TableCell>
-  //           <TableCell align="right">{groceries.lastName}</TableCell>
-  //           <TableCell align="right">{groceries.groceryname}</TableCell>
-  //           <TableCell align="right">{groceries.admin}</TableCell>
-  //         </TableRow>
-  //       );
-  //     });
-  //   };
+    groceryMapper = () => {
+      return this.state.groceryData.map((groceries: GroceryDetails, index) => {
+        return (
+    
+          <TableRow key={index}>
+            <TableCell component="th" scope="row">
+              {groceries.id}
+            </TableCell>
+            <TableCell align="right">{groceries.upc}</TableCell>
+            <TableCell align="right">{groceries.groceryName}</TableCell>
+            <TableCell align="right">{groceries.storageType}</TableCell>
+            <TableCell align="right">{groceries.storageContainer}</TableCell>
+            <TableCell align="right">{groceries.quantity}</TableCell>
+            <TableCell align="right">{groceries.unitOfMeasure}</TableCell>
+            <TableCell align="right">{groceries.onHand}</TableCell>
+            <TableCell align="right">{groceries.locationId}</TableCell>
+            <TableCell align="right">{groceries.vendorId}</TableCell>
+            <TableCell>
+            <Button type="submit" variant="contained" color="primary">
+              Edit
+            </Button>
+          </TableCell>
+          <TableCell>
+            <Button type="submit" variant="contained" color="secondary">
+              Delete
+            </Button>
+            </TableCell>
+                </TableRow>
+        );
+      });
+    };
 
   render() {
     return (
+        console.log("Welcome to grocery data"),
       <div>
         <h3>Grocery Table</h3>
         <TableContainer component={Paper}>
@@ -112,18 +142,27 @@ export class GroceryTable extends Component<AcceptedProps, GroceryDataState> {
             <TableHead>
               <TableRow>
                 <TableCell align="right">id</TableCell>
-                <TableCell align="right">First Name</TableCell>
-                <TableCell align="right">Last Name</TableCell>
-                <TableCell align="right">Groceryname</TableCell>
-                <TableCell align="right">Admin?</TableCell>
+                <TableCell align="right">UPC</TableCell>
+                <TableCell align="right">Grocery Item</TableCell>
+                <TableCell align="right">Storage Type</TableCell>
+                <TableCell align="right">Storage Container</TableCell>
+                <TableCell align="right">Unit Of Measure</TableCell>
+                <TableCell align="right">Quantity</TableCell>
+                <TableCell align="right">On-Hand</TableCell>
+                <TableCell align="right">Location Id</TableCell>
+                <TableCell align="right">Vendor Id</TableCell>
+                <TableCell align="right"></TableCell>
+                <TableCell align="right"></TableCell>
               </TableRow>
             </TableHead>
-
-            <TableBody>{/* {this.groceryMapper()} */}</TableBody>
+            <TableBody>
+              {this.groceryMapper()} 
+              </TableBody>
+            {/* {console.log("Welcome to grocery mapper")} */}
           </Table>
         </TableContainer>
       </div>
     );
   }
 }
-export default GroceryTable;
+
