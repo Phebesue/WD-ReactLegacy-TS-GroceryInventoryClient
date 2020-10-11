@@ -1,24 +1,13 @@
 import React, { Component } from "react";
 import Auth from "./auth/Auth";
 import SwitchController from "../src/site/SwitchController";
-
 import { Route, Link, Switch, BrowserRouter as Router } from "react-router-dom";
 // import moduleName from "formik";
-import {
-  Paper,
-  Tabs,
-  Tab,
-  Box,
-  Typography,
-  AppBar,
-  Container,
-} from "@material-ui/core";
 import "./App.css";
 import Footer from "./site/Footer";
-import { Admin } from "../src/components/admin/Admin";
-import User from "../src/components/user/User";
 import AdminNavbar from "../src/components/admin/AdminNavbar";
-import Navbar2 from "../src/site/Navbar2";
+import Navbar from "./site/Navbar";
+
 
 type sessionState = {
   sessionToken: string | null;
@@ -76,7 +65,7 @@ export default class GroceryApp extends Component<{}, sessionState> {
     return(  
 
     this.state.sessionToken === localStorage.getItem("sessionToken") ? 
-      localStorage.getItem("userRole") == "true" ? 
+      localStorage.getItem("userRole") === "true" ? 
        ( <AdminNavbar
           clearUser={this.clearUser}
           updateSessionToken={this.updateSessionToken}
@@ -86,7 +75,7 @@ export default class GroceryApp extends Component<{}, sessionState> {
           username={this.state.username}
         />)
       : 
-       ( <Navbar2
+       ( <Navbar
           clearUser={this.clearUser}
           username={this.state.username}
           sessionToken={this.state.sessionToken}
@@ -138,6 +127,7 @@ export default class GroceryApp extends Component<{}, sessionState> {
               sessionToken={this.state.sessionToken}
               username={this.state.username}
               protectedViews={this.protectedViews}
+              clearUser={this.clearUser}
             />
             {console.log("Bottom of App")}
             <Footer />

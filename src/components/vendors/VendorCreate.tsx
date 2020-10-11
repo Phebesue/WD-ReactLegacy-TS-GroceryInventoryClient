@@ -38,8 +38,8 @@ export default class VendorCreate extends Component<
   }
 
   handleSubmit = (event: any) => {
+    console.log("Before VendorCreate Fetch");
     if (this.props.sessionToken) {
-      console.log("Before VendorCreate Fetch");
       event.preventDefault();
       fetch(`${APIURL}/vendor/create`, {
         method: "POST",
@@ -57,15 +57,13 @@ export default class VendorCreate extends Component<
         }),
         headers: new Headers({
           "Content-Type": "application/json",
-          Authorization: this.props.sessionToken,
+          "Authorization": this.props.sessionToken,
         }),
       })
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          // this.props.updateSessionToken(data.sessionToken);
-          // this.props.updateUserRole(data.user.admin);
-        })
+              })
         .catch((err) => console.log(err));
     }
   };

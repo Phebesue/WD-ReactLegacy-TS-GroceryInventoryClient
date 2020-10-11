@@ -2,17 +2,7 @@ import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
 import { FormControl, TextField, Button } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
-// import { DataGrid, ColDef, ValueGetterParams } from "@material-ui/data-grid";
-// import Table from "@material-ui/core/Table";
-// import TableBody from "@material-ui/core/TableBody";
-// import TableCell from "@material-ui/core/TableCell";
-// import TableContainer from "@material-ui/core/TableContainer";
-// import TableHead from "@material-ui/core/TableHead";
-// import TableRow from "@material-ui/core/TableRow";
-// // import Radium from 'radium';
-// import Paper from '@material-ui/core/Paper';
-// // import './Location.css';
-// import { EnumDeclaration } from 'typescript';
+
 
 type AcceptedProps = {
   updateUsername: (newUsername: string) => void;
@@ -28,18 +18,9 @@ type LocationState = {
   type: string;
   locationNotes: string;
   userId: number;
-  // locData: Results[];
-  // results:Results;
-  // columns: ColDef[];
+
 };
-//   interface Results {
-//     locationName: string;
-//     room: string;
-//     place: string;
-//     type: string;
-//     locationNotes: string;
-//     userId: number;
-//   }
+
 const types = [
   {
     value: "",
@@ -136,18 +117,11 @@ export default class LocationCreate extends Component<
               }}
             />
 
-            {/* <TextField
-              label="Type"
-              variant="outlined"
-              onChange={(e) => {
-                this.setState({ type: e.target.value });
-              }}
-            /> */}
+     
             <TextField
               id="outlined-textarea"
               label="Location Notes"
-              //   placeholder="Location Notes"
-              type="text"
+                       type="text"
               multiline
               variant="outlined"
               onChange={(e) => {
