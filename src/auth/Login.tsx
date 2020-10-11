@@ -36,19 +36,33 @@ export class Login extends React.Component<AcceptedProps, UserState> {
         password: this.state.password,
       }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        console.log(this.props);
-        // console.log(data.sessionToken);
-        this.props.updateSessionToken(data.sessionToken);
-        this.props.updateUserRole(data.user.admin);
-        this.props.updateUsername(data.user.username);
-      })
-      // .then(() => {
-      //   window.location.reload()
-      // })
-  };
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       console.log(this.props);
+  //       // console.log(data.sessionToken);
+  //       this.props.updateSessionToken(data.sessionToken);
+  //       this.props.updateUserRole(data.user.admin);
+  //       this.props.updateUsername(data.user.username);
+  //     })
+  //     // .then(() => {
+  //     //   window.location.reload()
+  //     // })
+  // };
+  .then((res) => {
+    if (res.status !== 200) {
+      throw new Error("User does not exist");
+    } else return res.json();
+  })
+  .then((data) => {
+    // console.log(data);
+    this.props.updateSessionToken(data.sessionToken);
+    this.props.updateUserRole(data.user.admin);
+    this.props.updateUsername(data.user.username);
+    console.log("User successfully logged in");
+  })
+  .catch((err) => alert(err));
+};
   render() {
     return (
       <div id="loginDiv">

@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import {
-  AppBar,
-  Button,
-  IconButton,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
+import { AppBar, Button, IconButton, Toolbar } from "@material-ui/core";
 
 type AcceptedProps = {
   clearUser: () => void;
@@ -14,7 +8,7 @@ type AcceptedProps = {
   username: string | null | undefined;
 };
 
-export class Navbar2 extends Component<AcceptedProps, {}> {
+export class Navbar extends Component<AcceptedProps, {}> {
   constructor(props: AcceptedProps) {
     super(props);
     this.state = {};
@@ -26,7 +20,7 @@ export class Navbar2 extends Component<AcceptedProps, {}> {
         <div id="navContainer"></div>
         <h3>User Navbar</h3>
         <h3>Welcome {this.props.username}</h3>
-
+        {/* <AppBar > */}
         <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
           <Button style={{ margin: "5em" }}>
             <Link to="/user/home"> User Home</Link>
@@ -53,14 +47,14 @@ export class Navbar2 extends Component<AcceptedProps, {}> {
           </Button>
 
           <Button style={{ margin: "5em" }} onClick={this.props.clearUser}>
-            {/* <Link to="/user/home"> Logout</Link> */}
             <Link to="/home">Logout</Link>
             {/* Logout */}
           </Button>
           {console.log("Nav Footer")}
         </Toolbar>
+        {/* </AppBar> */}
       </div>
     );
   }
 }
-export default Navbar2;
+export default Navbar;

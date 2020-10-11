@@ -27,8 +27,9 @@ type ControllerProps = {
   updateUserRole: (newUserRole: string) => void;
   updateUsername: (newUsername: string) => void;
   protectedViews: () => void;
-  sessionToken: string | null;
+  sessionToken: any;
   username: string | null | undefined;
+  clearUser: () => void;
 };
 
 const SwitchController: FC<ControllerProps> = (props) => {
@@ -43,13 +44,13 @@ const SwitchController: FC<ControllerProps> = (props) => {
   // ) : (
   //   props.protectedViews()
   // )}
+  console.log("switchController: ", props.sessionToken);
 
   return (
     <div className="protectedViewsDiv">
       <div className="routes">
         <Switch>
-        
-        <Route exact path="/home"></Route>
+          <Route exact path="/home"></Route>
 
           <Route exact path="/auth">
             <Auth
@@ -87,6 +88,14 @@ const SwitchController: FC<ControllerProps> = (props) => {
           </Route>
           <Route exact path="/admin/vendorList">
             <VendorTable
+              updateSessionToken={props.updateSessionToken}
+              updateUsername={props.updateUsername}
+              updateUserRole={props.updateUserRole}
+              sessionToken={props.sessionToken}
+            />
+          </Route>
+          <Route exact path="/admin/vendorEdit">
+            <VendorEdit
               updateSessionToken={props.updateSessionToken}
               updateUsername={props.updateUsername}
               updateUserRole={props.updateUserRole}
@@ -197,6 +206,7 @@ const SwitchController: FC<ControllerProps> = (props) => {
               updateUsername={props.updateUsername}
               updateUserRole={props.updateUserRole}
               sessionToken={props.sessionToken}
+              clearUser={props.clearUser}
               // username={props.username}
             />
           </Route>
