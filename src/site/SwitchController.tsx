@@ -7,14 +7,14 @@ import AdminUserTable from "../components/admin/AdminUserTable";
 import AdminEditUser from "../components/admin/AdminEditUser";
 import GroceryCreate from "../components/grocery/GroceryCreate";
 import GroceryTable from "../components/grocery/GroceryTable";
-import GroceryEdit from "../components/grocery/GroceryEdit";
-import AdminGroceryTblDel from "../components/grocery/AdminGroceryTblDel";
+// import GroceryEdit from "../components/grocery/GroceryEdit";
+// import AdminGroceryTblDel from "../components/grocery/AdminGroceryTblDel";
 import AdminGroceryMgmt from "../components/grocery/AdminGroceryMgmt";
 import LocationCreate from "../components/locations/LocationCreate";
 import LocationTable from "../components/locations/LocationTable";
 import LocationEdit from "../components/locations/LocationEdit";
 import AdminLocationMgmt from "../components/locations/AdminLocationMgmt";
-import AdminLocationTblDel from "../components/locations/AdminLocationTblDel";
+// import AdminLocationTblDel from "../components/locations/AdminLocationTblDel";
 import VendorCreate from "../components/vendors/VendorCreate";
 import VendorTable from "../components/vendors/VendorTable";
 import VendorEdit from "../components/vendors/VendorEdit";
@@ -33,17 +33,7 @@ type ControllerProps = {
 };
 
 const SwitchController: FC<ControllerProps> = (props) => {
-  // {!props.sessionToken ? (
-  //   <Route exact path="/auth">
-  //     <Auth
-  //       updateSessionToken={props.updateSessionToken}
-  //       updateUsername={props.updateUsername}
-  //       updateUserRole={props.updateUserRole}
-  //     />
-  //   </Route>
-  // ) : (
-  //   props.protectedViews()
-  // )}
+
   console.log("switchController: ", props.sessionToken);
 
   return (
