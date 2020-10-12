@@ -1,97 +1,206 @@
 import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { FormControl, TextField, Button } from "@material-ui/core";
+import { UserDetails, UserData } from "../../Interfaces";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 
 type AdminProps = {
   updateSessionToken: (newToken: string) => void;
   updateUserRole: (newUserRole: string) => void;
   updateUsername: (newUsername: string) => void;
+  // clearUser: () => void;
   sessionToken: string | null;
   username: string | null | undefined;
 };
-interface Results {
-  id: number;
-  firstName: string;
-  lastName: string;
-  username: string;
-  admin: string;
-}
 
 type UserState = {
+  id: number;
   firstName: string;
   lastName: string;
   username: string;
   password: string;
   admin: string;
-  userData?:[];
-  results?: Results;
+  userData: UserDetails[];
+  results: UserDetails;
 };
 
 export default class AdminEditUser extends Component<AdminProps, UserState> {
   constructor(props: AdminProps) {
     super(props);
     this.state = {
+      id: 0,
       firstName: "",
       lastName: "",
       username: "",
       password: "",
-      admin:"",
+      admin: "",
+      userData: [],
+      results: {
+        id: 0,
+        firstName: "",
+        lastName: "",
+        username: "",
+        password: "",
+        admin: "",
+      },
     };
   }
-  // fetchUser = () => {
-  //   if (this.props.sessionToken) {
-  //     console.log("Before User Fetch");
-  //     fetch(`${APIURL}/user/all`, {
-  //       method: "GET",
-  //       headers: new Headers({
-  //         "Content-Type": "application/json",
-  //         Authorization: this.props.sessionToken,
-  //       }),
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data: Results[]) => {
-  //         // console.log(userData);
-  //         this.setState({ userData: data });
-  //       })
-  //       .then(() => {
-  //         if (this.state.userData !== null) {
-  //           console.log(this.state.userData);
-  //         }
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  // };
-  
-  handleSubmit = (event: any) => {
-    event.preventDefault();
-    fetch(`${APIURL}/user/admin/:id`, {
-      method: "POST",
-      body: JSON.stringify({
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        username: this.state.username,
-        password: this.state.password,
-        admin: this.state.admin,
-      }),
-      headers: new Headers({
-        "Content-Type": "application/json",
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        this.props.updateSessionToken(data.sessionToken);
-        this.props.updateUserRole(data.user.admin);
-      });
+
+  fetchUser = () => {
+    console.log("Before User Fetch", this.props.sessionToken);
+    if (this.props.sessionToken) {
+      fetch(`${APIURL}/user/`, {
+        method: "GET",
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Authorization: this.props.sessionToken,
+        }),
+      })
+        .then((res) => res.json())
+        .then((results) => {
+          // console.log(results.firstName),
+          this.setState({ id: results.id });
+          this.setState({ firstName: results.firstName });
+          this.setState({ lastName: results.lastName });
+          this.setState({ username: results.username });
+          this.setState({ password: results.password });
+          console.log("hi", results.id);
+        })
+
+        .catch((err) => console.log(err));
+    }
   };
+
+  handleSubmit = (event: any) => {
+    if (this.props.sessionToken) {
+      event.preventDefault();
+      fetch(`${APIURL}/user/admin/${this.state.id}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          id: this.state.id,
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          username: this.state.username,
+          password: this.state.password,
+          admin: this.state.admin,
+        }),
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Authorization: this.props.sessionToken,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        });
+    }
+  };
+
+  handleDelete = (id: number | undefined) => {
+    if (this.props.sessionToken) {
+      // fetch(`${APIURL}/user/${this.state.editId}`, {
+      fetch(`${APIURL}/user/${id}`, {
+        method: "DELETE",
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Authorization: this.props.sessionToken,
+        }),
+      })
+        .then((res) => {
+          this.fetchUser();
+          //  this.props.clearUser()
+        })
+        .catch((err) => alert(err));
+    }
+  };
+  componentDidMount() {
+    this.fetchUser();
+    // console.log(data)
+  }
   render() {
     return (
-      <div>
-        <Link to="/admin/userMgmt">User Management</Link>
-        <Link to="/admin/userTable">User Table</Link>
+      <div id="editUserDiv">
+        <h3 id="editUserHeading">Edit an account</h3>
+        <FormControl>
+          <TextField
+            label="First Name"
+            variant="outlined"
+            type="text"
+            value={this.state.firstName}
+            onChange={(e) => {
+              this.setState({ firstName: e.target.value });
+            }}
+          />
+          <TextField
+            label="Last Name"
+            variant="outlined"
+            type="text"
+            value={this.state.lastName}
+            onChange={(e) => {
+              this.setState({ lastName: e.target.value });
+            }}
+          />
+          <TextField
+            label="Username"
+            variant="outlined"
+            type="text"
+            value={this.state.username}
+            onChange={(e) => {
+              this.setState({ username: e.target.value });
+            }}
+          />
+          <TextField
+            label="New Password"
+            variant="outlined"
+            type="text"
+            onChange={(e) => {
+              this.setState({ password: e.target.value });
+            }}
+          />
+          <TextField
+            label="Admin?"
+            variant="outlined"
+            type="text"
+            value={this.state.admin}
+            onChange={(e) => {
+              this.setState({ admin: e.target.value });
+            }}
+          />
 
-
-      
+          <div>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={(e) => {
+                this.handleSubmit(e);
+                console.log(`
+                id: ${this.state.id},
+                firstName: ${this.state.firstName},
+                  lastName: ${this.state.lastName},
+                  username: ${this.state.username},
+                  admin: ${this.state.admin},            
+                  `);
+              }}
+            >
+              <EditIcon />
+              <Link to="/admin/userMgmt">Edit</Link>
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              value={this.state.id}
+              onClick={(e) => {
+                // console.log(this.state.id);
+                this.handleDelete(this.state.id);
+              }}
+            >
+              <DeleteIcon />
+              <Link to="/admin/userMgmt">Delete</Link>
+            </Button>
+          </div>
+        </FormControl>
       </div>
     );
   }

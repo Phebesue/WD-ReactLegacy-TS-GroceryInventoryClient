@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { Admin } from "../components/admin/Admin";
 import UserEdit from "../components/user/UserEdit";
 import User from "../components/user/User";
@@ -7,16 +7,17 @@ import AdminUserTable from "../components/admin/AdminUserTable";
 import AdminEditUser from "../components/admin/AdminEditUser";
 import GroceryCreate from "../components/grocery/GroceryCreate";
 import GroceryTable from "../components/grocery/GroceryTable";
-// import GroceryEdit from "../components/grocery/GroceryEdit";
-// import AdminGroceryTblDel from "../components/grocery/AdminGroceryTblDel";
+import GroceryEdit from "../components/grocery/GroceryEdit";
+import AdminGroceryTblDel from "../components/grocery/AdminGroceryTblDel";
 import AdminGroceryMgmt from "../components/grocery/AdminGroceryMgmt";
 import LocationCreate from "../components/locations/LocationCreate";
 import LocationTable from "../components/locations/LocationTable";
 import LocationEdit from "../components/locations/LocationEdit";
 import AdminLocationMgmt from "../components/locations/AdminLocationMgmt";
-// import AdminLocationTblDel from "../components/locations/AdminLocationTblDel";
+import AdminLocationTblDel from "../components/locations/AdminLocationTblDel";
 import VendorCreate from "../components/vendors/VendorCreate";
 import VendorTable from "../components/vendors/VendorTable";
+import AdminVendorTblDel from "../components/vendors/AdminVendorTblDel";
 import VendorEdit from "../components/vendors/VendorEdit";
 import AdminVendorMgmt from "../components/vendors/AdminVendorMgmt";
 import Auth from "../auth/Auth";
@@ -29,15 +30,15 @@ type ControllerProps = {
   protectedViews: () => void;
   sessionToken: any;
   username: string | null | undefined;
+  userRole: string ;
   clearUser: () => void;
 };
 
 const SwitchController: FC<ControllerProps> = (props) => {
-
   console.log("switchController: ", props.sessionToken);
 
   return (
-    <div className="protectedViewsDiv">
+    <div className="ViewsDiv">
       <div className="routes">
         <Switch>
           <Route exact path="/home"></Route>
@@ -67,6 +68,9 @@ const SwitchController: FC<ControllerProps> = (props) => {
               sessionToken={props.sessionToken}
             />
           </Route>
+          <Route exact path="/admin/vendorList">
+            <AdminVendorTblDel sessionToken={props.sessionToken} />
+          </Route>
           <Route exact path="/admin/vendorCreate">
             <VendorCreate
               updateSessionToken={props.updateSessionToken}
@@ -76,14 +80,7 @@ const SwitchController: FC<ControllerProps> = (props) => {
               // username={props.username}
             />
           </Route>
-          <Route exact path="/admin/vendorList">
-            <VendorTable
-              updateSessionToken={props.updateSessionToken}
-              updateUsername={props.updateUsername}
-              updateUserRole={props.updateUserRole}
-              sessionToken={props.sessionToken}
-            />
-          </Route>
+
           <Route exact path="/admin/vendorEdit">
             <VendorEdit
               updateSessionToken={props.updateSessionToken}
@@ -111,7 +108,7 @@ const SwitchController: FC<ControllerProps> = (props) => {
             />
           </Route>
           <Route exact path="/admin/locationList">
-            <LocationTable
+            <AdminLocationTblDel
               updateSessionToken={props.updateSessionToken}
               updateUsername={props.updateUsername}
               updateUserRole={props.updateUserRole}
@@ -146,13 +143,22 @@ const SwitchController: FC<ControllerProps> = (props) => {
               // username={props.username}
             />
           </Route>
+          <Route exact path="/admin/edit">
+            <AdminEditUser
+              updateSessionToken={props.updateSessionToken}
+              updateUsername={props.updateUsername}
+              updateUserRole={props.updateUserRole}
+              sessionToken={props.sessionToken}
+              username={props.username}
+            />
+          </Route>
           <Route exact path="/admin/grocery">
             <AdminGroceryMgmt
               updateSessionToken={props.updateSessionToken}
               updateUsername={props.updateUsername}
               updateUserRole={props.updateUserRole}
               sessionToken={props.sessionToken}
-              username={props.username}
+              // username={props.username}
             />
           </Route>
           <Route exact path="/admin/groceryCreate">
@@ -165,12 +171,14 @@ const SwitchController: FC<ControllerProps> = (props) => {
             />
           </Route>
           <Route exact path="/admin/groceryList">
-            <GroceryTable
+            <AdminGroceryTblDel
               updateSessionToken={props.updateSessionToken}
               updateUsername={props.updateUsername}
               updateUserRole={props.updateUserRole}
               sessionToken={props.sessionToken}
               username={props.username}
+              // userRole={props.userRole}
+
             />
           </Route>
           <Route exact path="/user/home">
@@ -210,7 +218,7 @@ const SwitchController: FC<ControllerProps> = (props) => {
             />
           </Route>
           <Route exact path="/user/grocery">
-            <AdminGroceryMgmt
+            <GroceryTable
               updateSessionToken={props.updateSessionToken}
               updateUsername={props.updateUsername}
               updateUserRole={props.updateUserRole}
@@ -234,6 +242,7 @@ const SwitchController: FC<ControllerProps> = (props) => {
               updateUserRole={props.updateUserRole}
               sessionToken={props.sessionToken}
               username={props.username}
+              // userRole={props.userRole}
             />
           </Route>
         </Switch>

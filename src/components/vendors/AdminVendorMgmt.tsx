@@ -4,7 +4,7 @@ import VendorCreate from "../vendors/VendorCreate";
 import VendorTable from "../vendors/VendorTable";
 import VendorEdit from "../vendors/VendorEdit";
 import Admin from "../../components/admin/Admin"
-import { Route, Link, Switch, BrowserRouter as Router } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 type AcceptedProps = {

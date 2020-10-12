@@ -1,15 +1,8 @@
 import React, { Component } from "react";
-import { Route, Link, Switch, BrowserRouter as Router } from "react-router-dom";
-import {
-  AppBar,
-  Button,
-  IconButton,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
+import {  Link} from "react-router-dom";
+import { Button, Toolbar } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import PersonIcon from "@material-ui/icons/Person";
-import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
+
 import { Admin } from "../admin/Admin";
 import { render } from "@testing-library/react";
 
@@ -45,27 +38,23 @@ export class AdminNavbar extends Component<AcceptedProps, ValueTypes> {
           </Button>
 
           <Button style={{ margin: "5em" }}>
-          
             <Link to="/admin/vendors">Vendor</Link>
           </Button>
 
           <Button style={{ margin: "5em" }}>
-            
             <Link to="/admin/locations">Locations</Link>
           </Button>
 
           <Button style={{ margin: "5em" }}>
-            
             <Link to="/admin/userTable">User Management</Link>
           </Button>
 
           <Button style={{ margin: "5em" }}>
-            
             <Link to="/admin/grocery">Grocery</Link>
           </Button>
 
           <Button style={{ margin: "5em" }} onClick={this.props.clearUser}>
-          <Link to="/home">Logout</Link>
+            <Link to="/home">Logout</Link>
             {/* Logout */}
           </Button>
           {console.log("Admin Nav Footer")}

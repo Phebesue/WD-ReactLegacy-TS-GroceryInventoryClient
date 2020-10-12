@@ -10,12 +10,12 @@ export interface UserDetails {
     lastName: string;
     username: string;
     password: string;
-    role: string;
-    
+    admin: string;    
 }
 
 export interface Groc {
-    grocery:GroceryDetails[]
+    grocery:GroceryDetails[],
+    
     }
 
 export interface GroceryDetails {
@@ -33,7 +33,7 @@ export interface GroceryDetails {
 }
 
 export interface LocationDetails {
-    locationId: number;
+    id: number;
     locationName: string;
     room: string;
     place: string;
@@ -42,7 +42,7 @@ export interface LocationDetails {
   }
 
   export interface VendorDetails {
-    vendorId: number;
+    id: number;
     vendorName: string;
     website: string;
     address: string;

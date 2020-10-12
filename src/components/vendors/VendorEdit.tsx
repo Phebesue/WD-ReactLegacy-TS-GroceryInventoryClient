@@ -39,7 +39,7 @@ export class VendorEdit extends Component<AcceptedProps, VendorDataState> {
       vendorNotes: "",
       vendorData: [
         {
-          vendorId: 0,
+          id: 0,
           vendorName: "",
           website: "",
           address: "",
@@ -51,7 +51,7 @@ export class VendorEdit extends Component<AcceptedProps, VendorDataState> {
       ],
 
       results: {
-        vendorId: 0,
+        id: 0,
         vendorName: "",
         website: "",
         address: "",
@@ -95,7 +95,7 @@ export class VendorEdit extends Component<AcceptedProps, VendorDataState> {
       fetch(`${APIURL}/user/`, {
         method: "PUT",
         body: JSON.stringify({
-          vendorId: this.state.results.vendorId,
+          vendorId: this.state.results.id,
           vendorName: this.state.results.vendorName,
           website: this.state.results.website,
           address: this.state.results.address,
