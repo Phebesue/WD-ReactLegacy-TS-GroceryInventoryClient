@@ -137,8 +137,8 @@ export class VendorEdit extends Component<AcceptedProps, VendorDataState> {
   render() {
     return (
       <div>
-        <div id="vendorCreateDiv">
-          <h2 id="vendorHeading">Edit a Vendor</h2>
+        <div id="vendorEditDiv">
+          <h2 id="vendorEditHeading">Edit a Vendor</h2>
           <FormControl>
             <TextField
               label="Vendor Name"

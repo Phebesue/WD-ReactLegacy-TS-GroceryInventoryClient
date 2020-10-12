@@ -129,6 +129,15 @@ const SwitchController: FC<ControllerProps> = (props) => {
               // username={props.username}
             />
           </Route>
+          <Route exact path="/admin/locationEdit">
+            <LocationEdit
+              updateSessionToken={props.updateSessionToken}
+              updateUsername={props.updateUsername}
+              updateUserRole={props.updateUserRole}
+              sessionToken={props.sessionToken}
+              // username={props.username}
+            />
+          </Route>
           <Route exact path="/admin/userMgmt">
             <AdminEditUser
               updateSessionToken={props.updateSessionToken}

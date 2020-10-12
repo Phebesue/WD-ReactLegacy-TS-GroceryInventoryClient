@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
-import {LocationDetails} from '../../Interfaces'
+import { LocationDetails } from "../../Interfaces";
+import { Link } from "react-router-dom";
 import {
   Button,
   Table,
@@ -41,7 +42,7 @@ export default class LocationTable extends Component<
     this.state = {
       locationData: [],
       results: {
-        id: 0,
+        locationId: 0,
         locationName: "",
         room: "",
         place: "",
@@ -82,8 +83,7 @@ export default class LocationTable extends Component<
       return (
         <TableRow key={index}>
           <TableCell component="th" scope="row">
-            {" "}
-            {locations.id}{" "}
+            {locations.locationId}
           </TableCell>
           <TableCell align="right">{locations.locationName}</TableCell>
           <TableCell align="right">{locations.room}</TableCell>
@@ -92,7 +92,8 @@ export default class LocationTable extends Component<
           <TableCell align="right">{locations.locationNotes}</TableCell>
           <TableCell>
             <Button type="submit" variant="contained" color="primary">
-              Edit
+              <Link to="/admin/locationEdit">Edit</Link>
+              {/* Edit */}
             </Button>
           </TableCell>
           <TableCell>
