@@ -33,7 +33,7 @@ export interface GroceryDetails {
 }
 
 export interface LocationDetails {
-    id: number;
+    locationId: number;
     locationName: string;
     room: string;
     place: string;

@@ -12,12 +12,12 @@ type AcceptedProps = {
   //   username: string | null | undefined;
 };
 type LocationState = {
+  locationId: number;
   locationName: string;
   room: string;
   place: string;
   type: string;
   locationNotes: string;
-  userId: number;
 
 };
 
@@ -45,12 +45,12 @@ export default class LocationCreate extends Component<
   constructor(props: AcceptedProps) {
     super(props);
     this.state = {
+      locationId: 0,
       locationName: "",
       room: "",
       place: "",
       type: "",
       locationNotes: "",
-      userId: 0,
     };
   }
 
@@ -62,12 +62,12 @@ export default class LocationCreate extends Component<
         method: "POST",
         body: JSON.stringify({
           location: {
+            locationId: this.state.locationId,
             locationName: this.state.locationName,
             room: this.state.room,
             place: this.state.place,
             type: this.state.type,
             locationNotes: this.state.locationNotes,
-            userId: this.state.userId,
           },
         }),
         headers: new Headers({
@@ -82,7 +82,7 @@ export default class LocationCreate extends Component<
         .catch((err) => console.log(err));
     }
   };
-  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {    this.setState({ type: event.target.value });
+  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {this.setState({ type: event.target.value });
   };
 
   render() {
