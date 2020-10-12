@@ -74,23 +74,25 @@ export default class VendorCreate extends Component<
         <div id="vendorCreateDiv">
           <h2 id="vendorHeading">Add a Vendor</h2>
           <FormControl>
-            <TextField
-              label="Vendor Name"
-              variant="outlined"
-              type="text"
-              onChange={(e) => {
-                this.setState({ vendorName: e.target.value });
-              }}
-            />
-
-            <TextField
-              label="Website"
-              variant="outlined"
-              type="text"
-              onChange={(e) => {
-                this.setState({ website: e.target.value });
-              }}
-            />
+            <div>
+              <TextField
+                label="Vendor Name"
+                variant="outlined"
+                type="text"
+                onChange={(e) => {
+                  this.setState({ vendorName: e.target.value });
+                }}
+              />
+  
+              <TextField
+                label="Website"
+                variant="outlined"
+                type="text"
+                onChange={(e) => {
+                  this.setState({ website: e.target.value });
+                }}
+              />
+            </div>
             <TextField
               label="Address"
               variant="outlined"
@@ -100,29 +102,31 @@ export default class VendorCreate extends Component<
               }}
             />
 
-            <TextField
-              label="City"
-              variant="outlined"
-              onChange={(e) => {
-                this.setState({ city: e.target.value });
-              }}
-            />
-            <TextField
-              label="zipcode"
-              variant="outlined"
-              type="text"
-              onChange={(e) => {
-                  this.setState({ website: e.target.value });
+            <div>
+              <TextField
+                label="City"
+                variant="outlined"
+                onChange={(e) => {
+                  this.setState({ city: e.target.value });
                 }}
-            />
-            <TextField
-              label="address"
-              variant="outlined"
-              type="text"
-              onChange={(e) => {
-                  this.setState({ zipcode: e.target.value });
-                }}
-            />
+              />
+              <TextField
+                label="zipcode"
+                variant="outlined"
+                type="text"
+                onChange={(e) => {
+                    this.setState({ website: e.target.value });
+                  }}
+              />
+              <TextField
+                label="address"
+                variant="outlined"
+                type="text"
+                onChange={(e) => {
+                    this.setState({ zipcode: e.target.value });
+                  }}
+              />
+            </div>
                 <TextField
                   id="outlined-textarea"
                   label="Notes"

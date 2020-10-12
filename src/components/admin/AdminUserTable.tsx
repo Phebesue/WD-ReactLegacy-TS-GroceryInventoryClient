@@ -1,6 +1,20 @@
 import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
-import {Button, Table, TableBody, TableCell,TableContainer, TableHead, TableRow, Paper } from "@material-ui/core";
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@material-ui/core";
+import BrightnessAutoIcon from "@material-ui/icons/BrightnessAuto";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import { Link } from "react-router-dom";
+import { UserDetails } from "../../Interfaces";
 
 // import Radium from 'radium';
 
@@ -10,16 +24,16 @@ type AcceptedProps = {
   updateUsername: (newUsername: string) => void;
   sessionToken: string | null;
 };
-interface Results {
-  id: number;
-  firstName: string;
-  lastName: string;
-  username: string;
-  admin: string;
-}
+// interface UserDetails {
+//   id: number;
+//   firstName: string;
+//   lastName: string;
+//   username: string;
+//   admin: string;
+// }
 type UserDataState = {
-  userData: Results[];
-  results: Results;
+  userData: UserDetails[];
+  results: UserDetails;
 };
 const styles = {
   table: {
@@ -31,17 +45,17 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
   constructor(props: AcceptedProps) {
     super(props);
     // console.log(props),
-      (this.state = {
-        userData: [],
-        results: {
-          id: 0,
-          firstName: "",
-          lastName: "",
-          username: "",
-          admin: "false",
-        },
-     
-      });
+    this.state = {
+      userData: [],
+      results: {
+        id: 0,
+        firstName: "",
+        lastName: "",
+        username: "",
+        password: "",
+        admin: "false",
+      },
+    };
   }
   componentDidMount() {
     this.fetchUsers();
@@ -49,7 +63,7 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
 
   fetchUsers = () => {
     if (this.props.sessionToken) {
-      console.log("Before UserTable Fetch");
+      console.log("Before Admin User Table Fetch");
       fetch(`${APIURL}/user/all`, {
         method: "GET",
         headers: new Headers({
@@ -58,7 +72,7 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
         }),
       })
         .then((res) => res.json())
-        .then((data: Results[]) => {
+        .then((data: UserDetails[]) => {
           // console.log(userData);
           this.setState({ userData: data });
         })
@@ -70,26 +84,48 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
         .catch((err) => console.log(err));
     }
   };
-  deleteUser = ( user: any) => {
-    fetch(`${APIURL}/user/${user.id}`, {
-        method: 'DELETE',
-        headers: new Headers({'Content-Type': 'application/json'}),
-
-    }).then(() => this.fetchUsers())
-}
+  deleteUser = (user: any) => {
+    fetch(`${APIURL}/user/${user.this.state.results.id}`, {
+      method: "DELETE",
+      headers: new Headers({ "Content-Type": "application/json" }),
+    }).then(() => this.fetchUsers());
+  };
 
   userMapper = () => {
-    return this.state.userData.map((users: Results, index) => {
+    return this.state.userData.map((users: UserDetails, index) => {
       return (
         <TableRow key={index}>
-          <TableCell component="th" scope="row">{users.id}</TableCell>
+          <TableCell component="th" scope="row">
+            {users.id}
+          </TableCell>
           <TableCell align="right">{users.firstName}</TableCell>
           <TableCell align="right">{users.lastName}</TableCell>
           <TableCell align="right">{users.username}</TableCell>
-          <TableCell align="right">{users.admin}</TableCell>    
-          <Button  /*onClick={()=> {this.props.AdminEditUser(user); this.props.updateOn()}}*/>Update</Button>
-          <Button id="deleteMe" variant='contained' color='primary' onClick={() => {this.deleteUser(users)}}>Delete User</Button>
-
+          <TableCell align="right">{users.admin}</TableCell>
+          <Button id="deleteMe" variant="contained" onClick={() => {}}>
+            <BrightnessAutoIcon />
+          </Button>
+          <Button
+            id="editUser"
+            variant="contained"
+            color="primary" /*onClick={()=> {this.props.AdminEditUser(user); this.props.updateOn()}}*/
+          >           
+            <Link to="/admin/edit">            
+              <EditIcon />
+            </Link>
+            {/* Update */}
+          </Button>
+          <Button
+            id="deleteMe"
+            variant="contained"
+            color="secondary"
+            onClick={() => {
+              this.deleteUser(users);
+            }}
+          >
+            <DeleteIcon />
+            {/* Delete User */}
+          </Button>
         </TableRow>
       );
     });
@@ -108,6 +144,8 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
                 <TableCell align="right">Last Name</TableCell>
                 <TableCell align="right">Username</TableCell>
                 <TableCell align="right">Admin?</TableCell>
+                <TableCell align="right"></TableCell>
+                <TableCell align="right"></TableCell>
               </TableRow>
             </TableHead>
 
@@ -120,4 +158,6 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
 }
 export default AdminUserTable;
 
-{/* <Link to="/admin/edit">Edit an Acct</Link> */}
+{
+  /* <Link to="/admin/edit">Edit an Acct</Link> */
+}

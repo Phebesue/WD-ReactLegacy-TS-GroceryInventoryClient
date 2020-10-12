@@ -40,7 +40,7 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
         lastName: "",
         username: "",
         password: "",
-        role:"",
+        admin:"",
       },
     };
     console.log("st: ", this.props.sessionToken);
@@ -84,7 +84,7 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
       }),
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: this.props.sessionToken,
+        "Authorization": this.props.sessionToken,
       }),
     })
       .then((response) => response.json())

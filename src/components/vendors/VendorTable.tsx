@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
 import { Link } from "react-router-dom";
 import { VendorDetails } from "../../Interfaces";
+import VendorEdit from "./VendorEdit";
 import {
   Button,
   Table,
@@ -41,7 +42,7 @@ export default class VendorTable extends Component<
     this.state = {
       vendorData: [],
       results: {
-        vendorId: 0,
+        id: 0,
         vendorName: "",
         website: "",
         address: "",
@@ -56,8 +57,8 @@ export default class VendorTable extends Component<
     this.fetchVendors();
   }
   fetchVendors = () => {
+    console.log("Before Vendor Table Fetch");
     if (this.props.sessionToken) {
-      console.log("Before Vendor Fetch");
       fetch(`${APIURL}/vendor/all`, {
         method: "GET",
         headers: new Headers({
@@ -83,7 +84,7 @@ export default class VendorTable extends Component<
       return (
         <TableRow key={index}>
           <TableCell component="th" scope="row">
-            {vendors.vendorId}{" "}
+            {vendors.id}{" "}
           </TableCell>
           <TableCell align="right">{vendors.vendorName}</TableCell>
           <TableCell align="right">{vendors.website}</TableCell>
@@ -92,17 +93,16 @@ export default class VendorTable extends Component<
           <TableCell align="right">{vendors.state}</TableCell>
           <TableCell align="right">{vendors.zipcode}</TableCell>
           <TableCell align="right">{vendors.vendorNotes}</TableCell>
-          <TableCell>
-            <Button type="submit" variant="contained" color="primary">
-              <Link to="/admin/vendorEdit">Edit</Link>
-              {/* Edit */}
+          {/* <TableCell>
+            <Button type="submit" variant="contained" color="primary"onClick={() => console.log(vendors.id)}>
+              <Link to="/admin/vendorEdit">Edit</Link>           
             </Button>
           </TableCell>
           <TableCell>
             <Button type="submit" variant="contained" color="secondary">
               Delete
             </Button>
-          </TableCell>
+          </TableCell> */}
         </TableRow>
       );
     });

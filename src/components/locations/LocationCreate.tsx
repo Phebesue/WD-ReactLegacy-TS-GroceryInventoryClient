@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
 import { FormControl, TextField, Button } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
-
+import InputLabel from "@material-ui/core/InputLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import Select from "@material-ui/core/Select";
 
 type AcceptedProps = {
   updateUsername: (newUsername: string) => void;
@@ -18,7 +20,6 @@ type LocationState = {
   place: string;
   type: string;
   locationNotes: string;
-
 };
 
 const types = [
@@ -41,7 +42,9 @@ const types = [
 ];
 
 export default class LocationCreate extends Component<
-  AcceptedProps,  LocationState> {
+  AcceptedProps,
+  LocationState
+> {
   constructor(props: AcceptedProps) {
     super(props);
     this.state = {
@@ -77,12 +80,13 @@ export default class LocationCreate extends Component<
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);   
+          console.log(data);
         })
         .catch((err) => console.log(err));
     }
   };
-  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {this.setState({ type: event.target.value });
+  handleChange = (event: any) => {
+    this.setState({ type: event.target.value });
   };
 
   render() {
@@ -91,78 +95,58 @@ export default class LocationCreate extends Component<
         <div id="locationCreateDiv">
           <h2 id="locationHeading">Add a Location</h2>
           <FormControl>
-            <TextField
-              label="Location Name"
-              variant="outlined"
-              type="text"
-              onChange={(e) => {
-                this.setState({ locationName: e.target.value });
-              }}
-            />
-
-            <TextField
-              label="Room"
-              variant="outlined"
-              type="text"
-              onChange={(e) => {
-                this.setState({ room: e.target.value });
-              }}
-            />
-            <TextField
-              label="Place"
-              variant="outlined"
-              type="text"
-              onChange={(e) => {
-                this.setState({ place: e.target.value });
-              }}
-            />
-
-     
+            <div>
+              <TextField
+                label="Location Name"
+                variant="outlined"
+                type="text"
+                onChange={(e) => {
+                  this.setState({ locationName: e.target.value });
+                }}
+              />
+  
+              <TextField
+                label="Room"
+                variant="outlined"
+                type="text"
+                onChange={(e) => {
+                  this.setState({ room: e.target.value });
+                }}
+              />
+            </div>
+            <div>
+              <TextField
+                label="Place"
+                variant="outlined"
+                type="text"
+                onChange={(e) => {
+                  this.setState({ place: e.target.value });
+                }}
+              />
+                <FormControl className="typeInput">
+                <InputLabel id="demo-simple-select-autowidth-label">
+                  Storage Type
+                </InputLabel>
+                <Select onChange={this.handleChange}>
+                  {types.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText>Storage Type</FormHelperText>
+              </FormControl>
+            </div>
             <TextField
               id="outlined-textarea"
               label="Location Notes"
-                       type="text"
+              type="text"
               multiline
               variant="outlined"
               onChange={(e) => {
                 this.setState({ locationNotes: e.target.value });
               }}
             />
-
-            {/* <TextField
-          id="filled-select-types-native"
-          select
-          label="Native select"
-          value={types}
-          onChange={this.handleChange}
-          SelectProps={{
-            native: true,
-          }}
-          helperText="Please select your type"
-          variant="filled"
-        >
-          {types.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </TextField> */}
-            <TextField
-              id="outlined-select-types"
-              select
-              label="Type"
-              value={types}
-              helperText="Please select your type"
-              variant="outlined"
-              onChange={this.handleChange}
-            >
-              {types.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-
             <Button
               variant="contained"
               onClick={(e) => {
@@ -172,6 +156,11 @@ export default class LocationCreate extends Component<
               Add a Location
             </Button>
           </FormControl>
+
+         
+
+         
+          
         </div>
       </div>
     );

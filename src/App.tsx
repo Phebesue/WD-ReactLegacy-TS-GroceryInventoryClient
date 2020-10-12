@@ -126,6 +126,7 @@ export default class GroceryApp extends Component<{}, sessionState> {
               updateUserRole={this.updateUserRole}
               sessionToken={this.state.sessionToken}
               username={this.state.username}
+              userRole={this.state.userRole}
               protectedViews={this.protectedViews}
               clearUser={this.clearUser}
             />

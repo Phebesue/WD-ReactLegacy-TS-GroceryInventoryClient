@@ -42,7 +42,7 @@ export default class LocationTable extends Component<
     this.state = {
       locationData: [],
       results: {
-        locationId: 0,
+        id: 0,
         locationName: "",
         room: "",
         place: "",
@@ -83,24 +83,23 @@ export default class LocationTable extends Component<
       return (
         <TableRow key={index}>
           <TableCell component="th" scope="row">
-            {locations.locationId}
+            {locations.id}
           </TableCell>
           <TableCell align="right">{locations.locationName}</TableCell>
           <TableCell align="right">{locations.room}</TableCell>
           <TableCell align="right">{locations.place}</TableCell>
           <TableCell align="right">{locations.type}</TableCell>
           <TableCell align="right">{locations.locationNotes}</TableCell>
-          <TableCell>
+          {/* <TableCell>
             <Button type="submit" variant="contained" color="primary">
               <Link to="/admin/locationEdit">Edit</Link>
-              {/* Edit */}
-            </Button>
+                       </Button>
           </TableCell>
           <TableCell>
             <Button type="submit" variant="contained" color="secondary">
               Delete
             </Button>
-          </TableCell>
+          </TableCell> */}
         </TableRow>
       );
     });

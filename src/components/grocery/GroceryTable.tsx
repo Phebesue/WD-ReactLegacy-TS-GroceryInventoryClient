@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
 import {Button, Table, TableBody, TableCell,TableContainer, TableHead, TableRow, Paper } from "@material-ui/core";
 import {GroceryDetails, Groc} from '../../Interfaces'
-// import Radium from 'radium';
+
 
 type AcceptedProps = {
   updateUsername: (newUsername: string) => void;
@@ -11,23 +11,7 @@ type AcceptedProps = {
   sessionToken: string | null;
   username: string | null | undefined;
 };
-// interface Groc {
-// grocery:GroceryDetails[]
-// }
 
-// interface GroceryDetails {
-//   id: number;
-//   upc: string;
-//   groceryName: string;
-//   storageType: string;
-//   storageContainer: string;
-//   quantity: string;
-//   unitOfMeasure: string;
-//   onHand: number;
-//   groceryNotes: string;
-//   locationId: number;
-//   vendorId: number;
-// }
 type GroceryDataState = {
   groceryData: [GroceryDetails];
   results: GroceryDetails;
@@ -40,7 +24,7 @@ const styles = {
   },
 };
 
-export default class GroceryTable extends Component<AcceptedProps, GroceryDataState> {
+export default class AdminGroceryMgmt extends Component<AcceptedProps, GroceryDataState> {
   constructor(props: AcceptedProps) {
     super(props);
     this.state = {
@@ -73,7 +57,7 @@ export default class GroceryTable extends Component<AcceptedProps, GroceryDataSt
     };
   
     componentDidMount() {
-      // this.fetchGroceries();
+      this.fetchGroceries();
     }
 
     fetchGroceries = () => {
@@ -88,7 +72,8 @@ export default class GroceryTable extends Component<AcceptedProps, GroceryDataSt
         })
           .then((res) => res.json())
           .then((data) => {
-            this.setState({ groceryData: data });
+            console.log(data)
+            this.setState({ groceryData: data.grocery });
          
           })
           .then(() => {
@@ -122,11 +107,11 @@ export default class GroceryTable extends Component<AcceptedProps, GroceryDataSt
               Edit
             </Button>
           </TableCell>
-          <TableCell>
+          {/* <TableCell>
             <Button type="submit" variant="contained" color="secondary">
               Delete
             </Button>
-            </TableCell>
+            </TableCell> */}
                 </TableRow>
         );
       });

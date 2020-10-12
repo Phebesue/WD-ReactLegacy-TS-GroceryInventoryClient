@@ -1,7 +1,23 @@
 import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
 import { FormControl, TextField, Button } from "@material-ui/core";
+import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import Select from "@material-ui/core/Select";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+  })
+);
 
 type AcceptedProps = {
   updateUsername: (newUsername: string) => void;
@@ -168,13 +184,13 @@ export default class GroceryCreate extends Component<
         .catch((err) => console.log(err));
     }
   };
-  handleChangeTypes = (event: React.ChangeEvent<HTMLInputElement>) => {
+  handleChangeTypes = (event: any) => {
     this.setState({ storageType: event.target.value });
   };
-  handleChangeContainers = (event: React.ChangeEvent<HTMLInputElement>) => {
+  handleChangeContainers = (event: any) => {
     this.setState({ storageContainer: event.target.value });
   };
-  handleChangeUnits = (event: React.ChangeEvent<HTMLInputElement>) => {
+  handleChangeUnits = (event: any) => {
     this.setState({ unitOfMeasure: event.target.value });
   };
 
@@ -185,7 +201,7 @@ export default class GroceryCreate extends Component<
           <h2 id="groceryHeading">Add a Grocery Item</h2>
           <FormControl>
             <div className="upc">
-            <TextField
+              <TextField
                 label="UPC"
                 variant="outlined"
                 type="text"
@@ -193,7 +209,7 @@ export default class GroceryCreate extends Component<
                   this.setState({ upc: e.target.value });
                 }}
               />
-                {/* </div>
+              {/* </div>
                 <div> */}
               <TextField
                 label="Grocery Item"
@@ -203,17 +219,25 @@ export default class GroceryCreate extends Component<
                   this.setState({ groceryName: e.target.value });
                 }}
               />
-      </div>
+            </div>
             <div>
+              {/* <FormControl>
+        <InputLabel id="demo-simple-select-label">Storage Types</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={types}
+          onChange={this. handleChangeTypes}
+        >
+             {types.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+        </Select>
+      </FormControl> */}
+
               {/* <TextField
-                label="StorageType"
-                variant="outlined"
-                type="text"
-                onChange={(e) => {
-                  this.setState({ storageType: e.target.value });
-                }}
-              /> */}
-            <TextField
               id="outlined-select-types"
               select
               label="Storage Type"
@@ -227,7 +251,7 @@ export default class GroceryCreate extends Component<
                   {option.label}
                 </MenuItem>
               ))}
-            </TextField>
+            </TextField> */}
               {/* <TextField
                 label="Storage Container"
                 variant="outlined"
@@ -236,7 +260,7 @@ export default class GroceryCreate extends Component<
                   this.setState({ storageContainer: e.target.value });
                 }}
               /> */}
-                <TextField
+              {/* <TextField
               id="outlined-select-containers"
               select
               label="Storage Container"
@@ -250,7 +274,23 @@ export default class GroceryCreate extends Component<
                   {option.label}
                 </MenuItem>
               ))}
-            </TextField>
+            </TextField> */}
+              {/* <FormControl variant="outlined" >
+        <InputLabel id="demo-simple-select-outlined-label">Storage Types</InputLabel>
+        <Select
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          value={types}
+          onChange={this.handleChangeTypes}
+          label="Storage Types"
+        >
+         
+            {types.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>))}
+        </Select>
+      </FormControl> */}
               {/* <TextField
                 label="unitOfMeasure"
                 variant="outlined"
@@ -259,7 +299,7 @@ export default class GroceryCreate extends Component<
                   this.setState({ unitOfMeasure: e.target.value });
                 }}
               /> */}
-                 <TextField
+              {/* <TextField
               id="outlined-select-containers"
               select
               label="Unit Of Measure"
@@ -273,7 +313,44 @@ export default class GroceryCreate extends Component<
                   {option.label}
                 </MenuItem>
               ))}
-            </TextField>
+            </TextField> */}
+
+              <FormControl className="typeInput">
+                <InputLabel id="demo-simple-select-autowidth-label">
+                  Storage Type
+                </InputLabel>
+                <Select onChange={this.handleChangeTypes}>
+                  {types.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText>Storage Type</FormHelperText>
+              </FormControl>
+
+              <FormControl className="containerInput">
+                <InputLabel id="demo-simple-select-autowidth-label"></InputLabel>
+                <Select onChange={this.handleChangeContainers}>
+                  {containers.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText>Storage Container</FormHelperText>
+              </FormControl>
+              <FormControl className="unitInput">
+                <InputLabel id="demo-simple-select-autowidth-label"></InputLabel>
+                <Select onChange={this.handleChangeUnits}>
+                  {units.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText>Unit Of Measure</FormHelperText>
+              </FormControl>
             </div>
             <div>
               <TextField
@@ -284,7 +361,7 @@ export default class GroceryCreate extends Component<
                   this.setState({ quantity: e.target.value });
                 }}
               />
-              
+
               <TextField
                 label="On-Hand"
                 variant="outlined"
@@ -293,7 +370,7 @@ export default class GroceryCreate extends Component<
                   this.setState({ onHand: e.target.value });
                 }}
               />
-                 </div>
+            </div>
             <div>
               <TextField
                 label="Location Id"
@@ -321,26 +398,6 @@ export default class GroceryCreate extends Component<
                 this.setState({ groceryNotes: e.target.value });
               }}
             />
-
-            {/* <TextField
-            id="filled-select-types-native"
-            select
-            label="Native select"
-            value={types}
-            onChange={this.handleChangeTypes}
-            SelectProps={{
-              native: true,
-            }}
-            helperText="Please select your type"
-            variant="filled"
-          >
-            {types.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </TextField> */}
-        
 
             <Button
               variant="contained"
