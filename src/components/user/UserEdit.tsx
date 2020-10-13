@@ -80,6 +80,7 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
         firstName: this.state.editFirstName,
         lastName: this.state.editLastName,
         username: this.state.editUsername,
+        // {this.state.editPassword === "" ?}
         password: this.state.editPassword,
       }),
       headers: new Headers({
@@ -154,6 +155,7 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
             label="New Password"
             variant="outlined"
             type="text"
+            required
             // value={this.state.editPassword}
             onChange={(e) => {
               this.setState({ editPassword: e.target.value });
@@ -171,6 +173,7 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
                 firstName: ${this.state.editFirstName},
                   lastName: ${this.state.editLastName},
                   username: ${this.state.editUsername},
+                  password: ${this.state.editPassword}
             
                   `);
               }}

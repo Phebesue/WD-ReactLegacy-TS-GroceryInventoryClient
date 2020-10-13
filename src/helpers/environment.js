@@ -6,9 +6,10 @@ switch (window.location.hostname) {
   case "localhost" || "127.0.0.1":
     APIURL = "http://localhost:3020";
     break;
-  //deployed React application
-//   case "tl-my-mediacollection-client.herokuapp.com":
-	// APIURL = "https://whats-for-dinner-server.herokuapp.com";
+  // deployed React application
+  case "whats-for-dinner-client.herokuapp.com/":
+	APIURL = "https://whats-for-dinner-client.herokuapp.com/
+  ";
     break;
 	
 	default: 

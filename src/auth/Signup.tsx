@@ -36,6 +36,7 @@ export class Signup extends Component<AcceptedProps, UserState> {
         lastName: this.state.lastName,
         username: this.state.username,
         password: this.state.password,
+        admin: "false"
       }),
       headers: new Headers({
         "Content-Type": "application/json",

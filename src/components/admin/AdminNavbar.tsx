@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import {  Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, Toolbar } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
 
-import { Admin } from "../admin/Admin";
-import { render } from "@testing-library/react";
 
 type ValueTypes = {};
 type AcceptedProps = {
@@ -20,7 +17,7 @@ export class AdminNavbar extends Component<AcceptedProps, ValueTypes> {
   constructor(props: AcceptedProps) {
     super(props);
     this.state = {};
-    console.log(props);
+    console.log("Props from Admin Navbar: ",props);
   }
   render() {
     return (

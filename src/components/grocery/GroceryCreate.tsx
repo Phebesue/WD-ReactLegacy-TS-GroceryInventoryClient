@@ -383,6 +383,7 @@ export default class GroceryCreate extends Component<
               <TextField
                 label="Vendor Id"
                 variant="outlined"
+                type="number"
                 onChange={(e) => {
                   this.setState({ vendorId: e.target.value });
                 }}

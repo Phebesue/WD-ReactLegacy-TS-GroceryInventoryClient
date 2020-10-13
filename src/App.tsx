@@ -7,6 +7,7 @@ import "./App.css";
 import Footer from "./site/Footer";
 import AdminNavbar from "../src/components/admin/AdminNavbar";
 import Navbar from "./site/Navbar";
+import Home from '../src/site/Home'
 
 
 type sessionState = {
@@ -63,33 +64,39 @@ export default class GroceryApp extends Component<{}, sessionState> {
   protectedViews = () => {
     console.log("userRole: ", this.state.userRole);
     return(  
+      
 
     this.state.sessionToken === localStorage.getItem("sessionToken") ? 
       localStorage.getItem("userRole") === "true" ? 
-       ( <AdminNavbar
-          clearUser={this.clearUser}
+         ( <AdminNavbar
+            clearUser={this.clearUser}
+            updateSessionToken={this.updateSessionToken}
+            updateUsername={this.updateUsername}
+            updateUserRole={this.updateUserRole}
+            sessionToken={this.state.sessionToken}
+            username={this.state.username}
+          />
+            )        
+        : 
+         ( <Navbar
+            clearUser={this.clearUser}
+            username={this.state.username}
+            sessionToken={this.state.sessionToken}
+          />  
+             )    
+       : (
+       <Route exact path="/home">
+        <Auth
           updateSessionToken={this.updateSessionToken}
           updateUsername={this.updateUsername}
           updateUserRole={this.updateUserRole}
-          sessionToken={this.state.sessionToken}
-          username={this.state.username}
-        />)
-      : 
-       ( <Navbar
-          clearUser={this.clearUser}
-          username={this.state.username}
-          sessionToken={this.state.sessionToken}
-        />  )    
-     : (
-     <Route exact path="/home">
-      <Auth
-        updateSessionToken={this.updateSessionToken}
-        updateUsername={this.updateUsername}
-        updateUserRole={this.updateUserRole}
-        /> 
-        </Route>
+          /> 
+             <Home />
+          </Route>
+       )
+     
      )
-     ) };
+     };
   componentDidMount() {
     console.log("Mounted");
     if (localStorage.getItem("username")) {
