@@ -139,7 +139,7 @@ export class VendorEdit extends Component<AcceptedProps, VendorDataState> {
       <div>
         <div id="vendorEditDiv">
           <h2 id="vendorEditHeading">Edit a Vendor</h2>
-          <FormControl>
+          <FormControl style={{backgroundColor:"#FFFFFF"}}>
             <TextField
               label="Vendor Name"
               variant="outlined"

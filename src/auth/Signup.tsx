@@ -36,6 +36,7 @@ export class Signup extends Component<AcceptedProps, UserState> {
         lastName: this.state.lastName,
         username: this.state.username,
         password: this.state.password,
+        admin: "false"
       }),
       headers: new Headers({
         "Content-Type": "application/json",
@@ -52,7 +53,7 @@ export class Signup extends Component<AcceptedProps, UserState> {
     return (
       <div id="signupDiv">
         <h1 id="signupHeading">Sign Up to Join</h1>
-        <FormControl>
+        <FormControl style={{backgroundColor:"#FFFFFF"}}>
           <TextField
             label="First Name"
             variant="outlined"

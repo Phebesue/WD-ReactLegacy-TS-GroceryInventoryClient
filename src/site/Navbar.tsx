@@ -23,31 +23,31 @@ export class Navbar extends Component<AcceptedProps, {}> {
         {/* <AppBar > */}
         <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
           <Button style={{ margin: "5em" }}>
-            <Link to="/user/home"> User Home</Link>
+            <Link style={{color:"#000000"}} to="/user/home"> User Home</Link>
           </Button>
 
           <Button style={{ margin: "5em" }}>
-            <Link to="/user/vendorList">Vendor List</Link>
+            <Link style={{color:"#000000"}} to="/user/vendorList">Vendor List</Link>
           </Button>
 
           <Button style={{ margin: "5em" }}>
-            <Link to="/user/locationList">Location List</Link>
+            <Link style={{color:"#000000"}} to="/user/locationList">Location List</Link>
           </Button>
 
           <Button style={{ margin: "5em" }}>
-            <Link to="/user/edit">Edit my Acct</Link>
+            <Link style={{color:"#000000"}} to="/user/edit">Edit my Acct</Link>
           </Button>
 
           <Button style={{ margin: "5em" }}>
-            <Link to="/user/grocery">Grocery</Link>
+            <Link style={{color:"#000000"}} to="/user/grocery">Grocery</Link>
           </Button>
 
           <Button style={{ margin: "5em" }}>
-            <Link to="/user/groceryCreate">Grocery Create</Link>
+            <Link style={{color:"#000000"}} to="/user/groceryCreate">Grocery Create</Link>
           </Button>
 
           <Button style={{ margin: "5em" }} onClick={this.props.clearUser}>
-            <Link to="/home">Logout</Link>
+            <Link style={{color:"#000000"}} to="/home">Logout</Link>
             {/* Logout */}
           </Button>
           {console.log("Nav Footer")}

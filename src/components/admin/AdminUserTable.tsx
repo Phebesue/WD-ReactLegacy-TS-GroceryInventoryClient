@@ -102,15 +102,15 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
           <TableCell align="right">{users.lastName}</TableCell>
           <TableCell align="right">{users.username}</TableCell>
           <TableCell align="right">{users.admin}</TableCell>
-          <Button id="deleteMe" variant="contained" onClick={() => {}}>
+          {/* <Button id="deleteMe" variant="contained" onClick={() => {}}>
             <BrightnessAutoIcon />
-          </Button>
+          </Button> */}
           <Button
             id="editUser"
             variant="contained"
             color="primary" /*onClick={()=> {this.props.AdminEditUser(user); this.props.updateOn()}}*/
           >           
-            <Link to="/admin/edit">            
+            <Link  style={{color:"#000000"}} to="/admin/edit">            
               <EditIcon />
             </Link>
             {/* Update */}
@@ -158,6 +158,3 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
 }
 export default AdminUserTable;
 
-{
-  /* <Link to="/admin/edit">Edit an Acct</Link> */
-}

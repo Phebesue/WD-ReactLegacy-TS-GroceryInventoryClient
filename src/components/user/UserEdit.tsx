@@ -4,7 +4,10 @@ import APIURL from "../../helpers/environment";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import {Link } from "react-router-dom";
-import {UserDetails} from '../../Interfaces'
+import {UserDetails} from '../../Interfaces';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+
+
 
 type AcceptedProps = {
   updateUsername: (newUsername: string) => void;
@@ -80,7 +83,9 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
         firstName: this.state.editFirstName,
         lastName: this.state.editLastName,
         username: this.state.editUsername,
-        password: this.state.editPassword,
+      //  {this.state.editPassword !=== "" ?
+      //  password: this.state.editPassword,
+      
       }),
       headers: new Headers({
         "Content-Type": "application/json",
@@ -92,7 +97,26 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
         console.log(data);
       });
   };
-
+  handleSubmitPassword = (event: any) => {
+    event.preventDefault();
+  
+    fetch(`${APIURL}/user/`, {
+      method: "PUT",
+      body: JSON.stringify({
+        
+       password: this.state.editPassword,
+      
+      }),
+      headers: new Headers({
+        "Content-Type": "application/json",
+        "Authorization": this.props.sessionToken,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
   handleDelete = (id: number | undefined) => {
     if (this.props.sessionToken) {
       // fetch(`${APIURL}/user/${this.state.editId}`, {
@@ -110,25 +134,31 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
         .catch((err) => alert(err));
     }
   };
+  
+//   handleChange = (e:any) => {
+//     // const { user } = this.state;
+//     password = e.target.value;
+//     this.setState({ editPassword: e.target.value });
+// }
   componentDidMount() {
     this.fetchUser();
     // console.log(data)
   }
   render() {
     return (
+      
+      
       <div id="editUserDiv">
         <h3 id="editUserHeading">Edit your account</h3>
-        <FormControl>
+     
+        <FormControl style={{backgroundColor:"#FFFFFF"}}>
           <TextField
             label="First Name"
             variant="outlined"
             type="text"
             value={this.state.editFirstName}
             onChange={(e) => {
-              this.setState({ editFirstName: e.target.value });
-              // {
-              //   console.log(this.state.editFirstName);
-              // }
+              this.setState({ editFirstName: e.target.value });        
             }}
           />
 
@@ -150,15 +180,31 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
               this.setState({ editUsername: e.target.value });
             }}
           />
-          <TextField
-            label="New Password"
-            variant="outlined"
-            type="text"
-            // value={this.state.editPassword}
-            onChange={(e) => {
-              this.setState({ editPassword: e.target.value });
-            }}
-          />
+             {/* <ValidatorForm
+                ref="form"
+                onSubmit={this.handleSubmitPassword}
+                onError={errors => console.log(errors)}
+            >
+
+          <TextValidator
+                    label="Password"
+                    onChange={this.handleSubmitPassword}
+                    name="password"
+                    type="password"
+                    validators={['required']}
+                    errorMessages={['this field is required']}
+                    value=""
+                    /> */}
+                {/* <TextValidator
+                    label="Repeat password"
+                    onChange={this.handleSubmitPassword}
+                    name="repeatPassword"
+                    type="password"
+                    validators={['isPasswordMatch', 'required']}
+                    errorMessages={['password mismatch', 'this field is required']}
+                    value={user.repeatPassword}
+                  /> */}
+                  {/* </ValidatorForm>\ */}
 
           <div>
             <Button
@@ -171,6 +217,7 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
                 firstName: ${this.state.editFirstName},
                   lastName: ${this.state.editLastName},
                   username: ${this.state.editUsername},
+                  password: ${this.state.editPassword}
             
                   `);
               }}
@@ -193,6 +240,7 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
             </Button>
           </div>
         </FormControl>
+     
       </div>
     );
   }

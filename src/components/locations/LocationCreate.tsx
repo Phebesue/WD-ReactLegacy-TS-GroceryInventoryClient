@@ -22,24 +22,24 @@ type LocationState = {
   locationNotes: string;
 };
 
-const types = [
-  {
-    value: "",
-    label: "",
-  },
-  {
-    value: "dry",
-    label: "dry",
-  },
-  {
-    value: "frozen",
-    label: "frozen",
-  },
-  {
-    value: "refrigerated",
-    label: "refrigerated",
-  },
-];
+const types = ["", "dry", "frozen", "refrigerated"]
+//   {
+//     value: "",
+//     label: "",
+//   },
+//   {
+//     value: "dry",
+//     label: "dry",
+//   },
+//   {
+//     value: "frozen",
+//     label: "frozen",
+//   },
+//   {
+//     value: "refrigerated",
+//     label: "refrigerated",
+//   },
+// ];
 
 export default class LocationCreate extends Component<
   AcceptedProps,
@@ -94,7 +94,7 @@ export default class LocationCreate extends Component<
       <div>
         <div id="locationCreateDiv">
           <h2 id="locationHeading">Add a Location</h2>
-          <FormControl>
+          <FormControl style={{backgroundColor:"#FFFFFF"}}>
             <div>
               <TextField
                 label="Location Name"
@@ -129,8 +129,8 @@ export default class LocationCreate extends Component<
                 </InputLabel>
                 <Select onChange={this.handleChange}>
                   {types.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
+                    <MenuItem key={option[0]} value={option}>
+                      {option}
                     </MenuItem>
                   ))}
                 </Select>

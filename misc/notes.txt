@@ -1,0 +1,50 @@
+
+Person 
+import PersonPinSharpIcon from '@material-ui/icons/PersonPinSharp';
+
+Location
+import LocationOnSharpIcon from '@material-ui/icons/LocationOnSharp';
+
+Food
+import FastfoodSharpIcon from '@material-ui/icons/FastfoodSharp';
+
+store
+import StorefrontSharpIcon from '@material-ui/icons/StorefrontSharp';
+
+logout
+import ExitToAppSharpIcon from '@material-ui/icons/ExitToAppSharp';
+
+add
+import AddIcon from '@material-ui/icons/Add';
+
+close
+import CloseIcon from '@material-ui/icons/Close';
+
+home
+import HomeIcon from '@material-ui/icons/Home';
+
+comment
+import CommentIcon from '@material-ui/icons/Comment';
+
+delete
+import DeleteIcon from '@material-ui/icons/Delete';
+
+allDone
+import DoneAllIcon from '@material-ui/icons/DoneAll';
+
+edit
+import EditIcon from '@material-ui/icons/Edit';
+
+favorite
+import FavoriteIcon from '@material-ui/icons/Favorite';
+
+flag
+import FlagIcon from '@material-ui/icons/Flag';
+
+star
+import GradeIcon from '@material-ui/icons/Grade';
+
+add ShoppingCart
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+
+

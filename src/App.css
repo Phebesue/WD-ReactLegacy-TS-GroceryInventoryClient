@@ -1,10 +1,20 @@
 .App {
   text-align: center;
+  background-color: #DDC9B4;
+  height: 100vh;
+  text-decoration-color: #000000;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a{
+  color:#000000;
+}
+header, .header{
+  background-color: #7A6C5D;
+  color: #ffffff;
+  margin: 0;
+}
+h2{
+  margin:0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -25,7 +35,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #000000;
 }
 
 @keyframes App-logo-spin {

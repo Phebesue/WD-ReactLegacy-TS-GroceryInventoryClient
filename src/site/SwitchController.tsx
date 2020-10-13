@@ -32,6 +32,7 @@ type ControllerProps = {
   username: string | null | undefined;
   userRole: string ;
   clearUser: () => void;
+  locationProps: string;
 };
 
 const SwitchController: FC<ControllerProps> = (props) => {
@@ -122,7 +123,7 @@ const SwitchController: FC<ControllerProps> = (props) => {
               updateUsername={props.updateUsername}
               updateUserRole={props.updateUserRole}
               sessionToken={props.sessionToken}
-              // username={props.username}
+              locationProps={props.locationProps}
             />
           </Route>
           <Route exact path="/admin/userMgmt">
