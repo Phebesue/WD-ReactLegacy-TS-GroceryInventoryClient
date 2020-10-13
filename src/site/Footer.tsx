@@ -1,13 +1,16 @@
 import React from "react";
-// import {Row} from "reactstrap";
+import "./Footer.css";
 
 const Footer = () => {
     return(
-        <footer>
-            {/* <row> */}
-                <p>&copy; Summer J. Kerekes 2020</p>
-            {/* </row> */}
-        </footer>
+        <div className="footer">
+            <div className="spacer"></div>
+            <footer>
+             
+            <p>&copy; Summer J. Kerekes 2020</p>
+            
+            </footer>
+        </div>
     )
 }
 export default Footer;
