@@ -94,7 +94,7 @@ export default class AdminVendorTblDel extends Component<
           <TableCell align="right">{vendors.vendorNotes}</TableCell>
           <TableCell>
             <Button type="submit" variant="contained" color="primary">
-              <Link to="/admin/vendorEdit">Edit</Link>
+              <Link  style={{color:"#000000"}} to="/admin/vendorEdit">Edit</Link>
               {/* Edit */}
             </Button>
           </TableCell>

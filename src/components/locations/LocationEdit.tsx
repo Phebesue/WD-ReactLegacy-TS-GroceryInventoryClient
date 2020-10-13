@@ -11,6 +11,7 @@ type AcceptedProps = {
   updateSessionToken: (newToken: string) => void;
   updateUserRole: (newUserRole: string) => void;
   sessionToken: string | null;
+  locationProps:any;
 };
 
 type LocationDataState = {
@@ -24,24 +25,7 @@ type LocationDataState = {
   locationNotes: string;
 };
 
-const types = [
-  {
-    value: "",
-    label: "",
-  },
-  {
-    value: "dry",
-    label: "dry",
-  },
-  {
-    value: "frozen",
-    label: "frozen",
-  },
-  {
-    value: "refrigerated",
-    label: "refrigerated",
-  },
-];
+const types = ["", "dry", "frozen", "refrigerated"]
 
 export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
   constructor(props: AcceptedProps) {
@@ -129,8 +113,8 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
 
   handleDelete = (id: number | undefined) => {
     if (this.props.sessionToken) {
-      //   fetch(`${APIURL}/user/${this.state.results.locationId}`, {
-      fetch(`${APIURL}/user/${id}`, {
+        fetch(`${APIURL}/user/${this.props.locationProps}`, {
+      // fetch(`${APIURL}/user/${id}`, {
         method: "DELETE",
         headers: new Headers({
           "Content-Type": "application/json",
@@ -152,11 +136,12 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
       <div>
         <div id="locationEditDiv">
           <h2 id="locationEditHeading">Edit a Location</h2>
-          <FormControl>
+          <FormControl  style={{backgroundColor:"#FFFFFF"}}>
             <TextField
               label="Location Name"
               variant="outlined"
               type="text"
+              value={this.state.results.locationName}
               onChange={(e) => {
                 this.setState({ locationName: e.target.value });
               }}
@@ -200,8 +185,8 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
               onChange={this.handleChange}
             >
               {types.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
+                <MenuItem key={option[0]} value={option}>
+                  {option}
                 </MenuItem>
               ))}
             </TextField>

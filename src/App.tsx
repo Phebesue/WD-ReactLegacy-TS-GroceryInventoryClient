@@ -14,6 +14,7 @@ type sessionState = {
   sessionToken: string | null;
   username: string | null | undefined;
   userRole: string;
+  locationProps: string;
 };
 export default class GroceryApp extends Component<{}, sessionState> {
   constructor(props: sessionState) {
@@ -22,6 +23,7 @@ export default class GroceryApp extends Component<{}, sessionState> {
       sessionToken: "",
       username: "",
       userRole: "false",
+      locationProps:"",
     };
     this.protectedViews = this.protectedViews.bind(this);
   }
@@ -115,8 +117,8 @@ export default class GroceryApp extends Component<{}, sessionState> {
     const session = localStorage.getItem("sessionToken");
     return (
       <div className="App">
-        <div id="main">
-          <h2> What's for Dinner?</h2>
+        <header id="main">
+          <h2> What's for Dinner?</h2></header>
           <Router>
             {!session ? (
               <Auth
@@ -136,11 +138,12 @@ export default class GroceryApp extends Component<{}, sessionState> {
               userRole={this.state.userRole}
               protectedViews={this.protectedViews}
               clearUser={this.clearUser}
+              locationProps={this.state.locationProps}
             />
             {console.log("Bottom of App")}
             <Footer />
           </Router>
-        </div>
+    
       </div>
     );
   }

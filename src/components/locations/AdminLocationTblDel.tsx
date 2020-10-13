@@ -23,6 +23,7 @@ type AcceptedProps = {
 };
 
 type LocationDataState = {
+  locationProps: any;
   locationData: LocationDetails[];
   results: LocationDetails;
 };
@@ -40,6 +41,7 @@ export default class AdminLocationTblDel extends Component<
     super(props);
     //   console.log(props),
     this.state = {
+      locationProps:0,
       locationData: [],
       results: {
         id: 0,
@@ -91,9 +93,11 @@ export default class AdminLocationTblDel extends Component<
           <TableCell align="right">{locations.type}</TableCell>
           <TableCell align="right">{locations.locationNotes}</TableCell>
           <TableCell>
-            <Button type="submit" variant="contained" color="primary">
-              <Link to="/admin/locationEdit">Edit</Link>
-                       </Button>
+            <Button type="submit" variant="contained" color="primary" value="locationData.id" onClick={(e:any) => console.log(locations.id)}>
+              <Link to={{
+                pathname: "/admin/locationEdit",
+                locationProps:{locations.id}}}>Edit </Link>
+                      </Button>
           </TableCell>
           <TableCell>
             <Button type="submit" variant="contained" color="secondary">

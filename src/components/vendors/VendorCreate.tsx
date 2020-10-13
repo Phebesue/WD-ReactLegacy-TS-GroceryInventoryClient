@@ -73,7 +73,7 @@ export default class VendorCreate extends Component<
       <div>
         <div id="vendorCreateDiv">
           <h2 id="vendorHeading">Add a Vendor</h2>
-          <FormControl>
+          <FormControl style={{backgroundColor:"#FFFFFF"}}>
             <div>
               <TextField
                 label="Vendor Name"

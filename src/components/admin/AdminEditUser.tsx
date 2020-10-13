@@ -123,7 +123,7 @@ export default class AdminEditUser extends Component<AdminProps, UserState> {
     return (
       <div id="editUserDiv">
         <h3 id="editUserHeading">Edit an account</h3>
-        <FormControl>
+        <FormControl  style={{backgroundColor:"#FFFFFF"}}>
           <TextField
             label="First Name"
             variant="outlined"
