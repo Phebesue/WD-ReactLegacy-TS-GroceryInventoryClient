@@ -134,7 +134,7 @@ export default class GroceryApp extends Component<{}, sessionState> {
     return (
       <div className="App">
         <header id="main">
-          <h2> What's for Dinner?<br /> Deployed</h2>
+          <h2> What's for Dinner?</h2>
         </header>
         <Router>
           {!session ? (

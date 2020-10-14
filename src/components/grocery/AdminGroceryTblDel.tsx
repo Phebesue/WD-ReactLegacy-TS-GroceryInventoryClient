@@ -118,7 +118,7 @@ export default class AdminGroceryTblDel extends Component<AcceptedProps, Grocery
                 this.props.updateGroceryId(groceries.id);
               }}
             >
-              <Link style={{ color: "#000000" }} to="/user/groceryEdit">
+              <Link style={{ color: "#000000" }} to="/admin/groceryEdit">
                 Edit
               </Link>
             </Button>

@@ -192,7 +192,7 @@ export default class AdminEditUser extends Component<AdminProps, UserState> {
               }}
             >
               <EditIcon />
-              <Link to="/admin/userMgmt">Edit</Link>
+              <Link to="/admin/userTable">Edit</Link>
             </Button>
             <Button
               variant="outlined"

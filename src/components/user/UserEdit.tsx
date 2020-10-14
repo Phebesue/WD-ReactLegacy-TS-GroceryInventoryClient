@@ -215,14 +215,14 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
                 console.log(`
                 id: ${this.state.editId},
                 firstName: ${this.state.editFirstName},
-                  lastName: ${this.state.editLastName},
-                  username: ${this.state.editUsername},
-                  password: ${this.state.editPassword}            
+                lastName: ${this.state.editLastName},
+                username: ${this.state.editUsername},
+                password: ${this.state.editPassword}            
                   `);
               }}
             >
               <EditIcon />
-              Edit
+              <Link to="/user/home"> Edit</Link>
             </Button>
             <Button
               variant="outlined"

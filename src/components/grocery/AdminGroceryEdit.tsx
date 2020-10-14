@@ -327,15 +327,29 @@ export default class AdminGroceryEdit extends Component<
                 this.setState({ groceryNotes: e.target.value });
               }}
             />
-            <Button
-              variant="contained"
-              onClick={(e) => {
-                this.handleSubmit(e);
-              }}
-            >
-             
-              <Link to="/admin/groceryList"> Edit a Grocery Item</Link>
-            </Button>
+            <div>
+              <Button
+                variant="contained"
+                onClick={(e) => {
+                  this.handleSubmit(e);
+                }}
+              >             
+                  <EditIcon />
+                <Link to="/admin/groceryList"> Edit a Grocery Item</Link>
+              </Button>
+              <Button
+                  variant="outlined"
+                  color="primary"
+                  value={this.state.locatId}
+                  onClick={(e) => {
+                    // console.log(this.state.id);
+                    this.handleDelete(this.state.locatId);               
+                  }}
+                >
+                  <DeleteIcon />
+                  <Link to="/admin/groceryList"> Delete Location</Link>
+                </Button>
+            </div>
           </FormControl>
         </div>
       </div>
