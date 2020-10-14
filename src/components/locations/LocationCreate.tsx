@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
 import { FormControl, TextField, Button } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
+import { Link } from "react-router-dom";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Select from "@material-ui/core/Select";
@@ -153,13 +154,10 @@ export default class LocationCreate extends Component<
                 this.handleSubmit(e);
               }}
             >
-              Add a Location
+             <Link to="/admin/locationList">Add a Location</Link>
             </Button>
-          </FormControl>
-
-         
-
-         
+            
+          </FormControl>      
           
         </div>
       </div>

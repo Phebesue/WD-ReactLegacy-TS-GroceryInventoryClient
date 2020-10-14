@@ -222,7 +222,7 @@ export default class GroceryCreate extends Component<
                 this.handleSubmit(e);
               }}
             >
-              Add a Grocery Item
+                <Link to="/user/groceryList">Add a Grocery Item</Link>            
             </Button>
           </FormControl>
         </div>

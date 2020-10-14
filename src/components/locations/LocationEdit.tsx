@@ -221,6 +221,7 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
                 <DeleteIcon />
                 <Link to="/admin/locationList"> Delete Location</Link>
               </Button>
+             
             </div>
           </FormControl>
         </div>

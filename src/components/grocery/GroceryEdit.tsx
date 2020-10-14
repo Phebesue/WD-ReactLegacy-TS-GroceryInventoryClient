@@ -322,6 +322,18 @@ export default class GroceryEdit extends Component<
              
               <Link to="/admin/groceryList"> Edit a Grocery Item</Link>
             </Button>
+            {/* <Button
+                variant="outlined"
+                color="primary"
+                value={this.state.locatId}
+                onClick={(e) => {
+                  // console.log(this.state.id);
+                  this.handleDelete(this.state.locatId);               
+                }}
+              >
+                <DeleteIcon />
+                <Link to="/admin/groceryList"> Delete Location</Link>
+              </Button> */}
           </FormControl>
         </div>
       </div>

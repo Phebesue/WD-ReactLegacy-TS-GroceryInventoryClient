@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
 import { FormControl, TextField, Button } from "@material-ui/core";
-import MenuItem from "@material-ui/core/MenuItem";
+import { Link } from "react-router-dom";
 
 type AcceptedProps = {
   updateUsername: (newUsername: string) => void;
@@ -111,15 +111,15 @@ export default class VendorCreate extends Component<
                 }}
               />
               <TextField
-                label="zipcode"
+                label="State"
                 variant="outlined"
                 type="text"
                 onChange={(e) => {
-                    this.setState({ website: e.target.value });
+                    this.setState({ state: e.target.value });
                   }}
               />
               <TextField
-                label="address"
+                label="zipcode"
                 variant="outlined"
                 type="text"
                 onChange={(e) => {
@@ -144,7 +144,7 @@ export default class VendorCreate extends Component<
                 this.handleSubmit(e);
               }}
             >
-              Add a Vendor
+            <Link to="/admin/vendorList">Add a Vendor</Link>
             </Button>
           </FormControl>
         </div>
