@@ -10,9 +10,10 @@ type AdminProps = {
   updateSessionToken: (newToken: string) => void;
   updateUserRole: (newUserRole: string) => void;
   updateUsername: (newUsername: string) => void;
-  // clearUser: () => void;
   sessionToken: string | null;
   username: string | null | undefined;
+  userId: number;
+  updateUserId: (newUserId: number) => void;
 };
 
 type UserState = {
@@ -36,7 +37,14 @@ export default class AdminEditUser extends Component<AdminProps, UserState> {
       username: "",
       password: "",
       admin: "",
-      userData: [],
+      userData: [
+      {  id: 0,
+        firstName: "",
+        lastName: "",
+        username: "",
+        password: "",
+        admin: "",}
+      ],
       results: {
         id: 0,
         firstName: "",
@@ -51,7 +59,7 @@ export default class AdminEditUser extends Component<AdminProps, UserState> {
   fetchUser = () => {
     console.log("Before User Fetch", this.props.sessionToken);
     if (this.props.sessionToken) {
-      fetch(`${APIURL}/user/`, {
+      fetch(`${APIURL}/user/one/${this.props.userId}`, {
         method: "GET",
         headers: new Headers({
           "Content-Type": "application/json",
@@ -65,8 +73,8 @@ export default class AdminEditUser extends Component<AdminProps, UserState> {
           this.setState({ firstName: results.firstName });
           this.setState({ lastName: results.lastName });
           this.setState({ username: results.username });
-          this.setState({ password: results.password });
-          console.log("hi", results.id);
+          this.setState({ admin: results.admin });
+          // console.log("hi", results.id);
         })
 
         .catch((err) => console.log(err));
@@ -76,7 +84,7 @@ export default class AdminEditUser extends Component<AdminProps, UserState> {
   handleSubmit = (event: any) => {
     if (this.props.sessionToken) {
       event.preventDefault();
-      fetch(`${APIURL}/user/admin/${this.state.id}`, {
+      fetch(`${APIURL}/user/admin/${this.props.userId}`, {
         method: "PUT",
         body: JSON.stringify({
           id: this.state.id,
@@ -100,17 +108,15 @@ export default class AdminEditUser extends Component<AdminProps, UserState> {
 
   handleDelete = (id: number | undefined) => {
     if (this.props.sessionToken) {
-      // fetch(`${APIURL}/user/${this.state.editId}`, {
-      fetch(`${APIURL}/user/${id}`, {
+      fetch(`${APIURL}/user/${this.props.userId}`, {
         method: "DELETE",
         headers: new Headers({
           "Content-Type": "application/json",
-          Authorization: this.props.sessionToken,
+          "Authorization": this.props.sessionToken,
         }),
       })
         .then((res) => {
           this.fetchUser();
-          //  this.props.clearUser()
         })
         .catch((err) => alert(err));
     }
@@ -123,6 +129,7 @@ export default class AdminEditUser extends Component<AdminProps, UserState> {
     return (
       <div id="editUserDiv">
         <h3 id="editUserHeading">Edit an account</h3>
+        {/* {console.log(this.state.username)} */}
         <FormControl  style={{backgroundColor:"#FFFFFF"}}>
           <TextField
             label="First Name"
@@ -151,14 +158,14 @@ export default class AdminEditUser extends Component<AdminProps, UserState> {
               this.setState({ username: e.target.value });
             }}
           />
-          <TextField
+          {/* <TextField
             label="New Password"
             variant="outlined"
             type="text"
             onChange={(e) => {
               this.setState({ password: e.target.value });
             }}
-          />
+          /> */}
           <TextField
             label="Admin?"
             variant="outlined"
@@ -197,7 +204,7 @@ export default class AdminEditUser extends Component<AdminProps, UserState> {
               }}
             >
               <DeleteIcon />
-              <Link to="/admin/userMgmt">Delete</Link>
+              <Link to="/admin/userTable">Delete</Link>
             </Button>
           </div>
         </FormControl>
