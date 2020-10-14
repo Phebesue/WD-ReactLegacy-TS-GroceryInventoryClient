@@ -217,8 +217,7 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
                 firstName: ${this.state.editFirstName},
                   lastName: ${this.state.editLastName},
                   username: ${this.state.editUsername},
-                  password: ${this.state.editPassword}
-            
+                  password: ${this.state.editPassword}            
                   `);
               }}
             >

@@ -13,12 +13,10 @@ import {
   Paper,
 } from "@material-ui/core";
 
-
 type AcceptedProps = {
-    // updateSessionToken: (newToken: string) => void;
-    // updateUserRole: (newUserRole: string) => void;
-    // updateUsername: (newUsername: string) => void;
-    sessionToken: string | null;
+  sessionToken: string | null;
+  vendorId: number;
+  updateVendorId: (newVendorId: number) => void;
 };
 
 type VendorDataState = {
@@ -92,39 +90,46 @@ export default class AdminVendorTblDel extends Component<
           <TableCell align="right">{vendors.state}</TableCell>
           <TableCell align="right">{vendors.zipcode}</TableCell>
           <TableCell align="right">{vendors.vendorNotes}</TableCell>
-          <TableCell>
-            <Button type="submit" variant="contained" color="primary">
-              <Link  style={{color:"#000000"}} to="/admin/vendorEdit">Edit</Link>
-              {/* Edit */}
+          <TableCell align="right">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              value="locationData.id"
+              onClick={(e) => {
+                this.props.updateVendorId(vendors.id);
+              }}
+            >
+              <Link style={{ color: "#000000" }} to="/admin/vendorEdit">
+                Edit
+              </Link>
             </Button>
           </TableCell>
-          <TableCell>
+          {/* <TableCell>
             <Button type="submit" variant="contained" color="secondary">
               Delete
             </Button>
-          </TableCell>
+          </TableCell> */}
         </TableRow>
       );
     });
   };
 
-  handleDelete = (id: number | undefined) => {
-    if (this.props.sessionToken) {
-      // fetch(`${APIURL}/user/${this.state.results.id}`, {
-      fetch(`${APIURL}/user/${id}`, {
-        method: "DELETE",
-        headers: new Headers({
-          "Content-Type": "application/json",
-          Authorization: this.props.sessionToken,
-        }),
-      })
-        .then((res) => {
-          this.fetchVendors();
-          // <Link to="/admin/vendorList"/>
-        })
-        .catch((err) => alert(err));
-    }
-  };
+  // handleDelete = (id: number | undefined) => {
+  //   if (this.props.sessionToken) {
+  //     fetch(`${APIURL}/vendor/${this.props.vendorId}`, {
+  //       method: "DELETE",
+  //       headers: new Headers({
+  //         "Content-Type": "application/json",
+  //         Authorization: this.props.sessionToken,
+  //       }),
+  //     })
+  //       .then((res) => {
+  //         this.fetchVendor();
+  //       })
+  //       .catch((err) => alert(err));
+  //   }
+  // };
 
   render() {
     return (
@@ -143,7 +148,7 @@ export default class AdminVendorTblDel extends Component<
                 <TableCell align="right">Zipcode</TableCell>
                 <TableCell align="right">Vendor Notes</TableCell>
                 <TableCell align="right"></TableCell>
-                <TableCell align="right"></TableCell>
+                {/* <TableCell align="right"></TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>{this.vendorMapper()}</TableBody>

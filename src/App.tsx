@@ -7,14 +7,16 @@ import "./App.css";
 import Footer from "./site/Footer";
 import AdminNavbar from "../src/components/admin/AdminNavbar";
 import Navbar from "./site/Navbar";
-import Home from '../src/site/Home'
-
+import Home from "../src/site/Home";
 
 type sessionState = {
   sessionToken: string | null;
   username: string | null | undefined;
   userRole: string;
-  locationProps: string;
+  locationId: number;
+  vendorId: number;
+  groceryId: number;
+  userId: number;
 };
 export default class GroceryApp extends Component<{}, sessionState> {
   constructor(props: sessionState) {
@@ -23,7 +25,10 @@ export default class GroceryApp extends Component<{}, sessionState> {
       sessionToken: "",
       username: "",
       userRole: "false",
-      locationProps:"",
+      locationId: 0,
+      vendorId:0,
+      groceryId:0,
+      userId:0,
     };
     this.protectedViews = this.protectedViews.bind(this);
   }
@@ -57,6 +62,23 @@ export default class GroceryApp extends Component<{}, sessionState> {
     console.log(`Username: ${newUsername}`);
   };
 
+  updateLocationId = (newLocationId: number) => {
+    this.setState({ locationId: newLocationId });
+    console.log("locationId from App: ", newLocationId);
+  };
+  updateVendorId = (newVendorId: number) => {
+    this.setState({ vendorId: newVendorId });
+    console.log("vendorId from App: ", newVendorId);
+  };
+  updateGroceryId = (newGroceryId: number) => {
+    this.setState({ groceryId: newGroceryId });
+    console.log("groceryId from App: ", newGroceryId);
+  };
+  updateUserId = (newUserId: number) => {
+    this.setState({ userId: newUserId });
+    console.log("userId from App: ", newUserId);
+  };
+
   clearUser = () => {
     localStorage.clear();
     this.setState({ sessionToken: "", userRole: "false" });
@@ -65,40 +87,34 @@ export default class GroceryApp extends Component<{}, sessionState> {
 
   protectedViews = () => {
     console.log("userRole: ", this.state.userRole);
-    return(  
-      
-
-    this.state.sessionToken === localStorage.getItem("sessionToken") ? 
-      localStorage.getItem("userRole") === "true" ? 
-         ( <AdminNavbar
-            clearUser={this.clearUser}
-            updateSessionToken={this.updateSessionToken}
-            updateUsername={this.updateUsername}
-            updateUserRole={this.updateUserRole}
-            sessionToken={this.state.sessionToken}
-            username={this.state.username}
-          />
-            )        
-        : 
-         ( <Navbar
-            clearUser={this.clearUser}
-            username={this.state.username}
-            sessionToken={this.state.sessionToken}
-          />  
-             )    
-       : (
-       <Route exact path="/home">
+    return this.state.sessionToken === localStorage.getItem("sessionToken") ? (
+      localStorage.getItem("userRole") === "true" ? (
+        <AdminNavbar
+          clearUser={this.clearUser}
+          updateSessionToken={this.updateSessionToken}
+          updateUsername={this.updateUsername}
+          updateUserRole={this.updateUserRole}
+          sessionToken={this.state.sessionToken}
+          username={this.state.username}
+        />
+      ) : (
+        <Navbar
+          clearUser={this.clearUser}
+          username={this.state.username}
+          sessionToken={this.state.sessionToken}
+        />
+      )
+    ) : (
+      <Route exact path="/home">
         <Auth
           updateSessionToken={this.updateSessionToken}
           updateUsername={this.updateUsername}
           updateUserRole={this.updateUserRole}
-          /> 
-             <Home />
-          </Route>
-       )
-     
-     )
-     };
+        />
+        <Home />
+      </Route>
+    );
+  };
   componentDidMount() {
     console.log("Mounted");
     if (localStorage.getItem("username")) {
@@ -118,32 +134,39 @@ export default class GroceryApp extends Component<{}, sessionState> {
     return (
       <div className="App">
         <header id="main">
-          <h2> What's for Dinner?</h2></header>
-          <Router>
-            {!session ? (
-              <Auth
-                updateSessionToken={this.updateSessionToken}
-                updateUsername={this.updateUsername}
-                updateUserRole={this.updateUserRole}
-              />
-            ) : (
-              this.protectedViews()
-            )}
-            <SwitchController
+          <h2> What's for Dinner?</h2>
+        </header>
+        <Router>
+          {!session ? (
+            <Auth
               updateSessionToken={this.updateSessionToken}
               updateUsername={this.updateUsername}
               updateUserRole={this.updateUserRole}
-              sessionToken={this.state.sessionToken}
-              username={this.state.username}
-              userRole={this.state.userRole}
-              protectedViews={this.protectedViews}
-              clearUser={this.clearUser}
-              locationProps={this.state.locationProps}
             />
-            {console.log("Bottom of App")}
-            <Footer />
-          </Router>
-    
+          ) : (
+            this.protectedViews()
+          )}
+          <SwitchController
+            updateSessionToken={this.updateSessionToken}
+            updateUsername={this.updateUsername}
+            updateUserRole={this.updateUserRole}
+            sessionToken={this.state.sessionToken}
+            username={this.state.username}
+            userRole={this.state.userRole}
+            protectedViews={this.protectedViews}
+            clearUser={this.clearUser}
+            updateLocationId={this.updateLocationId}
+            updateVendorId={this.updateVendorId}
+            updateGroceryId={this.updateGroceryId}
+            updateUserId={this.updateUserId}
+            locationId={this.state.locationId}
+            vendorId={this.state.vendorId}
+            groceryId={this.state.groceryId}
+            userId={this.state.userId}
+          />
+          {console.log("Bottom of App")}
+          <Footer />
+        </Router>
       </div>
     );
   }

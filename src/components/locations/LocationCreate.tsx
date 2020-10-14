@@ -124,9 +124,9 @@ export default class LocationCreate extends Component<
                 }}
               />
                 <FormControl className="typeInput">
-                <InputLabel id="demo-simple-select-autowidth-label">
+                {/* <InputLabel id="demo-simple-select-autowidth-label">
                   Storage Type
-                </InputLabel>
+                </InputLabel> */}
                 <Select onChange={this.handleChange}>
                   {types.map((option) => (
                     <MenuItem key={option[0]} value={option}>

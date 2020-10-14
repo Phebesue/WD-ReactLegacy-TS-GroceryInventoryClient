@@ -18,9 +18,11 @@ import AdminLocationTblDel from "../components/locations/AdminLocationTblDel";
 import VendorCreate from "../components/vendors/VendorCreate";
 import VendorTable from "../components/vendors/VendorTable";
 import AdminVendorTblDel from "../components/vendors/AdminVendorTblDel";
+import AdminGroceryEdit from '../components/grocery/AdminGroceryEdit'
 import VendorEdit from "../components/vendors/VendorEdit";
 import AdminVendorMgmt from "../components/vendors/AdminVendorMgmt";
 import Auth from "../auth/Auth";
+import UserGroceryMgmt from '../components/grocery/UserGroceryMgmt'
 
 type controllerState = {};
 type ControllerProps = {
@@ -30,9 +32,16 @@ type ControllerProps = {
   protectedViews: () => void;
   sessionToken: any;
   username: string | null | undefined;
-  userRole: string ;
+  userRole: string;
   clearUser: () => void;
-  locationProps: string;
+  locationId: number;
+  vendorId: number;
+  groceryId: number;
+  userId: number;
+  updateLocationId: (newLocationId: number) => void;
+  updateVendorId: (newVendorId: number) => void;
+  updateGroceryId: (newGroceryId: number) => void;
+  updateUserId: (newUserId: number) => void;
 };
 
 const SwitchController: FC<ControllerProps> = (props) => {
@@ -70,7 +79,11 @@ const SwitchController: FC<ControllerProps> = (props) => {
             />
           </Route>
           <Route exact path="/admin/vendorList">
-            <AdminVendorTblDel sessionToken={props.sessionToken} />
+            <AdminVendorTblDel
+              sessionToken={props.sessionToken}
+              vendorId={props.vendorId}
+              updateVendorId={props.updateVendorId}
+            />
           </Route>
           <Route exact path="/admin/vendorCreate">
             <VendorCreate
@@ -78,7 +91,6 @@ const SwitchController: FC<ControllerProps> = (props) => {
               updateUsername={props.updateUsername}
               updateUserRole={props.updateUserRole}
               sessionToken={props.sessionToken}
-              // username={props.username}
             />
           </Route>
 
@@ -88,6 +100,7 @@ const SwitchController: FC<ControllerProps> = (props) => {
               updateUsername={props.updateUsername}
               updateUserRole={props.updateUserRole}
               sessionToken={props.sessionToken}
+              vendorId={props.vendorId}
             />
           </Route>
           <Route exact path="/admin/locations">
@@ -114,7 +127,8 @@ const SwitchController: FC<ControllerProps> = (props) => {
               updateUsername={props.updateUsername}
               updateUserRole={props.updateUserRole}
               sessionToken={props.sessionToken}
-              // username={props.username}
+              locationId={props.locationId}
+              updateLocationId={props.updateLocationId}
             />
           </Route>
           <Route exact path="/admin/locationEdit">
@@ -123,7 +137,7 @@ const SwitchController: FC<ControllerProps> = (props) => {
               updateUsername={props.updateUsername}
               updateUserRole={props.updateUserRole}
               sessionToken={props.sessionToken}
-              locationProps={props.locationProps}
+              locationId={props.locationId}
             />
           </Route>
           <Route exact path="/admin/userMgmt">
@@ -133,6 +147,8 @@ const SwitchController: FC<ControllerProps> = (props) => {
               updateUserRole={props.updateUserRole}
               sessionToken={props.sessionToken}
               username={props.username}
+              userId={props.userId}
+              updateUserId={props.updateUserId}
             />
           </Route>
           <Route exact path="/admin/userTable">
@@ -141,7 +157,8 @@ const SwitchController: FC<ControllerProps> = (props) => {
               updateUsername={props.updateUsername}
               updateUserRole={props.updateUserRole}
               sessionToken={props.sessionToken}
-              // username={props.username}
+              userId={props.userId}
+              updateUserId={props.updateUserId}
             />
           </Route>
           <Route exact path="/admin/edit">
@@ -151,6 +168,8 @@ const SwitchController: FC<ControllerProps> = (props) => {
               updateUserRole={props.updateUserRole}
               sessionToken={props.sessionToken}
               username={props.username}
+              userId={props.userId}
+              updateUserId={props.updateUserId}
             />
           </Route>
           <Route exact path="/admin/grocery">
@@ -159,7 +178,7 @@ const SwitchController: FC<ControllerProps> = (props) => {
               updateUsername={props.updateUsername}
               updateUserRole={props.updateUserRole}
               sessionToken={props.sessionToken}
-              // username={props.username}
+            
             />
           </Route>
           <Route exact path="/admin/groceryCreate">
@@ -173,13 +192,22 @@ const SwitchController: FC<ControllerProps> = (props) => {
           </Route>
           <Route exact path="/admin/groceryList">
             <AdminGroceryTblDel
-              updateSessionToken={props.updateSessionToken}
-              updateUsername={props.updateUsername}
-              updateUserRole={props.updateUserRole}
+              // updateSessionToken={props.updateSessionToken}
+              // updateUsername={props.updateUsername}
+              // updateUserRole={props.updateUserRole}
               sessionToken={props.sessionToken}
-              username={props.username}
-              // userRole={props.userRole}
-
+              groceryId={props.groceryId}
+              updateGroceryId={props.updateGroceryId}
+            />
+          </Route>
+          <Route exact path="/admin/groceryEdit">
+            <AdminGroceryEdit
+              // updateSessionToken={props.updateSessionToken}
+              // updateUsername={props.updateUsername}
+              // updateUserRole={props.updateUserRole}
+              sessionToken={props.sessionToken}
+              groceryId={props.groceryId}
+              // updateGroceryId={props.updateGroceryId}
             />
           </Route>
           <Route exact path="/user/home">
@@ -219,12 +247,14 @@ const SwitchController: FC<ControllerProps> = (props) => {
             />
           </Route>
           <Route exact path="/user/grocery">
-            <GroceryTable
-              updateSessionToken={props.updateSessionToken}
-              updateUsername={props.updateUsername}
-              updateUserRole={props.updateUserRole}
+            <UserGroceryMgmt
+              // updateSessionToken={props.updateSessionToken}
+              // updateUsername={props.updateUsername}
+              // updateUserRole={props.updateUserRole}
+              // username={props.username} 
               sessionToken={props.sessionToken}
-              username={props.username}
+              // groceryId={props.groceryId}
+              // updateGroceryId={props.updateGroceryId}
             />
           </Route>
           <Route exact path="/user/groceryCreate">
@@ -233,17 +263,26 @@ const SwitchController: FC<ControllerProps> = (props) => {
               updateUsername={props.updateUsername}
               updateUserRole={props.updateUserRole}
               sessionToken={props.sessionToken}
-              // username={props.username}
+         
             />
           </Route>
           <Route exact path="/user/groceryList">
             <GroceryTable
+              // updateSessionToken={props.updateSessionToken}
+              // updateUsername={props.updateUsername}
+              // updateUserRole={props.updateUserRole}
+              sessionToken={props.sessionToken}
+              groceryId={props.groceryId}
+              updateGroceryId={props.updateGroceryId}
+            /> </Route>
+             <Route exact path="/user/groceryEdit">
+            <GroceryEdit
               updateSessionToken={props.updateSessionToken}
               updateUsername={props.updateUsername}
               updateUserRole={props.updateUserRole}
               sessionToken={props.sessionToken}
-              username={props.username}
-              // userRole={props.userRole}
+              groceryId={props.groceryId}
+              // updateGroceryId={props.updateGroceryId}
             />
           </Route>
         </Switch>

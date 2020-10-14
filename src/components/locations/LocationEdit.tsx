@@ -5,19 +5,20 @@ import { Link } from "react-router-dom";
 import { LocationDetails } from "../../Interfaces";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MenuItem from "@material-ui/core/MenuItem";
+import EditIcon from "@material-ui/icons/Edit";
 
 type AcceptedProps = {
   updateUsername: (newUsername: string) => void;
   updateSessionToken: (newToken: string) => void;
   updateUserRole: (newUserRole: string) => void;
   sessionToken: string | null;
-  locationProps:any;
+  locationId:number;
 };
 
 type LocationDataState = {
   locationData: LocationDetails[];
   results: LocationDetails;
-  locationId: number;
+  locatId: number;
   locationName: string;
   room: string;
   place: string;
@@ -31,7 +32,7 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
   constructor(props: AcceptedProps) {
     super(props);
     this.state = {
-      locationId: 0,
+      locatId: 0,
       locationName: "",
       room: "",
       place: "",
@@ -60,11 +61,12 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
   }
   componentDidMount() {
     this.fetchLocation();
+    console.log("LocEdit Props", this.props)
   }
   fetchLocation = () => {
     if (this.props.sessionToken) {
       console.log("Before LocationEdit Fetch");
-      fetch(`${APIURL}/location/:id`, {
+      fetch(`${APIURL}/location/one/${this.props.locationId}`, {
         method: "GET",
         headers: new Headers({
           "Content-Type": "application/json",
@@ -72,31 +74,32 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
         }),
       })
         .then((res) => res.json())
-        .then((data: LocationDetails[]) => {
-          this.setState({ locationData: data });
+        .then((results) => {
+          this.setState({ locatId: results.id });
+          this.setState({ locationName: results.locationName });
+          this.setState({ room: results.room });
+          this.setState({ place: results.place });
+          this.setState({ locationNotes: results.locationNotes });
+          console.log("hi", results.id);
         })
-        .then(() => {
-          if (this.state.locationData !== null) {
-            console.log(this.state.locationData);
-          }
-        })
+      
         .catch((err) => console.log(err));
     }
   };
 
   handleSubmit = (event: any) => {
-    console.log("Before LocationEdit Fetch");
+    console.log("As LocationEdit Update");
     if (this.props.sessionToken) {
       event.preventDefault();
-      fetch(`${APIURL}/user/`, {
+      fetch(`${APIURL}/location/update/${this.props.locationId}`, {
         method: "PUT",
         body: JSON.stringify({
-          locationId: this.state.results.id,
-          locationName: this.state.results.locationName,
-          room: this.state.results.room,
-          place: this.state.results.place,
-          type: this.state.results.type,
-          locationNotes: this.state.results.locationNotes,
+          // locatId: this.state.id,
+          locationName: this.state.locationName,
+          room: this.state.room,
+          place: this.state.place,
+          type: this.state.type,
+          locationNotes: this.state.locationNotes,
         }),
         headers: new Headers({
           "Content-Type": "application/json",
@@ -113,7 +116,7 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
 
   handleDelete = (id: number | undefined) => {
     if (this.props.sessionToken) {
-        fetch(`${APIURL}/user/${this.props.locationProps}`, {
+        fetch(`${APIURL}/location/${this.props.locationId}`, {
       // fetch(`${APIURL}/user/${id}`, {
         method: "DELETE",
         headers: new Headers({
@@ -136,12 +139,13 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
       <div>
         <div id="locationEditDiv">
           <h2 id="locationEditHeading">Edit a Location</h2>
+          {/* {console.log(this.state.locationName)} */}
           <FormControl  style={{backgroundColor:"#FFFFFF"}}>
             <TextField
               label="Location Name"
               variant="outlined"
               type="text"
-              value={this.state.results.locationName}
+              value={this.state.locationName}
               onChange={(e) => {
                 this.setState({ locationName: e.target.value });
               }}
@@ -151,6 +155,7 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
               label="Room"
               variant="outlined"
               type="text"
+              value={this.state.room}
               onChange={(e) => {
                 this.setState({ room: e.target.value });
               }}
@@ -159,6 +164,7 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
               label="Place"
               variant="outlined"
               type="text"
+              value={this.state.place}
               onChange={(e) => {
                 this.setState({ place: e.target.value });
               }}
@@ -168,6 +174,7 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
               id="outlined-textarea"
               label="Location Notes"
               type="text"
+              value={this.state.locationNotes}
               multiline
               variant="outlined"
               onChange={(e) => {
@@ -179,7 +186,7 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
               id="outlined-select-types"
               select
               label="Type"
-              value={types}
+              value={this.state.type}
               helperText="Please select your type"
               variant="outlined"
               onChange={this.handleChange}
@@ -199,20 +206,20 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
                 }}
               >
                 {/* Update a Location */}
+                <EditIcon />
                 <Link to="/admin/locationList"> Update a Location</Link>
               </Button>
               <Button
                 variant="outlined"
                 color="primary"
-                value={this.state.locationId}
+                value={this.state.locatId}
                 onClick={(e) => {
-                  // console.log(this.state.editId);
-                  this.handleDelete(this.state.locationId);   
-              
+                  // console.log(this.state.id);
+                  this.handleDelete(this.state.locatId);               
                 }}
               >
                 <DeleteIcon />
-                       <Link to="/home">Delete</Link>
+                <Link to="/admin/locationList"> Delete Location</Link>
               </Button>
             </div>
           </FormControl>

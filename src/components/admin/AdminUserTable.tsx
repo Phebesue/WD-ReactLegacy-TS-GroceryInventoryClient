@@ -23,14 +23,10 @@ type AcceptedProps = {
   updateUserRole: (newUserRole: string) => void;
   updateUsername: (newUsername: string) => void;
   sessionToken: string | null;
+  userId: number;
+  updateUserId: (newUserId: number) => void;
 };
-// interface UserDetails {
-//   id: number;
-//   firstName: string;
-//   lastName: string;
-//   username: string;
-//   admin: string;
-// }
+
 type UserDataState = {
   userData: UserDetails[];
   results: UserDetails;
@@ -102,20 +98,24 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
           <TableCell align="right">{users.lastName}</TableCell>
           <TableCell align="right">{users.username}</TableCell>
           <TableCell align="right">{users.admin}</TableCell>
-          {/* <Button id="deleteMe" variant="contained" onClick={() => {}}>
-            <BrightnessAutoIcon />
-          </Button> */}
-          <Button
-            id="editUser"
-            variant="contained"
-            color="primary" /*onClick={()=> {this.props.AdminEditUser(user); this.props.updateOn()}}*/
-          >           
-            <Link  style={{color:"#000000"}} to="/admin/edit">            
-              <EditIcon />
-            </Link>
-            {/* Update */}
-          </Button>
-          <Button
+          <TableCell align="right">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              value="userData.id"
+              onClick={(e) => {
+                this.props.updateUserId(users.id);
+              }}
+            >
+              <Link style={{ color: "#000000" }} to="/admin/edit">
+                <EditIcon />
+                Edit
+              </Link>
+            </Button>
+          </TableCell>
+
+          {/* <Button
             id="deleteMe"
             variant="contained"
             color="secondary"
@@ -123,9 +123,8 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
               this.deleteUser(users);
             }}
           >
-            <DeleteIcon />
-            {/* Delete User */}
-          </Button>
+            <DeleteIcon />        
+          </Button> */}
         </TableRow>
       );
     });
@@ -145,7 +144,7 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
                 <TableCell align="right">Username</TableCell>
                 <TableCell align="right">Admin?</TableCell>
                 <TableCell align="right"></TableCell>
-                <TableCell align="right"></TableCell>
+                {/* <TableCell align="right"></TableCell> */}
               </TableRow>
             </TableHead>
 
@@ -157,4 +156,3 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
   }
 }
 export default AdminUserTable;
-

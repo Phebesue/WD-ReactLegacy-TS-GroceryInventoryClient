@@ -11,9 +11,9 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import Select from "@material-ui/core/Select";
 
 type AcceptedProps = {
-  updateUsername: (newUsername: string) => void;
-  updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: string) => void;
+//   updateUsername: (newUsername: string) => void;
+//   updateSessionToken: (newToken: string) => void;
+//   updateUserRole: (newUserRole: string) => void;
   sessionToken: string | null;
   groceryId: number;
 };
@@ -54,7 +54,7 @@ const units = [
   "none",
 ];
 
-export default class GroceryEdit extends Component<
+export default class AdminGroceryEdit extends Component<
   AcceptedProps,
   GroceryDataState
 > {
@@ -109,11 +109,11 @@ export default class GroceryEdit extends Component<
   }
   componentDidMount() {
     this.fetchGrocery();
-    console.log("GrocEdit Props", this.props);
+    console.log("AdminGrocEdit Props", this.props);
   }
   fetchGrocery = () => {
     if (this.props.sessionToken) {
-      console.log("Before GroceryEdit Fetch");
+      console.log("Before AdmnGroceryEdit Fetch");
       fetch(`${APIURL}/grocery/one/${this.props.groceryId}`, {
         method: "GET",
         headers: new Headers({
@@ -174,7 +174,21 @@ export default class GroceryEdit extends Component<
     }
   };
 
-
+  handleDelete = (id: number | undefined) => {
+    if (this.props.sessionToken) {
+      fetch(`${APIURL}/grocery/${this.props.groceryId}`, {
+        method: "DELETE",
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Authorization: this.props.sessionToken,
+        }),
+      })
+        .then((res) => {
+          this.fetchGrocery();
+        })
+        .catch((err) => alert(err));
+    }
+  };
   handleChangeTypes = (event: any) => {
     this.setState({ storageType: event.target.value });
   };

@@ -8,7 +8,7 @@ switch (window.location.hostname) {
     break;
   // deployed React application
   case "whats-for-dinner-client.herokuapp.com":
-	APIURL = "https://whats-for-dinner-client.herokuapp.com";
+	APIURL = "https://whats-for-dinner-server2.herokuapp.com";
     break;
 	
 	default: 

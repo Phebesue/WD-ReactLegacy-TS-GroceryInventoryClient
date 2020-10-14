@@ -12,18 +12,17 @@ import {
   TableRow,
   Paper,
 } from "@material-ui/core";
-// import Radium from 'radium';
 
 type AcceptedProps = {
   updateUsername: (newUsername: string) => void;
   updateSessionToken: (newToken: string) => void;
   updateUserRole: (newUserRole: string) => void;
   sessionToken: string | null;
-  // username: string | null | undefined;
+  locationId: number;
+  updateLocationId: (newLocationId: number) => void;
 };
 
 type LocationDataState = {
-  locationProps: any;
   locationData: LocationDetails[];
   results: LocationDetails;
 };
@@ -41,7 +40,6 @@ export default class AdminLocationTblDel extends Component<
     super(props);
     //   console.log(props),
     this.state = {
-      locationProps:0,
       locationData: [],
       results: {
         id: 0,
@@ -58,7 +56,7 @@ export default class AdminLocationTblDel extends Component<
   }
   fetchLocations = () => {
     if (this.props.sessionToken) {
-      console.log("Before UserTable Fetch");
+      console.log("Before Loc Table Fetch");
       fetch(`${APIURL}/location/all`, {
         method: "GET",
         headers: new Headers({
@@ -92,27 +90,54 @@ export default class AdminLocationTblDel extends Component<
           <TableCell align="right">{locations.place}</TableCell>
           <TableCell align="right">{locations.type}</TableCell>
           <TableCell align="right">{locations.locationNotes}</TableCell>
-          <TableCell>
-            <Button type="submit" variant="contained" color="primary" value="locationData.id" onClick={(e:any) => console.log(locations.id)}>
-              <Link to={{
-                pathname: "/admin/locationEdit",
-                locationProps:{locations.id}}}>Edit </Link>
-                      </Button>
-          </TableCell>
-          <TableCell>
-            <Button type="submit" variant="contained" color="secondary">
-              Delete
+          <TableCell align="right">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              value="locationData.id"
+              onClick={(e) => {
+                this.props.updateLocationId(locations.id);
+              }}
+            >
+              <Link style={{ color: "#000000" }} to="/admin/locationEdit">
+                Edit
+              </Link>
             </Button>
           </TableCell>
+          {/* <TableCell>
+            <Button type="submit" variant="contained" color="secondary"
+            value="locationData.id" onClick={(e)=>{  this.props.updateLocationId(locations.id)}} >
+              Delete
+            </Button>
+          </TableCell> */}
         </TableRow>
       );
     });
   };
 
+  // handleDelete = (id: number | undefined) => {
+  //   if (this.props.sessionToken) {
+  //       fetch(`${APIURL}/location/${this.props.locationId}`, {
+  //     // fetch(`${APIURL}/user/${id}`, {
+  //       method: "DELETE",
+  //       headers: new Headers({
+  //         "Content-Type": "application/json",
+  //         Authorization: this.props.sessionToken,
+  //       }),
+  //     })
+  //       .then((res) => {
+  //         this.fetchLocations();
+  //       })
+  //       .catch((err) => alert(err));
+  //   }
+  // };
+
   render() {
     return (
       <div>
         <h3>Location Table</h3>
+        {console.log(this.props.locationId)}
         <TableContainer component={Paper}>
           <Table style={styles.table} aria-label="simple table">
             <TableHead>
@@ -124,13 +149,13 @@ export default class AdminLocationTblDel extends Component<
                 <TableCell align="right">Type</TableCell>
                 <TableCell align="right">Location Notes</TableCell>
                 <TableCell align="right"></TableCell>
-                <TableCell align="right"></TableCell>
+                {/* <TableCell align="right"></TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>{this.locationMapper()}</TableBody>
           </Table>
         </TableContainer>
-      </div>
+            </div>
     );
   }
 }
