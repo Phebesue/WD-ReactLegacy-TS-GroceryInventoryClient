@@ -91,19 +91,19 @@ export default class AdminVendorTblDel extends Component<
           <TableCell align="right">{vendors.zipcode}</TableCell>
           <TableCell align="right">{vendors.vendorNotes}</TableCell>
           <TableCell align="right">
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              value="locationData.id"
-              onClick={(e) => {
-                this.props.updateVendorId(vendors.id);
-              }}
-            >
-              <Link style={{ color: "#000000" }} to="/admin/vendorEdit">
+            <Link style={{ color: "#000000" }} to="/admin/vendorEdit">
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                value="locationData.id"
+                onClick={(e) => {
+                  this.props.updateVendorId(vendors.id);
+                }}
+              >
                 Edit
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </TableCell>
           {/* <TableCell>
             <Button type="submit" variant="contained" color="secondary">
@@ -114,22 +114,6 @@ export default class AdminVendorTblDel extends Component<
       );
     });
   };
-
-  // handleDelete = (id: number | undefined) => {
-  //   if (this.props.sessionToken) {
-  //     fetch(`${APIURL}/vendor/${this.props.vendorId}`, {
-  //       method: "DELETE",
-  //       headers: new Headers({
-  //         "Content-Type": "application/json",
-  //         Authorization: this.props.sessionToken,
-  //       }),
-  //     })
-  //       .then((res) => {
-  //         this.fetchVendor();
-  //       })
-  //       .catch((err) => alert(err));
-  //   }
-  // };
 
   render() {
     return (
@@ -148,7 +132,7 @@ export default class AdminVendorTblDel extends Component<
                 <TableCell align="right">Zipcode</TableCell>
                 <TableCell align="right">Vendor Notes</TableCell>
                 <TableCell align="right"></TableCell>
-                {/* <TableCell align="right"></TableCell> */}
+             
               </TableRow>
             </TableHead>
             <TableBody>{this.vendorMapper()}</TableBody>

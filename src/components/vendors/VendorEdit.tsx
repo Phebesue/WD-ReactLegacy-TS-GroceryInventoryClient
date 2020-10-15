@@ -144,7 +144,7 @@ export class VendorEdit extends Component<AcceptedProps, VendorDataState> {
       <div>
         <div id="vendorEditDiv">
           <h2 id="vendorEditHeading">Edit a Vendor</h2>
-          {console.log(this.state.vendorName)}
+          {/* {console.log(this.state.vendorName)} */}
           <FormControl style={{ backgroundColor: "#FFFFFF" }}>
             <TextField
               label="Vendor Name"
@@ -155,7 +155,6 @@ export class VendorEdit extends Component<AcceptedProps, VendorDataState> {
                 this.setState({ vendorName: e.target.value });
               }}
             />
-
             <TextField
               label="Website"
               variant="outlined"
@@ -174,7 +173,6 @@ export class VendorEdit extends Component<AcceptedProps, VendorDataState> {
                 this.setState({ address: e.target.value });
               }}
             />
-
             <div>
               <TextField
                 label="City"
@@ -216,32 +214,36 @@ export class VendorEdit extends Component<AcceptedProps, VendorDataState> {
               }}
             />
 
-<div style={{ display: "flex", justifyContent: "space-evenly" }}>
+            <div style={{  color:"#000000",display: "flex", justifyContent: "space-evenly" }}>
               <Button
                 variant="contained"
                 onClick={(e) => {
                   this.handleSubmit(e);
-                  console.log(`
-                  VendorName: ${this.state.vendorName},
-                  Address: ${this.state.address},
-                  `);
+                  //   console.log(`
+                  // VendorName: ${this.state.vendorName},
+                  // Address: ${this.state.address},
+                  // `);
                 }}
               >
                 <EditIcon />
-                <Link to="/admin/vendorList"> Update a Vendor </Link>
+                <Link style={{  color:"#000000"}} to="/admin/vendorList">Update a Vendor</Link>
               </Button>
-              <Button
-                variant="outlined"
-                color="primary"
-                value={this.state.vendId}
-                onClick={(e) => {
-                  // console.log(this.state.vendId);
-                  this.handleDelete(this.state.vendId);
-                }}
-              >
-                <DeleteIcon />
-                <Link to="/admin/vendorList"> Delete Vendor</Link>
-              </Button>
+
+              <Link  
+              to="/admin/vendorList">
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  value={this.state.vendId}
+                  onClick={(e) => {
+                    // console.log(this.state.vendId);
+                    this.handleDelete(this.state.vendId);
+                  }}
+                >
+                  <DeleteIcon />
+                  Delete Vendor
+                </Button>
+              </Link>
             </div>
           </FormControl>
         </div>

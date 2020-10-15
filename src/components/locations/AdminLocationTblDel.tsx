@@ -91,19 +91,19 @@ export default class AdminLocationTblDel extends Component<
           <TableCell align="right">{locations.type}</TableCell>
           <TableCell align="right">{locations.locationNotes}</TableCell>
           <TableCell align="right">
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              value="locationData.id"
-              onClick={(e) => {
-                this.props.updateLocationId(locations.id);
-              }}
-            >
-              <Link style={{ color: "#000000" }} to="/admin/locationEdit">
+            <Link style={{ color: "#000000" }} to="/admin/locationEdit">
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                value="locationData.id"
+                onClick={(e) => {
+                  this.props.updateLocationId(locations.id);
+                }}
+              >
                 Edit
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </TableCell>
           {/* <TableCell>
             <Button type="submit" variant="contained" color="secondary"
@@ -155,7 +155,7 @@ export default class AdminLocationTblDel extends Component<
             <TableBody>{this.locationMapper()}</TableBody>
           </Table>
         </TableContainer>
-            </div>
+      </div>
     );
   }
 }

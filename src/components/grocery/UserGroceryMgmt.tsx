@@ -1,24 +1,23 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
 
-
 type AcceptedProps = {
-//   updateUsername: (newUsername: string) => void;
-//   updateSessionToken: (newToken: string) => void;
-//   updateUserRole: (newUserRole: string) => void;
+  //   updateUsername: (newUsername: string) => void;
+  //   updateSessionToken: (newToken: string) => void;
+  //   updateUserRole: (newUserRole: string) => void;
   sessionToken: string | null;
 };
 
 const UserGroceryMgmt: FC<AcceptedProps> = (props) => {
   return (
     <div>
-      <button style={{ margin: "2rem" }}>
-        <Link to="/admin/groceryCreate">Create a new Grocery Item</Link>
-      </button>
+      <Link to="/admin/groceryCreate">
+        <button style={{ margin: "2rem" }}>Create a new Grocery Item</button>
+      </Link>
       <br />
-      <button style={{ margin: "2rem" }}>
-        <Link to="/user/GroceryList">Grocery List</Link>
-      </button>
+      <Link to="/user/GroceryList">
+        <button style={{ margin: "2rem" }}>Grocery List</button>
+      </Link>
     </div>
   );
 };

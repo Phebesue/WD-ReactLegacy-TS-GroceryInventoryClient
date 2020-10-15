@@ -39,11 +39,23 @@ type GroceryState = {
   vendId: number;
 };
 
-const types = ["", "dry", "frozen", "refrigerated"]
- 
-const containers = ["", "bag", "box", "carton",  "jar", "none"]
+const types = ["", "dry", "frozen", "refrigerated"];
 
-const units = ["", "each", "grams", "kilograms", "ounces", "pounds", "milliliters", "liters", "fluid ounces", "gallons", "none"]
+const containers = ["", "bag", "box", "carton", "jar", "none"];
+
+const units = [
+  "",
+  "each",
+  "grams",
+  "kilograms",
+  "ounces",
+  "pounds",
+  "milliliters",
+  "liters",
+  "fluid ounces",
+  "gallons",
+  "none",
+];
 
 export default class GroceryCreate extends Component<
   AcceptedProps,
@@ -114,7 +126,7 @@ export default class GroceryCreate extends Component<
       <div>
         <div id="groceryCreateDiv">
           <h2 id="groceryHeading">Add a Grocery Item</h2>
-          <FormControl style={{backgroundColor:"#FFFFFF"}} >
+          <FormControl style={{ backgroundColor: "#FFFFFF" }}>
             <div className="upc">
               <TextField
                 label="UPC"
@@ -123,7 +135,7 @@ export default class GroceryCreate extends Component<
                 onChange={(e) => {
                   this.setState({ upc: e.target.value });
                 }}
-              />        
+              />
               <TextField
                 label="Grocery Item"
                 variant="outlined"
@@ -133,7 +145,7 @@ export default class GroceryCreate extends Component<
                 }}
               />
             </div>
-            <div>    
+            <div>
               <FormControl className="typeInput">
                 {/* <InputLabel id="demo-simple-select--label">
                   Storage Type
@@ -184,7 +196,7 @@ export default class GroceryCreate extends Component<
                 variant="outlined"
                 type="number"
                 onChange={(e) => {
-                  this.setState({ onHand:  Number(e.target.value)});
+                  this.setState({ onHand: Number(e.target.value) });
                 }}
               />
             </div>
@@ -194,7 +206,7 @@ export default class GroceryCreate extends Component<
                 variant="outlined"
                 type="number"
                 onChange={(e) => {
-                  this.setState({ locatId:  Number(e.target.value)});
+                  this.setState({ locatId: Number(e.target.value) });
                 }}
               />
               <TextField
@@ -202,7 +214,7 @@ export default class GroceryCreate extends Component<
                 variant="outlined"
                 type="number"
                 onChange={(e) => {
-                  this.setState({ vendId:  Number(e.target.value)});
+                  this.setState({ vendId: Number(e.target.value) });
                 }}
               />
             </div>
@@ -216,14 +228,16 @@ export default class GroceryCreate extends Component<
                 this.setState({ groceryNotes: e.target.value });
               }}
             />
-            <Button
-              variant="contained"
-              onClick={(e) => {
-                this.handleSubmit(e);
-              }}
-            >
-                <Link to="/user/groceryList">Add a Grocery Item</Link>            
-            </Button>
+            <Link to="/user/groceryList">
+              <Button
+                variant="contained"
+                onClick={(e) => {
+                  this.handleSubmit(e);
+                }}
+              >
+                Add a Grocery Item
+              </Button>
+            </Link>
           </FormControl>
         </div>
       </div>

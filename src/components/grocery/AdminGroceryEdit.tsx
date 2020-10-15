@@ -11,9 +11,9 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import Select from "@material-ui/core/Select";
 
 type AcceptedProps = {
-//   updateUsername: (newUsername: string) => void;
-//   updateSessionToken: (newToken: string) => void;
-//   updateUserRole: (newUserRole: string) => void;
+  //   updateUsername: (newUsername: string) => void;
+  //   updateSessionToken: (newToken: string) => void;
+  //   updateUserRole: (newUserRole: string) => void;
   sessionToken: string | null;
   groceryId: number;
 };
@@ -33,7 +33,7 @@ type GroceryDataState = {
   groceryNotes: string;
   locatId: number;
   vendId: number;
-  grocery: any,
+  grocery: any;
 };
 
 const types = ["", "dry", "frozen", "refrigerated"];
@@ -118,7 +118,7 @@ export default class AdminGroceryEdit extends Component<
         method: "GET",
         headers: new Headers({
           "Content-Type": "application/json",
-          "Authorization": this.props.sessionToken,
+          Authorization: this.props.sessionToken,
         }),
       })
         .then((res) => res.json())
@@ -146,21 +146,21 @@ export default class AdminGroceryEdit extends Component<
       event.preventDefault();
       fetch(`${APIURL}/grocery/update/${this.props.groceryId}`, {
         method: "PUT",
-        body: JSON.stringify({grocery:{
-
-      
-          // locatId: this.state.id,
-          upc: this.state.upc,
-          groceryName: this.state.groceryName,
-          storageType: this.state.storageType,
-          storageContainer: this.state.storageContainer,
-          quantity: this.state.quantity,
-          unitOfMeasure: this.state.unitOfMeasure,
-          onHand: this.state.onHand,
-          groceryNotes: this.state.groceryNotes,
-          locatId: this.state.locatId,
-          vendId: this.state.vendId,
-        }}),
+        body: JSON.stringify({
+          grocery: {
+            // locatId: this.state.id,
+            upc: this.state.upc,
+            groceryName: this.state.groceryName,
+            storageType: this.state.storageType,
+            storageContainer: this.state.storageContainer,
+            quantity: this.state.quantity,
+            unitOfMeasure: this.state.unitOfMeasure,
+            onHand: this.state.onHand,
+            groceryNotes: this.state.groceryNotes,
+            locatId: this.state.locatId,
+            vendId: this.state.vendId,
+          },
+        }),
         headers: new Headers({
           "Content-Type": "application/json",
           Authorization: this.props.sessionToken,
@@ -205,7 +205,7 @@ export default class AdminGroceryEdit extends Component<
         <div id="groceryEditDiv">
           <h2 id="groceryEditHeading">Edit a Grocery Item</h2>
           {/* {console.log(this.state.groceryName)} */}
-          <FormControl style={{ width:"50%",backgroundColor: "#FFFFFF" }}>
+          <FormControl style={{ width: "50%", backgroundColor: "#FFFFFF" }}>
             <div>
               <TextField
                 label="UPC"
@@ -327,28 +327,31 @@ export default class AdminGroceryEdit extends Component<
                 this.setState({ groceryNotes: e.target.value });
               }}
             />
-          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
               <Button
                 variant="contained"
                 onClick={(e) => {
                   this.handleSubmit(e);
                 }}
-              >             
-                  <EditIcon />
-                <Link to="/admin/groceryList"> Edit a Grocery Item</Link>
+              >
+                <Link  style={{  color:"#000000"}} to="/admin/groceryList">
+                <EditIcon />
+                  Edit a Grocery Item</Link>
               </Button>
-              <Button
+              <Link to="/admin/groceryList">
+                <Button
                   variant="outlined"
                   color="primary"
                   value={this.state.locatId}
                   onClick={(e) => {
                     // console.log(this.state.id);
-                    this.handleDelete(this.state.locatId);               
+                    this.handleDelete(this.state.locatId);
                   }}
                 >
                   <DeleteIcon />
-                  <Link to="/admin/groceryList"> Delete Location</Link>
+                  Delete Location
                 </Button>
+              </Link>
             </div>
           </FormControl>
         </div>

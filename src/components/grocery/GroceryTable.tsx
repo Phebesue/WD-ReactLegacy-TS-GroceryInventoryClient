@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import { GroceryDetails, Groc } from "../../Interfaces";
 import { Link } from "react-router-dom";
+import EditIcon from "@material-ui/icons/Edit";
 
 type AcceptedProps = {
   // updateUsername: (newUsername: string) => void;
@@ -117,19 +118,19 @@ export default class AdminGroceryMgmt extends Component<
           <TableCell align="right">{groceries.locationId}</TableCell>
           <TableCell align="right">{groceries.vendorId}</TableCell>
           <TableCell align="right">
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              value="locationData.id"
-              onClick={(e) => {
-                this.props.updateGroceryId(groceries.id);
-              }}
-            >
-              <Link style={{ color: "#000000" }} to="/user/groceryEdit">
-                Edit
-              </Link>
-            </Button>
+            <Link to="/user/groceryEdit">
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                value="locationData.id"
+                onClick={(e) => {
+                  this.props.updateGroceryId(groceries.id);
+                }}
+              >
+                   <EditIcon /> Edit
+              </Button>
+            </Link>
           </TableCell>
           {/* <TableCell>
             <Button type="submit" variant="contained" color="secondary">

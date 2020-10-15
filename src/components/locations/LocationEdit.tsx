@@ -12,7 +12,7 @@ type AcceptedProps = {
   updateSessionToken: (newToken: string) => void;
   updateUserRole: (newUserRole: string) => void;
   sessionToken: string | null;
-  locationId:number;
+  locationId: number;
 };
 
 type LocationDataState = {
@@ -26,7 +26,7 @@ type LocationDataState = {
   locationNotes: string;
 };
 
-const types = ["", "dry", "frozen", "refrigerated"]
+const types = ["", "dry", "frozen", "refrigerated"];
 
 export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
   constructor(props: AcceptedProps) {
@@ -61,7 +61,7 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
   }
   componentDidMount() {
     this.fetchLocation();
-    console.log("LocEdit Props", this.props)
+    // console.log("LocEdit Props", this.props)
   }
   fetchLocation = () => {
     if (this.props.sessionToken) {
@@ -70,7 +70,7 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
         method: "GET",
         headers: new Headers({
           "Content-Type": "application/json",
-          "Authorization": this.props.sessionToken,
+          Authorization: this.props.sessionToken,
         }),
       })
         .then((res) => res.json())
@@ -80,9 +80,9 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
           this.setState({ room: results.room });
           this.setState({ place: results.place });
           this.setState({ locationNotes: results.locationNotes });
-          console.log("hi", results.id);
+          // console.log("hi", results.id);
         })
-      
+
         .catch((err) => console.log(err));
     }
   };
@@ -116,8 +116,8 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
 
   handleDelete = (id: number | undefined) => {
     if (this.props.sessionToken) {
-        fetch(`${APIURL}/location/${this.props.locationId}`, {
-      // fetch(`${APIURL}/user/${id}`, {
+      fetch(`${APIURL}/location/${this.props.locationId}`, {
+        // fetch(`${APIURL}/user/${id}`, {
         method: "DELETE",
         headers: new Headers({
           "Content-Type": "application/json",
@@ -140,7 +140,7 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
         <div id="locationEditDiv">
           <h2 id="locationEditHeading">Edit a Location</h2>
           {/* {console.log(this.state.locationName)} */}
-          <FormControl  style={{backgroundColor:"#FFFFFF"}}>
+          <FormControl style={{ backgroundColor: "#FFFFFF" }}>
             <TextField
               label="Location Name"
               variant="outlined"
@@ -150,7 +150,6 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
                 this.setState({ locationName: e.target.value });
               }}
             />
-
             <TextField
               label="Room"
               variant="outlined"
@@ -169,7 +168,6 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
                 this.setState({ place: e.target.value });
               }}
             />
-
             <TextField
               id="outlined-textarea"
               label="Location Notes"
@@ -181,7 +179,6 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
                 this.setState({ locationNotes: e.target.value });
               }}
             />
-
             <TextField
               id="outlined-select-types"
               select
@@ -204,23 +201,25 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
                   this.handleSubmit(e);
                 }}
               >
-                {/* Update a Location */}
-                <EditIcon />
-                <Link to="/admin/locationList"> Update a Location</Link>
+                <Link style={{ color: "#000000" }} to="/admin/locationList">
+                  <EditIcon />
+                  Update a Location
+                </Link>
               </Button>
-              <Button
-                variant="outlined"
-                color="primary"
-                value={this.state.locatId}
-                onClick={(e) => {
-                  // console.log(this.state.id);
-                  this.handleDelete(this.state.locatId);               
-                }}
-              >
-                <DeleteIcon />
-                <Link to="/admin/locationList"> Delete Location</Link>
-              </Button>
-             
+              <Link to="/admin/locationList">
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  value={this.state.locatId}
+                  onClick={(e) => {
+                    // console.log(this.state.id);
+                    this.handleDelete(this.state.locatId);
+                  }}
+                >
+                  <DeleteIcon />
+                  Delete Location
+                </Button>
+              </Link>
             </div>
           </FormControl>
         </div>

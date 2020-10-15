@@ -57,13 +57,13 @@ export default class VendorCreate extends Component<
         }),
         headers: new Headers({
           "Content-Type": "application/json",
-          "Authorization": this.props.sessionToken,
+          Authorization: this.props.sessionToken,
         }),
       })
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-              })
+        })
         .catch((err) => console.log(err));
     }
   };
@@ -73,7 +73,7 @@ export default class VendorCreate extends Component<
       <div>
         <div id="vendorCreateDiv">
           <h2 id="vendorHeading">Add a Vendor</h2>
-          <FormControl style={{backgroundColor:"#FFFFFF"}}>
+          <FormControl style={{ backgroundColor: "#FFFFFF" }}>
             <div>
               <TextField
                 label="Vendor Name"
@@ -83,7 +83,6 @@ export default class VendorCreate extends Component<
                   this.setState({ vendorName: e.target.value });
                 }}
               />
-  
               <TextField
                 label="Website"
                 variant="outlined"
@@ -101,7 +100,6 @@ export default class VendorCreate extends Component<
                 this.setState({ address: e.target.value });
               }}
             />
-
             <div>
               <TextField
                 label="City"
@@ -115,37 +113,39 @@ export default class VendorCreate extends Component<
                 variant="outlined"
                 type="text"
                 onChange={(e) => {
-                    this.setState({ state: e.target.value });
-                  }}
+                  this.setState({ state: e.target.value });
+                }}
               />
               <TextField
                 label="zipcode"
                 variant="outlined"
                 type="text"
                 onChange={(e) => {
-                    this.setState({ zipcode: e.target.value });
-                  }}
+                  this.setState({ zipcode: e.target.value });
+                }}
               />
             </div>
-                <TextField
-                  id="outlined-textarea"
-                  label="Notes"
-                  type="text"
-                  multiline
-                  variant="outlined"
-                  onChange={(e) => {
-                    this.setState({ vendorNotes: e.target.value });
-                  }}
-                />
-
-            <Button
-              variant="contained"
-              onClick={(e) => {
-                this.handleSubmit(e);
+            <TextField
+              id="outlined-textarea"
+              label="Notes"
+              type="text"
+              multiline
+              variant="outlined"
+              onChange={(e) => {
+                this.setState({ vendorNotes: e.target.value });
               }}
-            >
-            <Link to="/admin/vendorList">Add a Vendor</Link>
-            </Button>
+            />
+
+            <Link to="/admin/vendorList">
+              <Button
+                variant="contained"
+                onClick={(e) => {
+                  this.handleSubmit(e);
+                }}
+              >
+                Add a Vendor
+              </Button>
+            </Link>
           </FormControl>
         </div>
       </div>

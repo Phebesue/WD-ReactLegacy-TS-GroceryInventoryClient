@@ -38,12 +38,14 @@ export default class AdminEditUser extends Component<AdminProps, UserState> {
       password: "",
       admin: "",
       userData: [
-      {  id: 0,
-        firstName: "",
-        lastName: "",
-        username: "",
-        password: "",
-        admin: "",}
+        {
+          id: 0,
+          firstName: "",
+          lastName: "",
+          username: "",
+          password: "",
+          admin: "",
+        },
       ],
       results: {
         id: 0,
@@ -112,7 +114,7 @@ export default class AdminEditUser extends Component<AdminProps, UserState> {
         method: "DELETE",
         headers: new Headers({
           "Content-Type": "application/json",
-          "Authorization": this.props.sessionToken,
+          Authorization: this.props.sessionToken,
         }),
       })
         .then((res) => {
@@ -130,7 +132,7 @@ export default class AdminEditUser extends Component<AdminProps, UserState> {
       <div id="editUserDiv">
         <h3 id="editUserHeading">Edit an account</h3>
         {/* {console.log(this.state.username)} */}
-        <FormControl  style={{backgroundColor:"#FFFFFF"}}>
+        <FormControl style={{ backgroundColor: "#FFFFFF" }}>
           <TextField
             label="First Name"
             variant="outlined"
@@ -177,35 +179,39 @@ export default class AdminEditUser extends Component<AdminProps, UserState> {
           />
 
           <div>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={(e) => {
-                this.handleSubmit(e);
-                console.log(`
-                id: ${this.state.id},
-                firstName: ${this.state.firstName},
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={(e) => {
+                  this.handleSubmit(e);
+                  console.log(`
+                  id: ${this.state.id},
+                  firstName: ${this.state.firstName},
                   lastName: ${this.state.lastName},
                   username: ${this.state.username},
                   admin: ${this.state.admin},            
                   `);
-              }}
-            >
-              <EditIcon />
-              <Link to="/admin/userTable">Edit</Link>
-            </Button>
-            <Button
-              variant="outlined"
-              color="primary"
-              value={this.state.id}
-              onClick={(e) => {
-                // console.log(this.state.id);
-                this.handleDelete(this.state.id);
-              }}
-            >
-              <DeleteIcon />
-              <Link to="/admin/userTable">Delete</Link>
-            </Button>
+                }}
+              >
+                      <Link style={{  color:"#000000"}} to="/admin/userTable">
+                <EditIcon />
+                Edit
+            </Link>
+              </Button>
+            <Link  to="/admin/userTable">
+              <Button
+                variant="outlined"
+                color="primary"
+                value={this.state.id}
+                onClick={(e) => {
+                  // console.log(this.state.id);
+                  this.handleDelete(this.state.id);
+                }}
+              >
+                <DeleteIcon />
+                Delete
+              </Button>
+            </Link>
           </div>
         </FormControl>
       </div>

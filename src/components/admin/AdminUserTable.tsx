@@ -99,6 +99,7 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
           <TableCell align="right">{users.username}</TableCell>
           <TableCell align="right">{users.admin}</TableCell>
           <TableCell align="right">
+            <Link style={{ color: "#000000" }} to="/admin/edit">
             <Button
               type="submit"
               variant="contained"
@@ -108,11 +109,10 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
                 this.props.updateUserId(users.id);
               }}
             >
-              <Link style={{ color: "#000000" }} to="/admin/edit">
                 <EditIcon />
                 Edit
-              </Link>
             </Button>
+              </Link>
           </TableCell>
 
           {/* <Button

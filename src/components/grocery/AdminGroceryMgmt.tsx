@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
 
-
 type AcceptedProps = {
   updateUsername: (newUsername: string) => void;
   updateSessionToken: (newToken: string) => void;
@@ -12,13 +11,13 @@ type AcceptedProps = {
 const AdminGroceryMgmt: FC<AcceptedProps> = (props) => {
   return (
     <div>
-      <button style={{ margin: "2rem" }}>
-        <Link to="/admin/groceryCreate">Create a new Grocery Item</Link>
-      </button>
+      <Link to="/admin/groceryCreate">
+        <button style={{ margin: "2rem" }}>Create a new Grocery Item</button>
+      </Link>
       <br />
-      <button style={{ margin: "2rem" }}>
-        <Link to="/admin/GroceryList">Grocery List</Link>
-      </button>
+      <Link to="/admin/GroceryList">
+        <button style={{ margin: "2rem" }}>Grocery List</button>
+      </Link>
     </div>
   );
 };
