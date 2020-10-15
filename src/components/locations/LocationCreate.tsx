@@ -23,24 +23,7 @@ type LocationState = {
   locationNotes: string;
 };
 
-const types = ["", "dry", "frozen", "refrigerated"]
-//   {
-//     value: "",
-//     label: "",
-//   },
-//   {
-//     value: "dry",
-//     label: "dry",
-//   },
-//   {
-//     value: "frozen",
-//     label: "frozen",
-//   },
-//   {
-//     value: "refrigerated",
-//     label: "refrigerated",
-//   },
-// ];
+const types = ["", "dry", "frozen", "refrigerated"];
 
 export default class LocationCreate extends Component<
   AcceptedProps,
@@ -95,7 +78,7 @@ export default class LocationCreate extends Component<
       <div>
         <div id="locationCreateDiv">
           <h2 id="locationHeading">Add a Location</h2>
-          <FormControl style={{backgroundColor:"#FFFFFF"}}>
+          <FormControl style={{ backgroundColor: "#FFFFFF" }}>
             <div>
               <TextField
                 label="Location Name"
@@ -105,7 +88,7 @@ export default class LocationCreate extends Component<
                   this.setState({ locationName: e.target.value });
                 }}
               />
-  
+
               <TextField
                 label="Room"
                 variant="outlined"
@@ -124,10 +107,7 @@ export default class LocationCreate extends Component<
                   this.setState({ place: e.target.value });
                 }}
               />
-                <FormControl className="typeInput">
-                {/* <InputLabel id="demo-simple-select-autowidth-label">
-                  Storage Type
-                </InputLabel> */}
+              <FormControl className="typeInput">
                 <Select onChange={this.handleChange}>
                   {types.map((option) => (
                     <MenuItem key={option[0]} value={option}>
@@ -154,11 +134,11 @@ export default class LocationCreate extends Component<
                 this.handleSubmit(e);
               }}
             >
-             <Link to="/admin/locationList">Add a Location</Link>
+              <Link style={{ color: "#000000" }} to="/admin/locationList">
+                Add a Location
+              </Link>
             </Button>
-            
-          </FormControl>      
-          
+          </FormControl>
         </div>
       </div>
     );

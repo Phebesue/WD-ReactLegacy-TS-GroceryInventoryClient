@@ -11,13 +11,13 @@ type AcceptedProps = {
 const AdminLocationMgmt: FC<AcceptedProps> = (props) => {
   return (
     <div>
-      <button style={{ margin: "2rem" }}>
-        <Link to="/admin/locationCreate">Create a new Location</Link>
-      </button>
+      <Link to="/admin/locationCreate">
+        <button style={{ margin: "2rem" }}>Create a new Location</button>
+      </Link>
       <br />
-      <button style={{ margin: "2rem" }}>
-        <Link to="/admin/locationList">Location List</Link>
-      </button>
+      <Link to="/admin/locationList">
+        <button style={{ margin: "2rem" }}>Location List</button>
+      </Link>
     </div>
   );
 };

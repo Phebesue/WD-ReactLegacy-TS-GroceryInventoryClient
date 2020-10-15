@@ -118,8 +118,9 @@ export class Signup extends Component<AcceptedProps, UserState> {
             validators={["minStringLength:6", "required"]}
             errorMessages={[
               "Username should be more than 6 letters",
-              "this field is required",]}
-              autoComplete="off"
+              "this field is required",
+            ]}
+            autoComplete="off"
           />
           <TextValidator
             label="Password"
