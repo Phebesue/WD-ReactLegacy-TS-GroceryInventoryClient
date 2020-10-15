@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button, Toolbar } from "@material-ui/core";
+import Admin from '../admin/Admin'
+
 
 
 type ValueTypes = {};
@@ -56,6 +58,11 @@ export class AdminNavbar extends Component<AcceptedProps, ValueTypes> {
           </Button>
           {console.log("Admin Nav Footer")}
         </Toolbar>
+        {/* <Admin  updateSessionToken={this.props.updateSessionToken}
+              updateUsername={this.props.updateUsername}
+              updateUserRole={this.props.updateUserRole}
+              sessionToken={this.props.sessionToken}
+              username={this.props.username}/> */}
       </div>
     );
   }
