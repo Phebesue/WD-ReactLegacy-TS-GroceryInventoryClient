@@ -197,8 +197,7 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
                 </MenuItem>
               ))}
             </TextField>
-
-            <div>
+            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
               <Button
                 variant="contained"
                 onClick={(e) => {

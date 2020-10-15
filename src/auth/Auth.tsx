@@ -58,7 +58,7 @@ export default class Auth extends Component<AcceptedProps, UserState> {
                 updateUsername={this.props.updateUsername}
                 updateUserRole={this.props.updateUserRole}
               />
-              <Home />
+             
             </div>
           )}
           <br />
@@ -70,6 +70,7 @@ export default class Auth extends Component<AcceptedProps, UserState> {
           >
             {this.state.showLogin ? "Login Here" : "Signup Here"}
           </Button>
+          <Home />
         </div>
       </div>
     );

@@ -33,25 +33,30 @@ export class Admin extends Component<AdminProps, {}> {
 
   render() {
     return (
-   
-        <div id="adminDiv">
-          <div id="adminContainer">
-            <div style={{ display: "flex", justifyContent: "flex-start" }}>
-          
-            </div>
+      <div id="adminDiv">
+        <div id="adminContainer">
+          <div>
+            {/* <div style={{ display: "flex", justifyContent: "flex-start" }}></div> */}
             <div
-              style={{ display: "flex", justifyContent: "spaceBetween" }}
-              className="options"
+              style={{ width: "50%", display: "block" }}
+              // style={{ display: "flex", justifyContent: "spaceBetween" }}
+              // className="options"
             >
-            
-            </div>
+              {/* <h3>Grocery Inventory</h3> */}
+              <h5> Admin user functionality: </h5>
+              <ul>
+                <li>Pull a list of all registered users and delete users</li>
+                <li>Add, edit & delete vendors</li>
+                <li>Add, edit & delete locations available to track on hand</li>
+                <li>Edit & delete users</li>
+                <li>Delete grocery items</li>
+              </ul>
+            </div>{" "}
           </div>
-
-          {console.log("Admin Footer")}
-
-         
         </div>
 
+        {console.log("Admin Footer")}
+      </div>
     );
   }
 }

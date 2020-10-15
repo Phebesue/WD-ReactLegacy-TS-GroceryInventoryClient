@@ -216,7 +216,7 @@ export class VendorEdit extends Component<AcceptedProps, VendorDataState> {
               }}
             />
 
-            <div>
+<div style={{ display: "flex", justifyContent: "space-evenly" }}>
               <Button
                 variant="contained"
                 onClick={(e) => {

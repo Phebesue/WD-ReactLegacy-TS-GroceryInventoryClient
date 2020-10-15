@@ -205,7 +205,7 @@ export default class AdminGroceryEdit extends Component<
         <div id="groceryEditDiv">
           <h2 id="groceryEditHeading">Edit a Grocery Item</h2>
           {/* {console.log(this.state.groceryName)} */}
-          <FormControl style={{ backgroundColor: "#FFFFFF" }}>
+          <FormControl style={{ width:"50%",backgroundColor: "#FFFFFF" }}>
             <div>
               <TextField
                 label="UPC"
@@ -327,7 +327,7 @@ export default class AdminGroceryEdit extends Component<
                 this.setState({ groceryNotes: e.target.value });
               }}
             />
-            <div>
+          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
               <Button
                 variant="contained"
                 onClick={(e) => {
