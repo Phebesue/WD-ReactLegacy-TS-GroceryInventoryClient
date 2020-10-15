@@ -320,7 +320,7 @@ export default class GroceryEdit extends Component<
               }}
             >
              
-              <Link to="/admin/groceryList"> Edit a Grocery Item</Link>
+              <Link to="/user/groceryList"> Edit a Grocery Item</Link>
             </Button>
             {/* <Button
                 variant="outlined"
