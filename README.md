@@ -1,4 +1,5 @@
-### What are the requirements for the application to be considered Minimum Viable Product(MVP)?
+﻿# WD-ReactLegacy-TS-GroceryInventoryClient
+ ### What are the requirements for the application to be considered Minimum Viable Product(MVP)?
 #### Project Challenges:
 Here are the required responsibilities:
 
