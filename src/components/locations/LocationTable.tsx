@@ -89,17 +89,7 @@ export default class LocationTable extends Component<
           <TableCell align="right">{locations.room}</TableCell>
           <TableCell align="right">{locations.place}</TableCell>
           <TableCell align="right">{locations.type}</TableCell>
-          <TableCell align="right">{locations.locationNotes}</TableCell>
-          {/* <TableCell>
-            <Button type="submit" variant="contained" color="primary">
-              <Link to="/admin/locationEdit">Edit</Link>
-                       </Button>
-          </TableCell>
-          <TableCell>
-            <Button type="submit" variant="contained" color="secondary">
-              Delete
-            </Button>
-          </TableCell> */}
+          <TableCell align="right">{locations.locationNotes}</TableCell>        
         </TableRow>
       );
     });
@@ -119,8 +109,8 @@ export default class LocationTable extends Component<
                 <TableCell align="right">Place</TableCell>
                 <TableCell align="right">Type</TableCell>
                 <TableCell align="right">Location Notes</TableCell>
-                <TableCell align="right"></TableCell>
-                <TableCell align="right"></TableCell>
+                {/* <TableCell align="right"></TableCell> */}
+                {/* <TableCell align="right"></TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>{this.locationMapper()}</TableBody>

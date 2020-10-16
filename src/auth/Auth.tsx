@@ -49,7 +49,7 @@ export default class Auth extends Component<AcceptedProps, UserState> {
                 updateUsername={this.props.updateUsername}
                 updateUserRole={this.props.updateUserRole}
               />
-              <Home />
+              {/* <Home /> */}
             </div>
           ) : (
             <div>

@@ -33,7 +33,7 @@ type GroceryDataState = {
   groceryNotes: string;
   locatId: number;
   vendId: number;
-  grocery: any,
+  grocery: any;
 };
 
 const types = ["", "dry", "frozen", "refrigerated"];
@@ -118,7 +118,7 @@ export default class GroceryEdit extends Component<
         method: "GET",
         headers: new Headers({
           "Content-Type": "application/json",
-          "Authorization": this.props.sessionToken,
+          Authorization: this.props.sessionToken,
         }),
       })
         .then((res) => res.json())
@@ -146,21 +146,21 @@ export default class GroceryEdit extends Component<
       event.preventDefault();
       fetch(`${APIURL}/grocery/update/${this.props.groceryId}`, {
         method: "PUT",
-        body: JSON.stringify({grocery:{
-
-      
-          // locatId: this.state.id,
-          upc: this.state.upc,
-          groceryName: this.state.groceryName,
-          storageType: this.state.storageType,
-          storageContainer: this.state.storageContainer,
-          quantity: this.state.quantity,
-          unitOfMeasure: this.state.unitOfMeasure,
-          onHand: this.state.onHand,
-          groceryNotes: this.state.groceryNotes,
-          locatId: this.state.locatId,
-          vendId: this.state.vendId,
-        }}),
+        body: JSON.stringify({
+          grocery: {
+            // locatId: this.state.id,
+            upc: this.state.upc,
+            groceryName: this.state.groceryName,
+            storageType: this.state.storageType,
+            storageContainer: this.state.storageContainer,
+            quantity: this.state.quantity,
+            unitOfMeasure: this.state.unitOfMeasure,
+            onHand: this.state.onHand,
+            groceryNotes: this.state.groceryNotes,
+            locatId: this.state.locatId,
+            vendId: this.state.vendId,
+          },
+        }),
         headers: new Headers({
           "Content-Type": "application/json",
           Authorization: this.props.sessionToken,
@@ -173,7 +173,6 @@ export default class GroceryEdit extends Component<
         .catch((err) => console.log(err));
     }
   };
-
 
   handleChangeTypes = (event: any) => {
     this.setState({ storageType: event.target.value });
@@ -319,21 +318,10 @@ export default class GroceryEdit extends Component<
                 this.handleSubmit(e);
               }}
             >
-             
-              <Link to="/user/groceryList"> Edit a Grocery Item</Link>
+              <Link  style={{ color: "#000000" }} to="/user/groceryList">
+              <EditIcon />
+                Edit a Grocery Item</Link>
             </Button>
-            {/* <Button
-                variant="outlined"
-                color="primary"
-                value={this.state.locatId}
-                onClick={(e) => {
-                  // console.log(this.state.id);
-                  this.handleDelete(this.state.locatId);               
-                }}
-              >
-                <DeleteIcon />
-                <Link to="/admin/groceryList"> Delete Location</Link>
-              </Button> */}
           </FormControl>
         </div>
       </div>

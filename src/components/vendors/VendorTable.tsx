@@ -92,17 +92,7 @@ export default class VendorTable extends Component<
           <TableCell align="right">{vendors.city}</TableCell>
           <TableCell align="right">{vendors.state}</TableCell>
           <TableCell align="right">{vendors.zipcode}</TableCell>
-          <TableCell align="right">{vendors.vendorNotes}</TableCell>
-          {/* <TableCell>
-            <Button type="submit" variant="contained" color="primary"onClick={() => console.log(vendors.id)}>
-              <Link to="/admin/vendorEdit">Edit</Link>           
-            </Button>
-          </TableCell>
-          <TableCell>
-            <Button type="submit" variant="contained" color="secondary">
-              Delete
-            </Button>
-          </TableCell> */}
+          <TableCell align="right">{vendors.vendorNotes}</TableCell>         
         </TableRow>
       );
     });
@@ -110,8 +100,7 @@ export default class VendorTable extends Component<
 
   handleDelete = (id: number | undefined) => {
     if (this.props.sessionToken) {
-      // fetch(`${APIURL}/user/${this.state.results.id}`, {
-      fetch(`${APIURL}/user/${id}`, {
+         fetch(`${APIURL}/user/${id}`, {
         method: "DELETE",
         headers: new Headers({
           "Content-Type": "application/json",
@@ -120,8 +109,7 @@ export default class VendorTable extends Component<
       })
         .then((res) => {
           this.fetchVendors();
-          // <Link to="/admin/vendorTable"/>
-        })
+          })
         .catch((err) => alert(err));
     }
   };

@@ -16,6 +16,10 @@ header, .header{
 h2{
   margin:0;
 }
+.intro{
+background-color: #7a6c5d4f;
+
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

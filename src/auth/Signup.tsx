@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FormControl, TextField, Button } from "@material-ui/core";
-// import './signup.css';
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import APIURL from "../../src/helpers/environment";
 
 type UserState = {
@@ -27,80 +27,118 @@ export class Signup extends Component<AcceptedProps, UserState> {
     };
   }
 
-  handleSubmit = (event: any) => {
-    event.preventDefault();
-    fetch(`${APIURL}/user/signup`, {
-      method: "POST",
-      body: JSON.stringify({
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        username: this.state.username,
-        password: this.state.password,
-        admin: "false"
-      }),
-      headers: new Headers({
-        "Content-Type": "application/json",
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        this.props.updateSessionToken(data.sessionToken);
-        this.props.updateUserRole(data.user.admin);
-      });
+  handleSubmit = (e: any) => {
+    if (
+      this.state.firstName !== "" &&
+      this.state.lastName !== "" &&
+      this.state.username !== "" &&
+      this.state.password !== ""
+    ) {
+      e.preventDefault();
+      fetch(`${APIURL}/user/signup`, {
+        method: "POST",
+        body: JSON.stringify({
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          username: this.state.username,
+          password: this.state.password,
+          admin: "false",
+        }),
+        headers: new Headers({
+          "Content-Type": "application/json",
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          this.props.updateSessionToken(data.sessionToken);
+          // this.props.updateUserRole(data.user.admin);
+        });
+    } else {
+      alert("None of the fields can be empty");
+    }
   };
+  handleFirstNameChange = (event: any) => {
+    const firstName = event.target.value;
+    this.setState({ firstName: firstName });
+  };
+  handleLastNameChange = (event: any) => {
+    const lastName = event.target.value;
+    this.setState({ lastName: lastName });
+  };
+  handleUsernameChange = (event: any) => {
+    const username = event.target.value;
+    this.setState({ username: username });
+  };
+  handlePasswordChange = (event: any) => {
+    const password = event.target.value;
+    this.setState({ password: password });
+  };
+
   render() {
     return (
       <div id="signupDiv">
         <h1 id="signupHeading">Sign Up to Join</h1>
-        <FormControl style={{backgroundColor:"#FFFFFF"}}>
-          <TextField
-            label="First Name"
-            variant="outlined"
-            type="text"
-            onChange={(e) => {
-              this.setState({ firstName: e.target.value });
-            }}
-          />
 
-          <TextField
+        <ValidatorForm
+          style={{
+            marginLeft: "auto",
+            marginRight: "auto",
+            width: "35%",
+            display: "block",
+            backgroundColor: "#FFFFFF",
+          }}
+          ref="form"
+          onSubmit={this.handleSubmit}
+          onError={(errors) => console.log(errors)}
+        >
+          <TextValidator
+            label="First Name"
+            onChange={this.handleFirstNameChange}
+            name="First Name"
+            value={this.state.firstName}
+            validators={["required"]}
+            errorMessages={["this field is required"]}
+            autoComplete="off"
+          />
+          <TextValidator
             label="Last Name"
-            variant="outlined"
-            type="text"
-            onChange={(e) => {
-              this.setState({ lastName: e.target.value });
-            }}
+            onChange={(e) => this.handleLastNameChange(e)}
+            name="Last Name"
+            value={this.state.lastName}
+            validators={["required"]}
+            errorMessages={["this field is required"]}
+            autoComplete="off"
           />
-          <TextField
+          <TextValidator
             label="Username"
-            variant="outlined"
-            type="text"
-            onChange={(e) => {
-              this.setState({ username: e.target.value });
-            }}
-            // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}"
-            //   title="Username must include one number, one capital letter, and be 4-15 characters in length."
+            onChange={(e) => this.handleUsernameChange(e)}
+            name="Username"
+            value={this.state.username}
+            validators={["minStringLength:6", "required"]}
+            errorMessages={[
+              "Username should be more than 6 letters",
+              "this field is required",
+            ]}
+            autoComplete="off"
           />
-          <TextField
+          <TextValidator
             label="Password"
-            variant="outlined"
+            onChange={this.handlePasswordChange}
+            name="password"
+            value={this.state.password}
             type="password"
-            onChange={(e) => {
-              this.setState({ password: e.target.value });
-            }}
-            /* pattern="[a-zA-Z0-9]+"
-              title="Password must contain one number, one capital letter, and be 5-15 characters in length." */
+            validators={["minStringLength:6", "required"]}
+            errorMessages={[
+              "password should be more than 6 letters",
+              "this field is required",
+            ]}
           />
-          {/* <pre>{JSON.stringify(values, null, 5)}</pre> */}
-          <Button
-            variant="contained"
-            onClick={(e) => {
-              this.handleSubmit(e);
-            }}
-          >
-            Signup
+          <br />
+          <Button variant="contained" onClick={this.handleSubmit}>
+            Sign Up
           </Button>
-        </FormControl>
+        </ValidatorForm>
       </div>
     );
   }
