@@ -39,7 +39,7 @@ Instructions:
 - Clone to your local repository and open in code editor.
 - run npm install to update the app dependencies.
 - You will need to create the initial Admin account via Postman (or other API tester), or if testing on [deployed version](whats-for-dinner-client.herokuapp.com) userId: user120, password: pass120
-- Open Postman to run tests. [Postman Endpoint Tests](https://documenter.getpostman.com/view/11529668/TVRq1RDU) You'll need to Register and get a token to run certain tests.
+- Open Postman to run tests. [Postman Endpoint Tests](https://documenter.getpostman.com/view/11529668/TVRq1RDU) You'll need to Register and get a token to run most tests.
 
 ## What's for dinner??
 
