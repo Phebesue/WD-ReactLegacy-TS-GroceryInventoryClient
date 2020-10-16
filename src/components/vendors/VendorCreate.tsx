@@ -136,16 +136,14 @@ export default class VendorCreate extends Component<
               }}
             />
 
-            <Link to="/admin/vendorList">
-              <Button
-                variant="contained"
-                onClick={(e) => {
-                  this.handleSubmit(e);
-                }}
-              >
-                Add a Vendor
-              </Button>
-            </Link>
+            <Button
+              variant="contained"
+              onClick={(e) => {
+                this.handleSubmit(e);
+              }}
+            >
+              <Link to="/admin/vendorList">Add a Vendor</Link>
+            </Button>
           </FormControl>
         </div>
       </div>
