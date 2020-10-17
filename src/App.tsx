@@ -91,10 +91,10 @@ export default class GroceryApp extends Component<{}, sessionState> {
       localStorage.getItem("userRole") === "true" ? (
         <AdminNavbar
           clearUser={this.clearUser}
-          updateSessionToken={this.updateSessionToken}
-          updateUsername={this.updateUsername}
-          updateUserRole={this.updateUserRole}
-          sessionToken={this.state.sessionToken}
+          // updateSessionToken={this.updateSessionToken}
+          // updateUsername={this.updateUsername}
+          // updateUserRole={this.updateUserRole}
+          // sessionToken={this.state.sessionToken}
           username={this.state.username}
         />
       ) : (
@@ -108,7 +108,7 @@ export default class GroceryApp extends Component<{}, sessionState> {
       <Route exact path="/home">
         <Auth
           updateSessionToken={this.updateSessionToken}
-          updateUsername={this.updateUsername}
+          // updateUsername={this.updateUsername}
           updateUserRole={this.updateUserRole}
         />
         <Home />
@@ -140,7 +140,7 @@ export default class GroceryApp extends Component<{}, sessionState> {
           {!session ? (
             <Auth
               updateSessionToken={this.updateSessionToken}
-              updateUsername={this.updateUsername}
+              // updateUsername={this.updateUsername}
               updateUserRole={this.updateUserRole}
             />
           ) : (
@@ -165,8 +165,8 @@ export default class GroceryApp extends Component<{}, sessionState> {
             userId={this.state.userId}
           />
           {console.log("Bottom of App")}
-          <Footer />
         </Router>
+          <Footer />
       </div>
     );
   }

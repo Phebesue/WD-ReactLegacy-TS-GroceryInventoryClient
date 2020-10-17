@@ -15,10 +15,6 @@ import { Link } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
 
 type AcceptedProps = {
-  // updateUsername: (newUsername: string) => void;
-  // updateSessionToken: (newToken: string) => void;
-  // updateUserRole: (newUserRole: string) => void;
-  // username: string | null | undefined;
   sessionToken: string | null;
   groceryId: number;
   updateGroceryId: (newGroceryId: number) => void;
@@ -128,7 +124,7 @@ export default class AdminGroceryMgmt extends Component<
                   this.props.updateGroceryId(groceries.id);
                 }}
               >
-                   <EditIcon /> Edit
+                <EditIcon /> Edit
               </Button>
             </Link>
           </TableCell>

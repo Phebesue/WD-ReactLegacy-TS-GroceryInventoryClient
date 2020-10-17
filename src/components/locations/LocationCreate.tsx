@@ -3,16 +3,11 @@ import APIURL from "../../helpers/environment";
 import { FormControl, TextField, Button } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Link } from "react-router-dom";
-import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Select from "@material-ui/core/Select";
 
 type AcceptedProps = {
-  updateUsername: (newUsername: string) => void;
-  updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: string) => void;
   sessionToken: string | null;
-  //   username: string | null | undefined;
 };
 type LocationState = {
   locationId: number;

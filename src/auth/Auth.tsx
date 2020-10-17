@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import APIURL from "../helpers/environment";
 // import "./Auth.css";
 import { Button } from "@material-ui/core";
 import { Signup } from "./Signup";
@@ -8,7 +7,6 @@ import Home from "../site/Home";
 
 type AcceptedProps = {
   updateSessionToken: (newToken: string) => void;
-  updateUsername: (newUsername: string) => void;
   updateUserRole: (newUserRole: string) => void;
 };
 
@@ -45,8 +43,7 @@ export default class Auth extends Component<AcceptedProps, UserState> {
           {this.state.showLogin ? (
             <div>
               <Signup
-                updateSessionToken={this.props.updateSessionToken}
-                updateUsername={this.props.updateUsername}
+                updateSessionToken={this.props.updateSessionToken}    
                 updateUserRole={this.props.updateUserRole}
               />
               {/* <Home /> */}
@@ -55,10 +52,8 @@ export default class Auth extends Component<AcceptedProps, UserState> {
             <div>
               <Login
                 updateSessionToken={this.props.updateSessionToken}
-                updateUsername={this.props.updateUsername}
                 updateUserRole={this.props.updateUserRole}
               />
-             
             </div>
           )}
           <br />

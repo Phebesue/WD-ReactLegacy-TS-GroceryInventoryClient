@@ -11,17 +11,11 @@ import {
   Paper,
 } from "@material-ui/core";
 import BrightnessAutoIcon from "@material-ui/icons/BrightnessAuto";
-import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import { Link } from "react-router-dom";
 import { UserDetails } from "../../Interfaces";
 
-// import Radium from 'radium';
-
 type AcceptedProps = {
-  updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: string) => void;
-  updateUsername: (newUsername: string) => void;
   sessionToken: string | null;
   userId: number;
   updateUserId: (newUserId: number) => void;
@@ -69,7 +63,6 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
       })
         .then((res) => res.json())
         .then((data: UserDetails[]) => {
-          // console.log(userData);
           this.setState({ userData: data });
         })
         .then(() => {
@@ -100,19 +93,19 @@ export class AdminUserTable extends Component<AcceptedProps, UserDataState> {
           <TableCell align="right">{users.admin}</TableCell>
           <TableCell align="right">
             <Link style={{ color: "#000000" }} to="/admin/edit">
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              value="userData.id"
-              onClick={(e) => {
-                this.props.updateUserId(users.id);
-              }}
-            >
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                value="userData.id"
+                onClick={(e) => {
+                  this.props.updateUserId(users.id);
+                }}
+              >
                 <EditIcon />
                 Edit
-            </Button>
-              </Link>
+              </Button>
+            </Link>
           </TableCell>
 
           {/* <Button

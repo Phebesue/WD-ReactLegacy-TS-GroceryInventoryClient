@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
-import { Link } from "react-router-dom";
 import { VendorDetails } from "../../Interfaces";
-import VendorEdit from "./VendorEdit";
+
 import {
-  Button,
   Table,
   TableBody,
   TableCell,
@@ -13,12 +11,8 @@ import {
   TableRow,
   Paper,
 } from "@material-ui/core";
-// import Radium from 'radium';
 
 type AcceptedProps = {
-  updateUsername: (newUsername: string) => void;
-  updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: string) => void;
   sessionToken: string | null;
 };
 
@@ -92,15 +86,15 @@ export default class VendorTable extends Component<
           <TableCell align="right">{vendors.city}</TableCell>
           <TableCell align="right">{vendors.state}</TableCell>
           <TableCell align="right">{vendors.zipcode}</TableCell>
-          <TableCell align="right">{vendors.vendorNotes}</TableCell>         
+          <TableCell align="right">{vendors.vendorNotes}</TableCell>
         </TableRow>
       );
     });
   };
 
-  handleDelete = (id: number | undefined) => {
+  handleDelete = (id: number) => {
     if (this.props.sessionToken) {
-         fetch(`${APIURL}/user/${id}`, {
+      fetch(`${APIURL}/user/${id}`, {
         method: "DELETE",
         headers: new Headers({
           "Content-Type": "application/json",
@@ -109,7 +103,7 @@ export default class VendorTable extends Component<
       })
         .then((res) => {
           this.fetchVendors();
-          })
+        })
         .catch((err) => alert(err));
     }
   };
@@ -130,8 +124,6 @@ export default class VendorTable extends Component<
                 <TableCell align="right">State</TableCell>
                 <TableCell align="right">Zipcode</TableCell>
                 <TableCell align="right">Vendor Notes</TableCell>
-                <TableCell align="right"></TableCell>
-                <TableCell align="right"></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>{this.vendorMapper()}</TableBody>

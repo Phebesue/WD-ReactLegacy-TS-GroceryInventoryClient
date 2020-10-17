@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
 import { LocationDetails } from "../../Interfaces";
-import { Link } from "react-router-dom";
+
 import {
-  Button,
   Table,
   TableBody,
   TableCell,
@@ -12,14 +11,9 @@ import {
   TableRow,
   Paper,
 } from "@material-ui/core";
-// import Radium from 'radium';
 
 type AcceptedProps = {
-  updateUsername: (newUsername: string) => void;
-  updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: string) => void;
   sessionToken: string | null;
-  // username: string | null | undefined;
 };
 
 type LocationDataState = {
@@ -89,7 +83,7 @@ export default class LocationTable extends Component<
           <TableCell align="right">{locations.room}</TableCell>
           <TableCell align="right">{locations.place}</TableCell>
           <TableCell align="right">{locations.type}</TableCell>
-          <TableCell align="right">{locations.locationNotes}</TableCell>        
+          <TableCell align="right">{locations.locationNotes}</TableCell>
         </TableRow>
       );
     });
@@ -109,8 +103,6 @@ export default class LocationTable extends Component<
                 <TableCell align="right">Place</TableCell>
                 <TableCell align="right">Type</TableCell>
                 <TableCell align="right">Location Notes</TableCell>
-                {/* <TableCell align="right"></TableCell> */}
-                {/* <TableCell align="right"></TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>{this.locationMapper()}</TableBody>

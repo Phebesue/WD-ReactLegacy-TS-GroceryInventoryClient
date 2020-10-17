@@ -4,9 +4,6 @@ import { FormControl, TextField, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 type AcceptedProps = {
-  updateUsername: (newUsername: string) => void;
-  updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: string) => void;
   sessionToken: string | null;
 };
 type VendorState = {
@@ -142,7 +139,9 @@ export default class VendorCreate extends Component<
                 this.handleSubmit(e);
               }}
             >
-              <Link to="/admin/vendorList">Add a Vendor</Link>
+              <Link style={{ color: "#000000" }} to="/admin/vendorList">
+                Add a Vendor
+              </Link>
             </Button>
           </FormControl>
         </div>

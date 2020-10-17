@@ -3,17 +3,11 @@ import APIURL from "../../helpers/environment";
 import { FormControl, TextField, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { GroceryDetails } from "../../Interfaces";
-import DeleteIcon from "@material-ui/icons/Delete";
+// import DeleteIcon from "@material-ui/icons/Delete";
 import MenuItem from "@material-ui/core/MenuItem";
 import EditIcon from "@material-ui/icons/Edit";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Select from "@material-ui/core/Select";
 
 type AcceptedProps = {
-  updateUsername: (newUsername: string) => void;
-  updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: string) => void;
   sessionToken: string | null;
   groceryId: number;
 };
@@ -21,7 +15,6 @@ type AcceptedProps = {
 type GroceryDataState = {
   groceryData: GroceryDetails[];
   results: GroceryDetails;
-  groceryId: number;
   grocId: number;
   upc: string;
   groceryName: string;
@@ -61,7 +54,6 @@ export default class GroceryEdit extends Component<
   constructor(props: AcceptedProps) {
     super(props);
     this.state = {
-      groceryId: 0,
       grocId: 0,
       upc: "",
       groceryName: "",
@@ -229,7 +221,6 @@ export default class GroceryEdit extends Component<
                 ))}
               </TextField>
               <TextField
-                // id="outlined-select-containers"
                 select
                 label="Container"
                 type="text"
@@ -318,9 +309,10 @@ export default class GroceryEdit extends Component<
                 this.handleSubmit(e);
               }}
             >
-              <Link  style={{ color: "#000000" }} to="/user/groceryList">
-              <EditIcon />
-                Edit a Grocery Item</Link>
+              <Link style={{ color: "#000000" }} to="/user/groceryList">
+                <EditIcon />
+                Edit a Grocery Item
+              </Link>
             </Button>
           </FormControl>
         </div>

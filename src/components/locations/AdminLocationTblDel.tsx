@@ -14,9 +14,6 @@ import {
 } from "@material-ui/core";
 
 type AcceptedProps = {
-  updateUsername: (newUsername: string) => void;
-  updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: string) => void;
   sessionToken: string | null;
   locationId: number;
   updateLocationId: (newLocationId: number) => void;

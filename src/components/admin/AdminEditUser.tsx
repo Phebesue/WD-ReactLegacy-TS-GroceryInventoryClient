@@ -7,9 +7,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 
 type AdminProps = {
-  updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: string) => void;
-  updateUsername: (newUsername: string) => void;
   sessionToken: string | null;
   username: string | null | undefined;
   userId: number;
@@ -76,7 +73,6 @@ export default class AdminEditUser extends Component<AdminProps, UserState> {
           this.setState({ lastName: results.lastName });
           this.setState({ username: results.username });
           this.setState({ admin: results.admin });
-          // console.log("hi", results.id);
         })
 
         .catch((err) => console.log(err));
@@ -131,7 +127,6 @@ export default class AdminEditUser extends Component<AdminProps, UserState> {
     return (
       <div id="editUserDiv">
         <h3 id="editUserHeading">Edit an account</h3>
-        {/* {console.log(this.state.username)} */}
         <FormControl style={{ backgroundColor: "#FFFFFF" }}>
           <TextField
             label="First Name"
@@ -179,32 +174,31 @@ export default class AdminEditUser extends Component<AdminProps, UserState> {
           />
 
           <div>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={(e) => {
-                  this.handleSubmit(e);
-                  console.log(`
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={(e) => {
+                this.handleSubmit(e);
+                console.log(`
                   id: ${this.state.id},
                   firstName: ${this.state.firstName},
                   lastName: ${this.state.lastName},
                   username: ${this.state.username},
                   admin: ${this.state.admin},            
                   `);
-                }}
-              >
-                      <Link style={{  color:"#000000"}} to="/admin/userTable">
+              }}
+            >
+              <Link style={{ color: "#000000" }} to="/admin/userTable">
                 <EditIcon />
                 Edit
-            </Link>
-              </Button>
-            <Link  to="/admin/userTable">
+              </Link>
+            </Button>
+            <Link to="/admin/userTable">
               <Button
                 variant="outlined"
                 color="primary"
                 value={this.state.id}
                 onClick={(e) => {
-                  // console.log(this.state.id);
                   this.handleDelete(this.state.id);
                 }}
               >
