@@ -2,28 +2,11 @@ import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
 import { FormControl, TextField, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Select from "@material-ui/core/Select";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
-  })
-);
 
 type AcceptedProps = {
-  updateUsername: (newUsername: string) => void;
-  updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: string) => void;
   sessionToken: string | null;
 };
 type GroceryState = {
@@ -147,9 +130,6 @@ export default class GroceryCreate extends Component<
             </div>
             <div>
               <FormControl className="typeInput">
-                {/* <InputLabel id="demo-simple-select--label">
-                  Storage Type
-                </InputLabel> */}
                 <Select onChange={this.handleChangeTypes}>
                   {types.map((option) => (
                     <MenuItem key={option[0]} value={option}>
@@ -160,7 +140,6 @@ export default class GroceryCreate extends Component<
                 <FormHelperText>Storage Type</FormHelperText>
               </FormControl>
               <FormControl className="containerInput">
-                {/* <InputLabel id="demo-simple-select-autowidth-label"></InputLabel> */}
                 <Select onChange={this.handleChangeContainers}>
                   {containers.map((option) => (
                     <MenuItem key={option[0]} value={option}>
@@ -171,7 +150,6 @@ export default class GroceryCreate extends Component<
                 <FormHelperText>Storage Container</FormHelperText>
               </FormControl>
               <FormControl className="unitInput">
-                {/* <InputLabel id="demo-simple-select-autowidth-label"></InputLabel> */}
                 <Select onChange={this.handleChangeUnits}>
                   {units.map((option) => (
                     <MenuItem key={option} value={option}>

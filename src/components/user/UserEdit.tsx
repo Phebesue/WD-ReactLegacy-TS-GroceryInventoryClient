@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FormControl, TextField, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import APIURL from "../../helpers/environment";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -8,12 +8,8 @@ import { UserDetails } from "../../Interfaces";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 type AcceptedProps = {
-  updateUsername: (newUsername: string) => void;
-  updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: string) => void;
   clearUser: () => void;
   sessionToken: any;
-  // sessionToken: string | null;
 };
 type UserDataState = {
   editId: number;
@@ -44,7 +40,7 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
         admin: "",
       },
     };
-    console.log("st: ", this.props.sessionToken);
+    console.log("UserEdit: ", this.props.sessionToken);
   }
 
   fetchUser = () => {
@@ -65,7 +61,7 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
           this.setState({ editLastName: results.lastName });
           this.setState({ editUsername: results.username });
           this.setState({ editPassword: results.password });
-          console.log("hi", results.id);
+          console.log("UserEdit Fetch", results.id);
         })
 
         .catch((err) => console.log(err));
@@ -81,7 +77,6 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
         firstName: this.state.editFirstName,
         lastName: this.state.editLastName,
         username: this.state.editUsername,
-        //  {this.state.editPassword !=== "" ?
         //  password: this.state.editPassword,
       }),
       headers: new Headers({
@@ -112,9 +107,8 @@ export class UserEdit extends Component<AcceptedProps, UserDataState> {
         console.log(data);
       });
   };
-  handleDelete = (id: number | undefined) => {
+  handleDelete = (id: number) => {
     if (this.props.sessionToken) {
-      // fetch(`${APIURL}/user/${this.state.editId}`, {
       fetch(`${APIURL}/user/${id}`, {
         method: "DELETE",
         headers: new Headers({

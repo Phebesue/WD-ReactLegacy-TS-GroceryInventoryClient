@@ -1,22 +1,30 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
-type AcceptedProps = {
-  updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: string) => void;
-  updateUsername: (newUsername: string) => void;
-  sessionToken: string | null;
-};
+type AcceptedProps = {};
 
 const AdminVendorMgmt: FC<AcceptedProps> = (props) => {
   return (
     <div>
       <Link to="/admin/vendorCreate">
-        <button style={{ margin: "2rem" }}>Add a Vendor</button>
+        <Button
+          variant="contained"
+          color="secondary"
+          style={{ height: "4rem", width: "10rem", margin: "2rem" }}
+        >
+          Add a Vendor
+        </Button>
       </Link>
       <br />
       <Link to="/admin/vendorList">
-        <button style={{ margin: "2rem" }}>View All Vendors</button>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ height: "4rem", width: "10rem" }}
+        >
+          View All Vendors
+        </Button>
       </Link>
     </div>
   );

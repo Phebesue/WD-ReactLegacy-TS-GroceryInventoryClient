@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FormControl, TextField, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import APIURL from "../../src/helpers/environment";
 
@@ -11,7 +11,6 @@ type UserState = {
 };
 
 type AcceptedProps = {
-  updateUsername: (newUsername: string) => void;
   updateSessionToken: (newToken: string) => void;
   updateUserRole: (newUserRole: string) => void;
 };
@@ -52,7 +51,6 @@ export class Signup extends Component<AcceptedProps, UserState> {
         .then((data) => {
           console.log(data);
           this.props.updateSessionToken(data.sessionToken);
-          // this.props.updateUserRole(data.user.admin);
         });
     } else {
       alert("None of the fields can be empty");
@@ -117,7 +115,7 @@ export class Signup extends Component<AcceptedProps, UserState> {
             value={this.state.username}
             validators={["minStringLength:6", "required"]}
             errorMessages={[
-              "Username should be more than 6 letters",
+              "Username should be more than 5 letters",
               "this field is required",
             ]}
             autoComplete="off"
@@ -130,7 +128,7 @@ export class Signup extends Component<AcceptedProps, UserState> {
             type="password"
             validators={["minStringLength:6", "required"]}
             errorMessages={[
-              "password should be more than 6 letters",
+              "password should be more than 5 letters",
               "this field is required",
             ]}
           />

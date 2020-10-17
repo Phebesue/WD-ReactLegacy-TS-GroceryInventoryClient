@@ -8,9 +8,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import EditIcon from "@material-ui/icons/Edit";
 
 type AcceptedProps = {
-  updateUsername: (newUsername: string) => void;
-  updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: string) => void;
   sessionToken: string | null;
   locationId: number;
 };
@@ -114,10 +111,9 @@ export class LocationEdit extends Component<AcceptedProps, LocationDataState> {
     }
   };
 
-  handleDelete = (id: number | undefined) => {
+  handleDelete = (id: number) => {
     if (this.props.sessionToken) {
       fetch(`${APIURL}/location/${this.props.locationId}`, {
-        // fetch(`${APIURL}/user/${id}`, {
         method: "DELETE",
         headers: new Headers({
           "Content-Type": "application/json",

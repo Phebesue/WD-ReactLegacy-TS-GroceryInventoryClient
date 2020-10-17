@@ -7,9 +7,6 @@ import { VendorDetails } from "../../Interfaces";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 type AcceptedProps = {
-  updateUsername: (newUsername: string) => void;
-  updateSessionToken: (newToken: string) => void;
-  updateUserRole: (newUserRole: string) => void;
   sessionToken: string | null;
   vendorId: number;
 };
@@ -123,7 +120,7 @@ export class VendorEdit extends Component<AcceptedProps, VendorDataState> {
     }
   };
 
-  handleDelete = (id: number | undefined) => {
+  handleDelete = (id: number) => {
     if (this.props.sessionToken) {
       fetch(`${APIURL}/vendor/${this.props.vendorId}`, {
         method: "DELETE",
@@ -214,7 +211,13 @@ export class VendorEdit extends Component<AcceptedProps, VendorDataState> {
               }}
             />
 
-            <div style={{  color:"#000000",display: "flex", justifyContent: "space-evenly" }}>
+            <div
+              style={{
+                color: "#000000",
+                display: "flex",
+                justifyContent: "space-evenly",
+              }}
+            >
               <Button
                 variant="contained"
                 onClick={(e) => {
@@ -226,11 +229,12 @@ export class VendorEdit extends Component<AcceptedProps, VendorDataState> {
                 }}
               >
                 <EditIcon />
-                <Link style={{  color:"#000000"}} to="/admin/vendorList">Update a Vendor</Link>
+                <Link style={{ color: "#000000" }} to="/admin/vendorList">
+                  Update a Vendor
+                </Link>
               </Button>
 
-              <Link  
-              to="/admin/vendorList">
+              <Link to="/admin/vendorList">
                 <Button
                   variant="outlined"
                   color="primary"

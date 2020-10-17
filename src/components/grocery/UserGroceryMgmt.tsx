@@ -1,10 +1,8 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
 type AcceptedProps = {
-  //   updateUsername: (newUsername: string) => void;
-  //   updateSessionToken: (newToken: string) => void;
-  //   updateUserRole: (newUserRole: string) => void;
   sessionToken: string | null;
 };
 
@@ -12,11 +10,23 @@ const UserGroceryMgmt: FC<AcceptedProps> = (props) => {
   return (
     <div>
       <Link to="/admin/groceryCreate">
-        <button style={{ margin: "2rem" }}>Create a new Grocery Item</button>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ height: "4rem", margin: "2rem" }}
+        >
+          Create a new Grocery Item
+        </Button>
       </Link>
       <br />
       <Link to="/user/GroceryList">
-        <button style={{ margin: "2rem" }}>Grocery List</button>
+        <Button
+          variant="contained"
+          color="secondary"
+          style={{ height: "4rem", width: "10rem" }}
+        >
+          Grocery List
+        </Button>
       </Link>
     </div>
   );

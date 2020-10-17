@@ -1,19 +1,18 @@
 import React, { Component } from "react";
-import { FormControl, TextField, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import APIURL from "../helpers/environment";
 
 type AcceptedProps = {
   updateSessionToken: (newToken: string) => void;
   updateUserRole: (newUserRole: string) => void;
-  updateUsername: (newUsername: string) => void;
 };
 type UserState = {
   username: string;
   password: string;
 };
 
-export class Login extends React.Component<AcceptedProps, UserState> {
+export class Login extends Component<AcceptedProps, UserState> {
   constructor(props: AcceptedProps) {
     super(props);
     this.state = {
@@ -22,8 +21,8 @@ export class Login extends React.Component<AcceptedProps, UserState> {
     };
   }
 
-  // handleSubmit = (e: React.FormEvent<HTMLElement>) => {
-  handleSubmit = (e: any) => {
+  // handleSubmit = (e: FormEvent<Element> | React.FormEvent<HTMLElement>) => {
+    handleSubmit = (e: any) => {
     if (this.state.username !== "" && this.state.password !== "") {
       e.preventDefault();
       fetch(`${APIURL}/user/login`, {
@@ -45,7 +44,6 @@ export class Login extends React.Component<AcceptedProps, UserState> {
           // console.log(data);
           this.props.updateSessionToken(data.sessionToken);
           this.props.updateUserRole(data.user.admin);
-          this.props.updateUsername(data.user.username);
           console.log("User successfully logged in");
         })
         .catch((err) => alert(err));
@@ -83,12 +81,11 @@ export class Login extends React.Component<AcceptedProps, UserState> {
         >
           <TextValidator
             label="Username"
-            // style={{width:"35%",backgroundColor:"#FFFFFF"}}
             onChange={this.handleUsernameChange}
             name="username"
             value={this.state.username}
             validators={["minStringLength:6", "required"]}
-            // autoComplete="off"
+            autoComplete="off"
           />
           <TextValidator
             label="Password"
@@ -96,10 +93,7 @@ export class Login extends React.Component<AcceptedProps, UserState> {
             name="password"
             type="password"
             validators={["minStringLength:6", "required"]}
-            errorMessages={[
-              "password should be more than 6 letters",
-              "this field is required",
-            ]}
+            errorMessages={["this field is required"]}
             value={this.state.password}
           />
           <br />
@@ -107,39 +101,6 @@ export class Login extends React.Component<AcceptedProps, UserState> {
             Login
           </Button>
         </ValidatorForm>
-
-        {
-          /* <FormControl style={{backgroundColor:"#FFFFFF"}}>
-          <TextField
-            label="Username"
-            variant="outlined"
-            type="text"
-            onChange={(e) => {
-              this.setState({ username: e.target.value });
-            }}
-            // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}"
-            //   title="Username must include one number, one capital letter, and be 4-15 characters in length."
-          />
-          <TextField
-            label="Password"
-            variant="outlined"
-            type="password"
-            onChange={(e) => {
-              this.setState({ password: e.target.value });
-            }}
-            /* pattern="[a-zA-Z0-9]+"
-              title="Password must contain one number, one capital letter, and be 5-15 characters in length." */
-          // /> */}
-        }
-        {/* <Button
-            variant="contained"
-            onClick={(e) => {
-              this.handleSubmit(e);
-            }}
-          >
-            Login
-          </Button> */}
-        {/* </FormControl> */}
       </div>
     );
   }
